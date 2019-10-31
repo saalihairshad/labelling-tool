@@ -1,0 +1,111 @@
+
+.paper-nav-toggle {
+    width:25px;
+    height:25px;
+    cursor:pointer;
+    text-decoration:none
+   }
+   .paper-nav-toggle.active i::after,
+   .paper-nav-toggle.active i::before,
+   .paper-nav-toggle.dl-active i::after,
+   .paper-nav-toggle.dl-active i::before {
+    background:#03a9f4
+   }
+   .paper-nav-toggle:active,
+   .paper-nav-toggle:focus,
+   .paper-nav-toggle:hover {
+    outline:0;
+    border-bottom:none!important;
+    opacity:.8
+   }
+   .paper-nav-toggle i {
+    position:relative;
+    display:inline-block;
+    width:25px;
+    height:2px;
+    color:#03a9f4;
+    font:bold 14px/.4 Helvetica;
+    text-transform:uppercase;
+    text-indent:-55px;
+    background:#03a9f4;
+    transition:all .2s ease-out
+   }
+   .paper-nav-toggle i::after,
+   .paper-nav-toggle i::before {
+    content:'';
+    width:25px;
+    height:2px;
+    background:#03a9f4;
+    position:absolute;
+    left:0;
+    transition:all .2s ease-out
+   }
+   .paper-nav-toggle.paper-nav-white>i {
+    color:#fff;
+    background:#fff
+   }
+   .paper-nav-toggle.paper-nav-white>i::after,
+   .paper-nav-toggle.paper-nav-white>i::before {
+    background:#fff
+   }
+   .paper-nav-toggle.left {
+    left:0;
+    right:auto
+   }
+   .paper-nav-toggle i::before {
+    top:-7px
+   }
+   .paper-nav-toggle i::after {
+    bottom:-7px
+   }
+   .paper-nav-toggle:hover i::before {
+    top:-10px
+   }
+   .paper-nav-toggle:hover i::after {
+    bottom:-10px
+   }
+   .paper-nav-toggle.active i,
+   .paper-nav-toggle.dl-active i {
+    background:0 0
+   }
+   .paper-nav-toggle.active i::before,
+   .paper-nav-toggle.dl-active i::before {
+    top:0;
+    -webkit-transform:rotateZ(45deg);
+    -moz-transform:rotateZ(45deg);
+    -ms-transform:rotateZ(45deg);
+    -o-transform:rotateZ(45deg);
+    transform:rotateZ(45deg)
+   }
+   .paper-nav-toggle.active i::after,
+   .paper-nav-toggle.dl-active i::after {
+    bottom:0;
+    -webkit-transform:rotateZ(-45deg);
+    -moz-transform:rotateZ(-45deg);
+    -ms-transform:rotateZ(-45deg);
+    -o-transform:rotateZ(-45deg);
+    transform:rotateZ(-45deg)
+   }
+   .paper-nav-toggle {
+    position:absolute;
+    right:0;
+    top:10px;
+    padding:6px 0 0 0;
+    display:block;
+    margin:0 auto;
+    display:block;
+    height:44px;
+    width:44px;
+    z-index:2001;
+    border-bottom:none!important;
+    text-align:center
+   }
+   @media (max-width:1031px) {
+    .paper-nav-toggle {
+     position:absolute;
+     display:block
+    }
+   }
+   .paper-nav-toggle .left {
+    left:15px
+   }

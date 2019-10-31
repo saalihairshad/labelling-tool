@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Dashboard",
+    "icon": "icon icon-package s-24",
+    "route": "/dashboard"
+  },
+  {
+    "name": "Products",
+    "icon": "icon icon-package s-24",
+    "children": [
+      { "name": "All Products", "route": "/products", "icon": "icon-circle-o" },
+      { "name": "Add New", "route": "/products", "icon": "icon-add" }
+    ]
+  },
+  {
+    "name": "Users",
+    "icon": "icon-account_box s-24",
+    "children": [
+      {
+        "name": "All Users",
+        "route": "/users",
+        "icon": "icon-circle-o"
+      },
+      {
+        "name": "Add User",
+        "route": "/users/create",
+        "icon": "icon-add"
+      },
+      {
+        "name": "User Profile",
+        "route": "/users/1",
+        "icon": "icon-user"
+      }
+    ]
+  },
+  {
+    "name": "xxx",
+    "icon": "icon icon-package",
+    "route": "/dashboard",
+    "badge": 9
+  },
+  {
+    "name": "pp",
+    "icon": "icon icon-package",
+    "route": "/products",
+    "badge": 4,
+    "badgeClass": "badge-success"
+  }
+]

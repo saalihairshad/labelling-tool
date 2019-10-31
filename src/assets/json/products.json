@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "title": "Apple Product",
+      "thumbnail":"img/demo/shop/s1.png",
+      "category": "Mobile Phones",
+      "price": "$250",
+      "status": "Published",
+      "created": "September, 2017",
+      "updated": "5 days ago"
+    },
+    {
+        "id": 2,
+        "title": "Apple Product",
+        "thumbnail":"img/demo/shop/s2.png",
+        "category": "Mobile Phones",
+        "price": "$250",
+        "status": "Published",
+        "created": "September, 2017",
+        "updated": "5 days ago"
+      }
+
+  ]
+

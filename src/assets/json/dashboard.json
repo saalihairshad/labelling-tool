@@ -1,0 +1,72 @@
+{
+    "employees": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "email":"alexander@paper.com",
+            "image": "img/dummy/u3.png",
+            "designation": "Marketing Manager",
+            "salery": 250,
+            "age": 30,
+            "city": "New York"
+        },
+        {
+            "id": 2,
+            "name": "Sara Doe",
+            "email":"alexander@paper.com",
+            "image": "img/dummy/u6.png",
+            "designation": "Marketing Manager",
+            "salery": 250,
+            "age": 30,
+            "city": "New York"
+        }
+    ],
+    "tasks": [
+        {
+            "id": 1,
+            "title": "New Layout",
+            "subtitle":"75% Completed",
+            "progress": 75,
+            "variant":"primary",
+            "team":{
+                "u1": "img/dummy/u3.png",
+                "u2": "img/dummy/u3.png",
+                "u3": "img/dummy/u3.png"
+            }
+        },
+        {
+            "id": 2,
+            "title": "New Layout",
+            "subtitle":"75% Completed",
+            "progress": 75,
+            "variant":"success",
+            "team":{
+                "u1": "img/dummy/u3.png"
+            }
+        },
+        {
+            "id": 3,
+            "title": "New Layout",
+            "subtitle":"75% Completed",
+            "progress": 75,
+            "variant":"warning",
+            "team":{
+                "u1": "img/dummy/u3.png",
+                "u2": "img/dummy/u3.png",
+                "u3": "img/dummy/u3.png"
+            }
+        },
+        {
+            "id": 4,
+            "title": "New Layout",
+            "subtitle":"75% Completed",
+            "progress": 75,
+            "variant":"info",
+            "team":{
+                "u1": "img/dummy/u3.png"
+            }
+        }
+        
+    
+    ]
+}

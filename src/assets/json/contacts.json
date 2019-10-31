@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "image": "img/dummy/u3.png",
+            "designation": "Marketing Manager",
+            "salery": 250,
+            "age": 30,
+            "city": "New York"
+        },
+        {
+            "id": 2,
+            "name": "Sara Doe",
+            "image": "img/dummy/u6.png",
+            "designation": "Marketing Manager",
+            "salery": 250,
+            "age": 30,
+            "city": "New York"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+<template>
+  <div>
+    <!-- partial:_head.html -->
+    <!-- partial -->
+    <!-- partial:_sidebar.html -->
+    <!-- partial -->
+    <div class="has-sidebar-left">
+      <!-- partial:_searchBar.html -->
+      <!-- partial -->
+    </div>
+    <a href="#" data-toggle="push-menu" class="paper-nav-toggle left ml-2 fixed">
+      <i></i>
+    </a>
+  </div>
+</template>
+<script>
+export default {};
+</script>
