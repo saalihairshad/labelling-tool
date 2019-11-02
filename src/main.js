@@ -10,7 +10,18 @@ import VueSlimScroll from 'vue-slimscroll'
 import routes from './routes/routes'
 import './assets/scss/app.scss'
 import { LineChart } from "./components/charts/charts";
+//Tags 
+//https://github.com/voerro/vue-tagsinput
 
+
+
+import VoerroTagsInput from '@voerro/vue-tagsinput'
+Vue.component('tags-input', VoerroTagsInput);
+import '@voerro/vue-tagsinput/dist/style.css'
+
+
+import CKEditor from '@ckeditor/ckeditor5-vue';
+Vue.use( CKEditor );
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)

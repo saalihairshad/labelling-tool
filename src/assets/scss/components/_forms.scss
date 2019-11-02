@@ -405,22 +405,3 @@ a.btn-fab{
           6px 5px 1px #ccc, 5px 6px 1px #eee,
           7px 6px 1px #ccc;
 }
-
-.custom-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-table{
-  tr{
-    th{
-      .custom-control.custom-checkbox {
-        top: -12px;
-      }
-    }
-    td{
-      .custom-control.custom-checkbox {
-        top: -16px;
-      }
-    }
-  }
-}

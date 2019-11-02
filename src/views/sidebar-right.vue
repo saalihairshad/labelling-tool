@@ -299,10 +299,10 @@ export default {
       this.$refs.sidebarRight.classList.remove("control-sidebar-open");
     },
             documentClick(e) {
-            let el_handle = document.querySelector('#handle');
+            let el_handle = document.querySelector('.right-sidebar-handle');
             let el = this.$refs.sidebarRight;
             let target = e.target;
-        //&& el_handle.firstChild !== target
+        //
             if (el_handle !== target  && el !== target && !el.contains(target)) {
             this.close();
             }

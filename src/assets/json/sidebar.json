@@ -9,7 +9,7 @@
     "icon": "icon icon-package s-24",
     "children": [
       { "name": "All Products", "route": "/products", "icon": "icon-circle-o" },
-      { "name": "Add New", "route": "/products", "icon": "icon-add" }
+      { "name": "Add New", "route": "/products/create", "icon": "icon-add" }
     ]
   },
   {

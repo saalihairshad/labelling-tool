@@ -1,8 +1,10 @@
 //import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
-import UserProfile from "@/pages/UserProfile.vue";
+// import UserProfile from "@/pages/UserProfile.vue";
+import Users from "@/pages/Users.vue";
 import Products from "@/pages/Products.vue";
+import ProductsCreate from "@/pages/ProductsCreate.vue";
 // import TableList from "@/pages/TableList.vue";
 // import Typography from "@/pages/Typography.vue";
 // import Icons from "@/pages/Icons.vue";
@@ -27,9 +29,14 @@ const routes = [
         component: Products
     },
     {
+        path: "/products/create",
+        name: "Add New Product",
+        component: ProductsCreate
+    },
+    {
         path: "/users",
-        name: "User Profile",
-        component: UserProfile
+        name: "Users",
+        component: Users
     }
     
 ];

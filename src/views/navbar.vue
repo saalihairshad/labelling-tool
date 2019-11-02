@@ -82,8 +82,8 @@
         </DropDownMenu>
 
         <li>
-            <a class="nav-link ml-2 handle" data-toggle="control-sidebar" @click="toggleRightSidebar">
-                <i class="icon-format_align_right"></i>
+            <a href="" class="nav-link ml-2" data-toggle="control-sidebar" @click.prevent="toggleRightSidebar">
+                <i class="icon-format_align_right right-sidebar-handle"></i>
             </a>
         </li>
    <DropDownMenu 

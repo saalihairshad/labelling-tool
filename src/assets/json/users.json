@@ -1,0 +1,41 @@
+ [
+        {
+            "id": 1,
+            "name": "John Doe",
+            "designation": "Marketing Manager",
+            "income": 250,
+            "items": 30,
+            "city": "New York",
+            "email": "john@panel.com",
+            "phone":"+92 333 123 136",
+            "status":"Inactive",
+            "role":"Administrator"
+
+        },
+        {
+            "id": 2,
+            "name": "Sara Doe",
+            "image": "img/dummy/u6.png",
+            "designation": "Marketing Manager",
+            "income": 250,
+            "items": 30,
+            "city": "New York",
+            "email": "sara@panel.com",
+            "phone":"+92 333 123 136",
+            "status":"Inactive",
+            "role":"Seller"
+        },
+        {
+            "id": 3,
+            "name": "Sara Doe",
+            "image": "img/dummy/u7.png",
+            "designation": "Marketing Manager",
+            "income": 250,
+            "items": 30,
+            "city": "New York",
+            "email": "sara@panel.com",
+            "phone":"+92 333 123 136",
+            "status":"Inactive",
+            "role":"Seller"
+        }
+    ]

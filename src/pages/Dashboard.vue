@@ -160,7 +160,7 @@ import {
   DoughnutChart
 } from "../components/charts/charts.js";
 import chartsData from "../assets/data/charts.js";
-import json from "../assets/json/dashboard.json";
+import jsonData from "../assets/json/dashboard.json";
 import list from "../components/x-list";
 import mixins from '../helpers/mixins.js'
 export default {
@@ -174,7 +174,7 @@ export default {
   data() {
     return {
       chartsData,
-      json
+      json:jsonData
     };
   },
   methods: {

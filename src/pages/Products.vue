@@ -51,13 +51,13 @@
 </template>
 
 <script>
-import dummyProducts from "../assets/json/products.json";
+import jsonData from "../assets/json/products.json";
 import mixins from '../helpers/mixins.js'
 export default {
     mixins: [mixins],
     data() {
         return {
-            products: dummyProducts
+            products: jsonData
         }
     },
 };
