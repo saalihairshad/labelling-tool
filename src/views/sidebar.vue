@@ -158,6 +158,7 @@ export default {
     ToggleSidebar,
     TreeItem
   },
+  
   data() {
     return {
       s: "",
