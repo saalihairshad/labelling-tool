@@ -28,7 +28,7 @@
       },
       {
         "name": "User Profile",
-        "route": "/users/1",
+        "route": "/user/1",
         "icon": "icon-user"
       }
     ]
@@ -45,5 +45,22 @@
     "route": "/products",
     "badge": 4,
     "badgeClass": "badge-success"
+  },
+  {
+    "name": "Pages",
+    "icon": "icon-account_box s-24",
+    "children": [
+      {
+        "name": "Blank Page",
+        "route": "/blank",
+        "icon": "icon-circle-o",
+        "subtitle": "Get Started"
+      },
+      {
+        "name": "Tabs Page",
+        "route": "/blank-tabs",
+        "icon": "icon-add"
+      }
+    ]
   }
 ]

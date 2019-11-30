@@ -18,7 +18,7 @@
 
 
 <script>
-import mixins from '../helpers/mixins.js'
+import mixins from '../../helpers/mixins.js'
 export default {
      mixins: [mixins],
   props:['icon','image','badge','badgeClasses'],

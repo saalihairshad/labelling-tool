@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit="onSubmit" v-if="show">
+  <b-form @submit.prevent="onSubmit" v-if="show">
     <b-row>
       <b-col col-md-9>
         <b-row>
@@ -14,7 +14,7 @@
                 id="input-1"
                 v-model="form.name"
                 type="text"
-                required
+                
                 placeholder="Product Name"
                size="lg"
               ></b-form-input>
@@ -109,15 +109,14 @@
 </template>
 
 <script>
-import jsonData from "../assets/json/products.json";
 import mixins from "../helpers/mixins.js";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import VoerroTagsInput from '@voerro/vue-tagsinput'
 export default {
   mixins: [mixins],
-    components: { VoerroTagsInput },
+
   data() {
     return {
+      errors:[],
       form: {
         name: "",
         brand: "",
@@ -146,10 +145,19 @@ export default {
     };
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
+    onSubmit() {
+     /// alert(JSON.stringify(this.form));
+     this.errors =
+       [
+          {
+          name:{
+            0 : "The name filed is requied"
+          }
+        }
+      
+       ]
     }
+
   }
 };
 </script>

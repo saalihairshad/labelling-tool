@@ -186,7 +186,6 @@ export default {
       this.removeClass( document.body, "sidebar-collapse")
     },
         toggleSkin(){
-          console.log('change them')
        this.toggleClass(document.body,'theme-dark');
     }
   }

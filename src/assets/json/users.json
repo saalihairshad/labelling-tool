@@ -8,6 +8,8 @@
             "city": "New York",
             "email": "john@panel.com",
             "phone":"+92 333 123 136",
+            "address": "Blue Street, New York",
+            "website":"www.website.com",
             "status":"Inactive",
             "role":"Administrator"
 
@@ -22,6 +24,8 @@
             "city": "New York",
             "email": "sara@panel.com",
             "phone":"+92 333 123 136",
+            "address": "Blue Street, New York",
+            "website":"www.website.com",
             "status":"Inactive",
             "role":"Seller"
         },
@@ -35,6 +39,8 @@
             "city": "New York",
             "email": "sara@panel.com",
             "phone":"+92 333 123 136",
+            "address": "Blue Street, New York",
+            "website":"www.website.com",
             "status":"Inactive",
             "role":"Seller"
         }

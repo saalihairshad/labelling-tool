@@ -25,14 +25,10 @@
                 </template>
                 <template v-slot:cell(name)="data">
                   <div class="d-flex">
-                    <div class="avatar avatar-md mr-3 mb-2 mt-1">
-                      <img v-if="data.item.image" :src="assetsPath(data.item.image)" alt />
-                      <span
-                        v-else
-                        class="avatar-letter avatar-md circle"
-                        :class="letterClass(data.item.name)"
-                      ></span>
-                    </div>
+                    <user-avatar
+                     :name="data.item.name" 
+                     :image="data.item.image"
+                    />
                     <div>
                       <div>
                         <strong>{{data.item.name}}</strong>
@@ -71,8 +67,12 @@
 <script>
 import jsonData from "../assets/json/users.json";
 import mixins from "../helpers/mixins.js";
+import userAvatar from "../components/user-avatar";
 export default {
   mixins: [mixins],
+  components:{
+  userAvatar,
+  },
   data() {
     return {
       users: [],
@@ -85,11 +85,7 @@ export default {
   created() {
     this.users = jsonData;
   },
-  methods: {
-    letterClass(name) {
-      return "avatar-letter-" + name.substring(0, 1).toLowerCase();
-    }
-  },
+  
   computed: {
     rows() {
       return this.users.length;
