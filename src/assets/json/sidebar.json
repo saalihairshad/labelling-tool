@@ -40,10 +40,9 @@
     "badge": 9
   },
   {
-    "name": "pp",
-    "icon": "icon icon-package",
-    "route": "/products",
-    "badge": 4,
+    "name": "Tweets",
+    "icon": "icon icon-twitter",
+    "route": "/tweets",
     "badgeClass": "badge-success"
   },
   {

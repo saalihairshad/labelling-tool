@@ -10,10 +10,20 @@ import VueSlimScroll from 'vue-slimscroll'
 import routes from './routes/routes'
 import './assets/scss/app.scss'
 import { LineChart } from "./components/charts/charts";
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+import { TweetForm } from "./components/helo.vue";
+// Globally register your component
+Vue.component('TweetForm', TweetForm);
+
+
+
 //Tags 
 //https://github.com/voerro/vue-tagsinput
 
 
+Vue.use(ElementUI);
 
 import VoerroTagsInput from '@voerro/vue-tagsinput'
 Vue.component('tags-input', VoerroTagsInput);

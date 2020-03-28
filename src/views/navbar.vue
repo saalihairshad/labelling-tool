@@ -20,7 +20,7 @@
         </ul>
       </div>
     </div>
-    <TabsNav />
+    <!-- <TabsNav /> -->
   </div>
 </template>
 <script>

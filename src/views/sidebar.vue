@@ -34,7 +34,7 @@
                 aria-controls="v-pills-profile"
                 aria-selected="false"
               >
-                <i class="icon-add"></i>
+                <i class="icon-twitter"></i>
               </a>
               <a class="nav-link blink skin_handle" @click="toggleSkin()">
                 <i class="icon-lightbulb_outline"></i>

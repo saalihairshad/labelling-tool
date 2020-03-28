@@ -2,10 +2,11 @@
 
 import Dashboard from "@/pages/Dashboard.vue";
 // import UserProfile from "@/pages/UserProfile.vue";
-import Users from "@/pages/Users.vue";
+// import Users from "@/pages/Users.vue";
+import Tweets from "@/pages/Tweets.vue";
 import Products from "@/pages/Products.vue";
 import ProductsCreate from "@/pages/ProductsCreate.vue";
-import UserProfile from "@/pages/UserProfile.vue";
+// import UserProfile from "@/pages/UserProfile.vue";
 import BlankPage from "@/pages/BlankPage.vue";
 import TabsPage from "@/pages/TabsPage.vue";
 import TabsPageChild1 from "@/pages/TabsPageChild1.vue";
@@ -37,15 +38,20 @@ const routes = [
         name: "Add New Product",
         component: ProductsCreate
     },
+    // {
+    //     path: "/users",
+    //     name: "Users",
+    //     component: Users
+    // },
+    // {
+    //     path: "/user/:id",
+    //     name: "User Profoile",
+    //     component: UserProfile
+    // },
     {
-        path: "/users",
-        name: "Users",
-        component: Users
-    },
-    {
-        path: "/user/:id",
-        name: "User Profoile",
-        component: UserProfile
+        path: "/tweets",
+        name: "Tweets",
+        component: Tweets
     },
     {
         path: "/blank",
