@@ -3,7 +3,7 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
-const Tweet = require('../../models/tweet');
+const Tweet = require('../models/tweet');
 
 // Get Tweets
 router.get('/', async (req, res) => {

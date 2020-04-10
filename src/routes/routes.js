@@ -3,7 +3,9 @@
 import Dashboard from "@/pages/Dashboard.vue";
 // import UserProfile from "@/pages/UserProfile.vue";
 // import Users from "@/pages/Users.vue";
-import Tweets from "@/pages/Tweets.vue";
+import TweetsPage from "@/pages/Tweets.vue";
+import LoginPage from "@/pages/Login.vue";
+import RegisterPage from "@/pages/Register.vue";
 import Products from "@/pages/Products.vue";
 import ProductsCreate from "@/pages/ProductsCreate.vue";
 // import UserProfile from "@/pages/UserProfile.vue";
@@ -18,78 +20,96 @@ import TabsPageChild1 from "@/pages/TabsPageChild1.vue";
 // import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 
 const routes = [
-    {
-        path: "/",
-        component: Dashboard,
-        redirect: "/dashboard",
-    },
-    {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard
-    },
-    {
-        path: "/products",
-        name: "Products",
-        component: Products
-    },
-    {
-        path: "/products/create",
-        name: "Add New Product",
-        component: ProductsCreate
-    },
-    // {
-    //     path: "/users",
-    //     name: "Users",
-    //     component: Users
-    // },
-    // {
-    //     path: "/user/:id",
-    //     name: "User Profoile",
-    //     component: UserProfile
-    // },
-    {
-        path: "/tweets",
-        name: "Tweets",
-        component: Tweets
-    },
-    {
-        path: "/blank",
-        name: "Blank Page",
-        component: BlankPage,
-        meta:{
-            icon: "icon-pages",
-            subtitle:"Get Started",
-        }
-    },
-    {
-        path: "/blank-tabs",
-        name: "Blank Tab Page",
-      // redirect: "/blank-tabs/tab1",
-        component: TabsPage,
-        meta:{
-            icon: "icon-pages",
-            subtitle:"Get Started",
-        },
-        children: [
-            {
-              path: 'tab1',
-              name: 'Tab 1',
-              component: TabsPageChild1,
-            },
-            {
-                path: 'tab2',
-                name: 'Tab 2',
-                component: TabsPageChild1,
-              },
-              {
-                path: 'tab3',
-                name: 'Tab 3',
-                component: TabsPageChild1,
-              }
-          ]
+  {
+    path: "/",
+    component: Dashboard,
+    redirect: "/dashboard",
+    meta: {
+      requiresAuth: true
     }
-    
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/products",
+    name: "Products",
+    component: Products
+  },
+  {
+    path: "/products/create",
+    name: "Add New Product",
+    component: ProductsCreate
+  },
+  // {
+  //     path: "/users",
+  //     name: "Users",
+  //     component: Users
+  // },
+  // {
+  //     path: "/user/:id",
+  //     name: "User Profoile",
+  //     component: UserProfile
+  // },
+  {
+    path: "/tweets",
+    name: "Tweets",
+    component: TweetsPage,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/register",
+    name: "Register",
+    component: RegisterPage
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginPage
+  },
+  {
+    path: "/blank",
+    name: "Blank Page",
+    component: BlankPage,
+    meta: {
+      icon: "icon-pages",
+      subtitle: "Get Started"
+    }
+  },
+  {
+    path: "/blank-tabs",
+    name: "Blank Tab Page",
+    // redirect: "/blank-tabs/tab1",
+    component: TabsPage,
+    meta: {
+      icon: "icon-pages",
+      subtitle: "Get Started"
+    },
+    children: [
+      {
+        path: "tab1",
+        name: "Tab 1",
+        component: TabsPageChild1
+      },
+      {
+        path: "tab2",
+        name: "Tab 2",
+        component: TabsPageChild1
+      },
+      {
+        path: "tab3",
+        name: "Tab 3",
+        component: TabsPageChild1
+      }
+    ]
+  }
 ];
 
 export default routes;
