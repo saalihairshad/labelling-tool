@@ -1,35 +1,69 @@
 <template>
   <div>
-    <el-form ref="form" :model="form" label-width="120px" label-position="top">
-      <el-form-item label="Content Analysis">
+    <el-form ref="form" :model="form" label-width="120px" label-position="top" :rules="rules">
+<!-- 
+  
+      <el-form-item label="Content Analysis" prop="type">
+
+   <el-checkbox-group v-model="form.type">
+    <div class="row">
+    
+          <div class="col-md-4" v-for="type in types" :key="type.title" >
+                 <el-tooltip class="item" effect="dark" :content="type.description" placement="top-start">
+                    <el-checkbox :label="type.title">
+                 </el-checkbox>
+                </el-tooltip>
+          </div>
+    </div>
+
+    
+  </el-checkbox-group>
+ 
+      <div class="d-flex align-items-center">
+         
+              <el-checkbox
+                label="other"
+                v-model="otherTypeCheck"
+              ></el-checkbox>
+              <el-input
+              class="ml-4"
+                placeholder="Add Name"
+                v-if="otherTypeCheck"
+                type="text"
+                size="small"
+                v-model="form.otherType"
+              />
+            
+      </div>
+      </el-form-item> -->
+      
+       <el-form-item label="Content Analysis">
         <div class="row d-flex">
           <div class="col-md-4">
             <div>
               <el-checkbox
                 label="Bug Report"
                 v-model="form.type.bugReport"
+               
               ></el-checkbox>
             </div>
             <div>
               <el-checkbox
                 label="Support Request"
                 v-model="form.type.supportRequest"
+               
               ></el-checkbox>
             </div>
             <div>
               <el-checkbox
                 label="Feature Request"
                 v-model="form.type.featureRequest"
+               
               ></el-checkbox>
             </div>
           </div>
           <div class="col-md-4">
-            <div>
-              <el-checkbox
-                label="Feature Shortcoming"
-                v-model="form.type.featureShortcoming"
-              ></el-checkbox>
-            </div>
+       
             <div>
               <el-checkbox
                 label="General Complaint"
@@ -66,10 +100,11 @@
             </div>
           </div>
         </div>
+        <div v-if="!validType" class="text-danger">Please select a type</div>
       </el-form-item>
       <hr />
-      <el-form-item label="Sentiment Analysis" prop="resource">
-        <el-radio-group v-model="form.resource">
+      <el-form-item label="Sentiment Analysis" prop="sentiment">
+        <el-radio-group v-model="form.sentiment">
           <el-radio label="Very Negative"></el-radio>
           <el-radio label="Negative"></el-radio>
           <el-radio label="Neutral"></el-radio>
@@ -78,22 +113,49 @@
         </el-radio-group>
       </el-form-item>
       <hr />
+
+
+       <div class="row">
+         <div class="col-md-6">
+            <el-radio-group v-model="form.gender" >
+   
+
+   
       <el-form-item label="Gender" prop="gender">
-        <div class="">Original Name: xxxx</div>
-        <div class="">Formated Name: xxxx</div>
-        <el-radio-group v-model="form.gender">
+       
           <el-radio label="male"></el-radio>
           <el-radio label="female"></el-radio>
           <el-radio label="UnKnown"></el-radio>
-        </el-radio-group>
+      
       </el-form-item>
+        </el-radio-group>
 
+         </div>
+
+
+         <div class="col-md-6 pt-5">
+                       <div class=""><strong>Original Name:</strong>  {{tweet.user.name}}</div>
+         <div class="mb-3"> <strong>Formated Name:</strong>  {{formatedName}} <i class="el-icon-edit" @click="showFormatedNameField = !showFormatedNameField"></i></div>
+            <el-input  class="mb-3" type="text" size="mini" v-model="formatedName" v-if="showFormatedNameField"/>
+
+        
+
+     
       <el-button @click="handleGender" primary size="mini" plain>
         Detect Gender</el-button
       >
       <el-button @click="handleGender2" primary size="mini" plain>
         Detect Genderioz.io</el-button
       >
+         </div>
+       </div>
+    <hr/>
+
+<el-form-item label="Status" prop="isPending">
+      <el-checkbox v-model="isPending" label="Pending" border></el-checkbox>
+   </el-form-item>
+
+
 
       <el-form-item class="pt-4">
         <el-button type="primary" @click="onSubmit()">Submit</el-button>
@@ -106,22 +168,75 @@
 <script>
 import axios from "axios";
 import auth from "../services/authService";
+import _ from 'lodash';
 
 export default {
   props: ["tweet"],
   data() {
     return {
+      otherTypeCheck: false ,
+      formatedName: '',
+      detectGenderByName:'',
+      showFormatedNameField: false,
+      
+
+    types: [
+    
+      {
+        title: 'Bug Report',
+        description: 'Bug Report Description'
+      },
+
+      {
+        title: 'Support Request',
+        description: 'Support Request Description'
+      },
+
+      {
+        title: 'Feature Request',
+        description: 'Feature Request Description'
+      },
+
+      {
+        title: 'General Complaint',
+        description: 'General Complaint Description'
+      },
+
+      {
+        title: 'General Praise',
+        description: 'General Praise Description'
+      },
+
+      {
+        title: 'Noise',
+        description: 'Noise Description'
+      },
+
+
+    ],
+    rules: {
+       
+          type: [
+            { type: 'array', required: true, message: 'Please select at least one activity type', trigger: 'change' }
+          ],
+          sentiment: [
+            { required: true, message: 'Please select sentiment', trigger: 'change' }
+          ],
+          gender: [
+            { required: true, message: 'Please select a gender', trigger: 'change' }
+          ],
+        
+        },
+    
+      isPending: false,
+      validType : false,
       form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: {
+        
+          type: {
           bugReport: false,
           supportRequest: false,
           featureRequest: false,
-          featureShortcoming: false,
+  
           generalComplaint: false,
           generalPraise: false,
           noise: false,
@@ -131,17 +246,46 @@ export default {
           negative: false,
           neutral: false,
           positive: false,
-          veryPositive: false
+          veryPositive: false,
+      
         },
-        resource: "",
+        otherType: "",
+        sentiment: "",
         gender: "",
-        desc: ""
-      }
+      },
+      
     };
   },
   mounted() {
-    console.log(this.tweet.annotations);
-    this.form = this.tweet.annotations;
+    //console.log(this.tweet.annotations);
+    let user = auth.getCurrentUser();
+
+    if(this.tweet.annotations){
+    this.form = this.tweet.annotations[user._id].annotations;
+
+    //other type enable
+      if(this.form.otherType){
+        this.otherTypeCheck =true;
+      }
+    //pending status update
+
+    this.isPending = this.tweet.annotations[user._id].isPending;
+
+    this.validType = true;
+
+    //convert type object to array
+
+    // this.form.type  = Object.values(this.form.type);
+    
+    
+    
+    }
+
+    //Format Name
+    this.formatName();
+
+ 
+ 
     //Object.assign(this.form,this.tweet.annotations);
   },
   methods: {
@@ -149,12 +293,45 @@ export default {
     //   const name = this.tweet.user.name.split(" ");
     //   return name[0];
     // },
+
+    handleType(value){
+    
+   
+    console.log(this.isPending);
+
+  // var idx = this.form.type_raw.indexOf(value);
+  // console.log(idx);
+  // if(idx !== -1) {
+  //   this.form.type_raw.splice(idx, 1);
+  // } else {
+  //   this.form.type_raw.push(value);
+       
+  //  }
+
+   console.log(this.form);
+  // alert(value);
+      //     // console.log(e);
+      //     // console.log(value);
+      // this.toggle(this.form.type_raw,value);
+      // console.log(this.toggle(value));
+      // console.log(this.form.type_raw);
+
+    },
+
+ toggle(item) {
+  var idx = this.form.type_raw.indexOf(item);
+  if(idx !== -1) {
+    this.form.type_raw.splice(idx, 1);
+  } else {
+    this.form.type_raw.push(item);
+  }
+},
     handleGender() {
       try {
         var GenderApi = require("gender-api.com-client");
         var genderApiClient = new GenderApi.Client("XhcpKpNHWAPwSrFUlH");
 
-        genderApiClient.getByFirstName(this.formatName(), response => {
+        genderApiClient.getByFirstName(this.formatedName, response => {
           console.log(response.gender); //female
           console.log(response.accuracy); //98
 
@@ -166,11 +343,11 @@ export default {
     },
 
     handleGender2() {
-      console.log(this.formatName());
+      console.log(this.formatedName);
 
       var genderize = require("genderize");
 
-      genderize(this.formatName(), function(err, obj) {
+      genderize(this.formatedName, function(err, obj) {
         console.log(obj.gender);
         this.form.gender = response.gender; // outputs 'female'
       });
@@ -419,30 +596,117 @@ export default {
         var re = new RegExp(conversions[i], "g");
         str = str.replace(re, i);
       }
+
+      this.formatedName = str;
       return str;
     },
 
     onSubmit() {
-      const user = auth.getCurrentUser();
+ this.validType = false;
+
+
+      this.$refs.form.validate((valid) => {
+
+        console.log(this.form.type);
+
+    
+        for (let [key, value] of Object.entries(this.form.type)) {
+          if(value){
+             console.log(value);
+            this.validType = true;
+             break;
+          }    
+        }
+         
+
+          if (valid && this.validType) {
+                this.save();
+          
+          }else{
+              this.$message({
+              showClose: true,
+              message: "Validation Error",
+              type: "error"
+            });
+          }
+      });
+
+
+
+    },
+
+    save(){
+            let user = auth.getCurrentUser();
       console.log("clcikec");
       const url = "http://localhost:4000/api/tweets/";
 
-      if (this.tweet.annotations.annotators != null) {
-        const u = this.tweet.annotations.annotators.filter(
-          annotator => annotator._id === user._id
-        ).length;
-        if (u == 0) {
-          this.form["annotators"] = [
-            ...this.tweet.annotations.annotators,
-            user
-          ];
-        }
-      } else {
-        this.form["annotators"] = [user];
-      }
+      // if (this.tweet.annotations && this.tweet.annotations.annotators != null) {
+      //   const u = this.tweet.annotations.annotators.filter(
+      //     annotator => annotator._id === user._id
+      //   ).length;
+      //   if (u == 0) {
+      //     this.form["annotators"] = [
+      //       ...this.tweet.annotations.annotators,
+      //       user
+      //     ];
+      //   }
+      // } else {
+      //   this.form["annotators"] = [user];
+      // }
+      
+    let data  ={};
+    
+   
+      
 
+
+      // let type = {};
+
+      // Object.assign(type,this.form.type);
+
+      // console.log('------------');
+      // console.log(type);
+
+      //  let newForm = {};
+      //  Object.assign(newForm, this.form);
+      //  newForm['type'] = type;
+
+
+  
+     
+      
+
+      user['annotations'] = this.form;
+      console.log(user);
+
+
+
+
+      user['isPending'] = this.isPending;
+        
+
+    if(this.tweet.annotations){
+        data  = {
+          ...this.tweet.annotations,
+           [user._id] : user,
+        
+        };
+    }else{
+
+  
+     data = {
+        [user._id] : user,
+      };
+
+    }
+
+  
+    
+    
+
+     
       axios
-        .patch(`${url}${this.tweet._id}`, this.form)
+        .patch(`${url}${this.tweet._id}`, data)
         .then(response => {
           if (response.statusText == "OK") {
             this.$message({

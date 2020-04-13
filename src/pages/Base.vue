@@ -9,10 +9,10 @@
             role="tabpanel"
             aria-labelledby="w2-tab1"
           >
-            <!-- <div class="b-t">
+            <div class="b-t">
                <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
-            </div> -->
-            <ul class="list-unstyled b-t scrollable" v-if="tweets.length > 0">
+            </div>
+            <ul class="list-unstyled b-t" v-if="tweets.length > 0">
               <li
                 class="media p-3 b-b "
                 v-for="(tweet, index) in tweets"
@@ -58,13 +58,8 @@
       </div>
     </div>
     <div class="col-md-9 b-l vh-100">
-      <div class="p-3 scrollable-container" v-if="show">
+      <div class="p-3" v-if="show">
         <Tweet :tweet="selectedTweet" @next="handeNext()" />
-      </div>
-
-      <div class="text-center pt-5 mt-5" v-if="!selectedTweet">
-        <i class="el-icon-thumb fz-48"></i>
-        <div class="mt-3" ><h4>Select An Item</h4></div>
       </div>
     </div>
   </div>
@@ -73,9 +68,13 @@
 <script>
 import axios from "axios";
 import Tweet from "../components/Tweet";
+//import TweetForm from "../components/HelloWorld";
 import auth from "../services/authService";
 export default {
   name: "TweetComponent",
+  props: [
+   'url'
+  ],
   components: {
     Tweet
     //  TweetForm
@@ -124,11 +123,10 @@ export default {
       }
     },
     // Get tweet
-    getTweets() {
-      const url = "http://localhost:4000/api/tweets/";
+    get() {
       return new Promise((resolve, reject) => {
         axios
-          .get(url)
+          .get(this.url)
           .then(res => {
             const data = res.data.data;
             this.meta = res.data.meta;

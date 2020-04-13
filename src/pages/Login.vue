@@ -6,18 +6,18 @@
           <div class="col-lg-4 mx-md-auto">
             <div class="text-center">
               <img src="assets/img/dummy/u5.png" alt="" />
-              <h3 class="mt-2">Welcome Back</h3>
+
               <p class="p-t-b-20">
-                Hey Soldier welcome back signin now there is lot of new stuff
-                waiting for you
+           
               </p>
             </div>
 
             <el-form
+
               :model="form"
               ref="form"
               label-width="120px"
-              class="demo-dynamic"
+              class="card p-4 b-0 shadow r-0"
               label-position="top"
             >
               <el-form-item
@@ -76,10 +76,13 @@ export default {
         window.location = "/";
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
-          console.log("some errror here....");
-          // const errors = { ...this.state.errors };
-          // errors.email = ex.response.data;
-          // this.setState({ errors });
+
+           this.$message({
+            showClose: true,
+            message: ex.response.data,
+            type: "error"
+          });
+  
         }
       }
     }

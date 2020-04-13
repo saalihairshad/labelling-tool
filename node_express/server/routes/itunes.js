@@ -3,22 +3,22 @@ const mongodb = require('mongodb');
 
 const router = express.Router();
 
-const Tweet = require('../models/tweet');
+const Itunes = require('../models/itunes');
 
 // Get Tweets
 router.get('/', async (req, res) => {
-  const tweets = await loadCollection();
+  const itunes = await loadCollection();
 
 
-  let tweetsCollection = await tweets.find({}).toArray()
-  let annotations = await tweets.find({ annotations: { $exists: true } }).count()
+  let collection = await itunes.find({}).toArray()
+  let annotations = await itunes.find({ annotations: { $exists: true } }).count()
 
   const meta = {
     'annotated': annotations,
-    'total': tweetsCollection.length,
+    'total': collection.length,
   };
   const data = {
-    'data': tweetsCollection,
+    'data': collection,
     'meta': meta,
   }
 
@@ -57,19 +57,12 @@ router.patch("/:id", async (req, res, next) => {
 
 
 async function loadCollection() {
-
-
-
-
-
   // iAmNotInTheSchema is now saved to the db!!
-
-
   const client = await mongodb.MongoClient.connect('mongodb://localhost:27017', {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });
-  return client.db('CrudDB').collection('tweets');
+  return client.db('CrudDB').collection('itunes');
 }
 
 

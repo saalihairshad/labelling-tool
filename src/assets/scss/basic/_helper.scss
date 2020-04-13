@@ -613,3 +613,25 @@ ul.list-group {
     background: red;
   }
 }
+
+
+.scrollable{
+  height: calc(100vh - 100px);
+  overflow-y: auto !important;
+}
+
+.scrollable-container{
+  height: 100vh;
+  overflow-y: auto !important;
+}
+
+// .sticky{
+//   position: sticky;
+//   position: -webkit-sticky;
+//   top: 0; /* required */
+// }
+
+
+.fz-48{
+  font-size: 48px;
+}

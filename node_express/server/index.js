@@ -24,11 +24,13 @@ app.use(cors());
 
 const posts = require("./routes/posts");
 const tweets = require("./routes/tweets");
+const itunes = require("./routes/itunes");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
 
 app.use("/api/posts", posts);
 app.use("/api/tweets", tweets);
+app.use("/api/itunes", itunes);
 app.use("/api/users", users);
 app.use("/api/auth", auth);
 

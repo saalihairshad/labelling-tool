@@ -4,8 +4,7 @@
       <Title></Title>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-          <MessagesDropDown :data="dummyData.employees" />
-          <NotificationsDropDown :data="dummyData.employees" />
+        
           <li>
             <a
               href
@@ -13,10 +12,12 @@
               data-toggle="control-sidebar"
               @click.prevent="toggleRightSidebar"
             >
-              <i class="icon-format_align_right right-sidebar-handle"></i>
+              <!-- <i class="icon-format_align_right right-sidebar-handle"></i> -->
+              Hi, {{user.name}}
             </a>
           </li>
-          <UserDropDown :data="dummyData.employees" />
+
+  
         </ul>
       </div>
     </div>
@@ -31,6 +32,7 @@ import UserDropDown from "../components/navbar/user";
 import TabsNav from "../components/navbar/tabsNav";
 import json from "../assets/json/dashboard.json";
 import mixins from "../helpers/mixins.js";
+import auth from "../services/authService";
 
 export default {
   mixins: [mixins],
@@ -43,7 +45,8 @@ export default {
   },
   data() {
     return {
-      dummyData: json
+      dummyData: json,
+      user: [],
     };
   },
   methods: {
@@ -51,6 +54,9 @@ export default {
       let el = document.querySelector(".control-sidebar");
       this.toggleClass(el, "control-sidebar-open");
     }
-  }
+  },
+  mounted() {
+   this.user = auth.getCurrentUser();
+  },
 };
 </script>

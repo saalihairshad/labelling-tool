@@ -9,41 +9,42 @@
           <div class="indigo text-white">
             <div
               class="nav mt-5 pt-5 flex-column nav-pills"
-              id="v-pills-tab"
-              role="tablist"
-              aria-orientation="vertical"
+            
             >
-              <a
-                @click.prevent="setActive('t1')"
-                :class="{ active: isActive('t1') }"
-                class="nav-link"
-                id="v-pills-home-tab"
-                data-toggle="pill"
-                href="#t1"
-                role="tab"
-                aria-controls="v-pills-home"
-                aria-selected="true"
-              >
-                <i class="icon-inbox2"></i>
-              </a>
-
+           
               <a
                 @click="handleRoute('tweets')"
                 :class="{ active: isActive('t2') }"
-                class="nav-link"
-                href="#"
+            
               >
                 <i class="icon-twitter"></i>
               </a>
-              <a class="nav-link blink skin_handle" @click="toggleSkin()">
-                <i class="icon-lightbulb_outline"></i>
+           
+         
+           
+                <a
+                @click="handleRoute('appstore')"
+                :class="{ active: isActive('t1') }"
+              >
+                <i class="el-icon-star-off"></i>
               </a>
+                 <a
+                @click="handleRoute('documentation')"
+                :class="{ active: isActive('t1') }"
+              >
+                <i class="el-icon-document"></i>
+              </a>
+              <!-- <a class="nav-link blink skin_handle" @click="toggleSkin()">
+                <i class="icon-lightbulb_outline"></i>
+              </a> -->
+
+              
               <a @click="handleLogOut" class="nav-link" v-if="user">
                 <i class="el-icon-switch-button"></i>
               </a>
             </div>
           </div>
-          <div class="tab-content flex-grow-1" id="v-pills-tabContent">
+          <!-- <div class="tab-content flex-grow-1" id="v-pills-tabContent">
             <div
               class="tab-pane fade"
               :class="{ 'active show': isActive('t1') }"
@@ -69,11 +70,11 @@
                 ></tree-item>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </aside>
-    <ToggleSidebar />
+
   </div>
 </template>
 
@@ -116,7 +117,7 @@ export default {
 
     handleRoute(route) {
       this.setActive("t2");
-      vm.$router.push({ path: "/tweets" });
+      vm.$router.push({ path: "/"+route });
     },
     filterUsers() {
       this.filterdUser = json.employees.filter(user => this.s === user.name);
@@ -129,7 +130,7 @@ export default {
 
       //Open Sidebar when clicked on tab
       // removeClass,
-      this.removeClass(document.body, "sidebar-collapse");
+     // this.removeClass(document.body, "sidebar-collapse");
     },
     toggleSkin() {
       this.toggleClass(document.body, "theme-dark");

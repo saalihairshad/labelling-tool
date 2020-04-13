@@ -4,6 +4,9 @@ import Dashboard from "@/pages/Dashboard.vue";
 // import UserProfile from "@/pages/UserProfile.vue";
 // import Users from "@/pages/Users.vue";
 import TweetsPage from "@/pages/Tweets.vue";
+import AppStorePage from "@/pages/AppStorePage.vue";
+import DocumentationPage from "@/pages/DocumentationPage.vue";
+
 import LoginPage from "@/pages/Login.vue";
 import RegisterPage from "@/pages/Register.vue";
 import Products from "@/pages/Products.vue";
@@ -64,6 +67,23 @@ const routes = [
       requiresAuth: true
     }
   },
+  {
+    path: "/appstore",
+    name: "App Store",
+    component: AppStorePage,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/documentation",
+    name: "Documentation",
+    component: DocumentationPage,
+    meta: {
+      requiresAuth: true
+    }
+  },
+
   {
     path: "/register",
     name: "Register",

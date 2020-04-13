@@ -20,6 +20,8 @@
     "gender-api.com-client": "^1.0.14",
     "genderize": "^1.6.0",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
+    "recursive-diff": "^1.0.6",
     "sass-loader": "^7.3.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.4.2",
