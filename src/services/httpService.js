@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getJwt } from "./authService";
 
-var url = "http://localhost:4000/api";
+var url = process.env.API_URL;
 axios.defaults.baseURL = url;
 
 axios.create({
@@ -30,5 +30,6 @@ export default {
   get: axios.get,
   post: axios.post,
   put: axios.put,
+  patch: axios.patch,
   delete: axios.delete
 };

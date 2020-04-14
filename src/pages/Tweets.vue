@@ -29,22 +29,20 @@
                 </div>
 
                 <div class="media-body text-truncate">
-                  
-                  
-                  
                   <h6 class="mt-0 mb-1 font-weight-normal">
                     {{ tweet.user.name }}
                   </h6>
                   <span>{{ tweet.full_text }}</span>
                   <br />
-                  <small
-                    >
-
-      <el-tag size="mini" type="primary" class="mr-2"  v-if="isAnnotated(tweet)"
+                  <small>
+                    <el-tag
+                      size="mini"
+                      type="primary"
+                      class="mr-2"
+                      v-if="isAnnotated(tweet)"
                       >Anotated
-                      
-                      </el-tag > 
-                  
+                    </el-tag>
+
                     <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
 
                     <i class="icon-comment-o ml-3 mr-2"></i
@@ -64,7 +62,7 @@
 
       <div class="text-center pt-5 mt-5" v-if="!selectedTweet">
         <i class="el-icon-thumb fz-48"></i>
-        <div class="mt-3" ><h4>Select An Item</h4></div>
+        <div class="mt-3"><h4>Select An Item</h4></div>
       </div>
     </div>
   </div>
@@ -74,6 +72,7 @@
 import axios from "axios";
 import Tweet from "../components/Tweet";
 import auth from "../services/authService";
+import { getTweets } from "../services/tweetsService";
 export default {
   name: "TweetComponent",
   components: {
@@ -82,18 +81,18 @@ export default {
   },
   data() {
     return {
-      meta:[],
+      meta: [],
       tweets: [],
       error: "",
       text: "",
       selectedTweet: null,
       show: false,
       index: "",
-      user: {},
+      user: {}
     };
   },
   async created() {
-       this.user = auth.getCurrentUser();
+    this.user = auth.getCurrentUser();
     try {
       this.tweets = await this.getTweets();
     } catch (error) {
@@ -101,10 +100,8 @@ export default {
     }
   },
   methods: {
-    isAnnotated(tweet){
-
-        return tweet.annotations  && tweet.annotations[this.user._id];
-
+    isAnnotated(tweet) {
+      return tweet.annotations && tweet.annotations[this.user._id];
     },
     handleTweetClick(tweet) {
       this.selectedTweet = tweet;
@@ -125,23 +122,12 @@ export default {
     },
     // Get tweet
     getTweets() {
-      const url = "http://localhost:4000/api/tweets/";
-      return new Promise((resolve, reject) => {
-        axios
-          .get(url)
-          .then(res => {
-            const data = res.data.data;
-            this.meta = res.data.meta;
-            resolve(
-              data.map(tweet => ({
-                ...tweet
-              }))
-            );
-          })
-          .catch(err => {
-            reject(err);
-          });
-      });
+      getTweets()
+        .then(res => {
+          this.tweets = res.data.data;
+          this.meta = res.data.meta;
+        })
+        .catch(err => {});
     }
   }
 };

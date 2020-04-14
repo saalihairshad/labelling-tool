@@ -131,6 +131,7 @@
 <script>
 import axios from "axios";
 import auth from "../services/authService";
+import { update } from "../services/tweetsService";
 import mixins from "../helpers/mixins.js";
 export default {
   mixins: [mixins],
@@ -278,8 +279,7 @@ export default {
         };
       }
 
-      axios
-        .patch(this.url, data)
+      update(this.item._id, data)
         .then(response => {
           if (response.statusText == "OK") {
             this.$message({

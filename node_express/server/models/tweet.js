@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const newSchema = new Schema({
-  id_str: String,
-  full_text: String,
-},{ strict: false });
+const mongoose = require("mongoose");
 
-module.exports = mongoose.model('Tweet', newSchema);
+const tweetSchema = new mongoose.Schema({}, { strict: false });
+
+const Tweet = mongoose.model("Tweet", tweetSchema);
+
+exports.Tweet = Tweet;
