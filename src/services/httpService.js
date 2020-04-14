@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getJwt } from "./authService";
-
 var url = process.env.API_URL;
 axios.defaults.baseURL = url;
 

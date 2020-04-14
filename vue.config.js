@@ -2,6 +2,7 @@
 
 
 module.exports = {
+
     css: {
         loaderOptions: {
             sass: {
@@ -14,4 +15,3 @@ module.exports = {
     }
 
 }
-

@@ -18,7 +18,6 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.4",
     "chart.js": "^2.9.0",
-    "config": "^3.2.2",
     "core-js": "^3.6.4",
     "detect-gender": "^1.0.0",
     "element-ui": "^2.13.0",
