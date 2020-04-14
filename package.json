@@ -9,7 +9,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service serve"
+    "start": "node server.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^15.0.0",
@@ -18,21 +18,23 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.4",
     "chart.js": "^2.9.0",
+    "config": "^3.2.2",
     "core-js": "^3.6.4",
     "detect-gender": "^1.0.0",
     "element-ui": "^2.13.0",
+    "express": "^4.17.1",
     "gender-api.com-client": "^1.0.14",
     "genderize": "^1.6.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "recursive-diff": "^1.0.6",
     "sass-loader": "^7.3.1",
+    "serve-static": "^1.14.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.4.2",
     "vue-mq": "^1.0.1",
     "vue-router": "^3.1.3",
-    "vue-slimscroll": "^1.0.1",
-    "config": "^3.2.2"
+    "vue-slimscroll": "^1.0.1"
   },
   "devDependencies": {
     "@voerro/vue-tagsinput": "^2.0.2",
