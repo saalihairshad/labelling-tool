@@ -84,44 +84,27 @@
         <div class="col-md-6">
           <el-radio-group v-model="form.gender">
             <el-form-item label="Gender" prop="gender">
-              <el-radio label="male"></el-radio>
-              <el-radio label="female"></el-radio>
-              <el-radio label="unKnown"></el-radio>
+              <el-radio label="female">Female</el-radio>
+              <el-radio label="male">Male</el-radio>
+              <el-radio label="unknown">Unknown</el-radio>
             </el-form-item>
           </el-radio-group>
+          <div>
+            <i class="el-icon-info mr-3 text-yellow" />
+            <small
+              >Please refer to the coding guide line for more information</small
+            >
+          </div>
         </div>
+
         <div class="col-md-6 ">
           <!-- description="The formatted name contains the first word of the full name that might no be useful in some cases. For example if original name is 'this is jimmy', the formatted name will be 'this'. If you think jimmy can be categorized as male or female then please clik the pencil icon and write the name in the input box and then clik the detect gender button. "
      -->
-
-          <el-alert
-            title="Please refer to the coding guide line for more information"
-            type="info"
-            show-icon
-          >
-          </el-alert>
-
-          <div class=""><strong>Original Name:</strong> {{ item.Author }}</div>
-          <div class="mb-3">
-            <strong>Formated Name:</strong> {{ formatedName }}
-            <i
-              class="el-icon-edit"
-              @click="showFormatedNameField = !showFormatedNameField"
-            ></i>
-          </div>
-          <el-input
-            class="mb-3"
-            type="text"
-            size="mini"
-            v-model="formatedName"
-            v-if="showFormatedNameField"
+          <GenderDetect
+            :name="item.Author"
+            :formatedName="formatedName"
+            @gender="handleGender"
           />
-          <el-button @click="handleGender" primary size="mini" plain>
-            Detect Gender</el-button
-          >
-          <el-button @click="handleGender2" primary size="mini" plain>
-            Detect Genderioz.io</el-button
-          >
         </div>
       </div>
       <hr />
@@ -142,8 +125,7 @@
       </el-form-item>
 
       <el-form-item class="pt-4">
-        <el-button type="primary" @click="onSubmit()">Submit</el-button>
-        <el-button type="primary" @click="onNext()">Next</el-button>
+        <el-button type="primary" @click="onSubmit()">Save</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -154,16 +136,20 @@ import axios from "axios";
 import auth from "../services/authService";
 import mixins from "../helpers/mixins.js";
 import { update } from "../services/itunesService.js";
+import GenderDetect from "./GenderDetect";
+
 export default {
   mixins: [mixins],
   props: ["item", "url"],
+  components: {
+    GenderDetect
+  },
 
   data() {
     return {
       otherTypeCheck: false,
       formatedName: "",
       detectGenderByName: "",
-      showFormatedNameField: false,
 
       rules: {
         type: [
@@ -228,36 +214,9 @@ export default {
     this.formatedName = this.formatName(this.item.Author);
   },
   methods: {
-    handleGender() {
-      try {
-        var GenderApi = require("gender-api.com-client");
-        var genderApiClient = new GenderApi.Client("XhcpKpNHWAPwSrFUlH");
-
-        if (this.formatedName === "unidentified") {
-          this.form.gender = "unKnown";
-          return;
-        }
-
-        genderApiClient.getByFirstName(this.formatedName, response => {
-          console.log(response.gender); //female
-          console.log(response.accuracy); //98
-
-          this.form.gender = response.gender;
-        });
-      } catch (e) {
-        console.log("Error:", e);
-      }
+    handleGender(gender) {
+      this.form.gender = gender;
     },
-
-    handleGender2() {
-      console.log(this.formatedName);
-      var genderize = require("genderize");
-      genderize(this.formatedName, function(err, obj) {
-        console.log(obj.gender);
-        this.form.gender = response.gender; // outputs 'female'
-      });
-    },
-
     onSubmit() {
       this.validType = false;
       this.$refs.form.validate(valid => {
@@ -308,6 +267,7 @@ export default {
               message: "Itune Review annotated!",
               type: "success"
             });
+            this.onNext();
           }
         })
         .catch(error => {

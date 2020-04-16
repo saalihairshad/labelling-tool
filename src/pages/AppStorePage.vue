@@ -16,8 +16,8 @@
               selectedItem && review._id == selectedItem._id ? 'light b-l' : ''
             "
           >
-            <div class="avatar avatar-md orange mr-3">
-              <i class="icon-star"></i>
+            <div class="avatar avatar-md indigo mr-3">
+              <i class="icon-apple"></i>
             </div>
 
             <div class="media-body text-truncate">
@@ -99,18 +99,17 @@ export default {
       this.show = true;
     },
     handeNext() {
-      if (this.itunes[this.index + 1]) {
-        this.selecteditune = this.itunes[this.index + 1];
-        this.index = this.itunes.indexOf(this.selecteditune);
+      if (this.reviews[this.index + 1]) {
+        this.selectedItem = this.reviews[this.index + 1];
+        this.index = this.reviews.indexOf(this.selectedItem);
       } else {
         this.$message({
           showClose: true,
-          message: "No more itunes",
+          message: "No more reviews",
           type: "warning"
         });
       }
     },
-
     // Get tweet
     getitunes() {
       getReviews()

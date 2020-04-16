@@ -7,38 +7,24 @@
       <div class="sidebar">
         <div class="d-flex hv-100 align-items-stretch">
           <div class="indigo text-white">
-            <div
-              class="nav mt-5 pt-5 flex-column nav-pills"
-            
-            >
-           
+            <div class="nav mt-5 pt-5 flex-column nav-pills">
               <a
                 @click="handleRoute('tweets')"
-                :class="{ active: isActive('t2') }"
-            
+                :class="{ active: isActive('tweets') }"
               >
                 <i class="icon-twitter"></i>
               </a>
-           
-         
-           
-                <a
-                @click="handleRoute('appstore')"
-                :class="{ active: isActive('t1') }"
-              >
-                <i class="el-icon-star-off"></i>
+
+              <a @click="handleRoute('appstore')" :class="isActive('appstore')">
+                <i class="icon-apple"></i>
               </a>
-                 <a
-                @click="handleRoute('documentation')"
-                :class="{ active: isActive('t1') }"
-              >
+              <a @click="handleRoute('documentation')" :class="isActive('t1')">
                 <i class="el-icon-document"></i>
               </a>
               <!-- <a class="nav-link blink skin_handle" @click="toggleSkin()">
                 <i class="icon-lightbulb_outline"></i>
               </a> -->
 
-              
               <a @click="handleLogOut" class="nav-link" v-if="user">
                 <i class="el-icon-switch-button"></i>
               </a>
@@ -74,7 +60,6 @@
         </div>
       </div>
     </aside>
-
   </div>
 </template>
 
@@ -116,21 +101,22 @@ export default {
     },
 
     handleRoute(route) {
-      this.setActive("t2");
-      vm.$router.push({ path: "/"+route });
+      this.setActive(route);
+      vm.$router.push({ path: "/" + route });
     },
     filterUsers() {
       this.filterdUser = json.employees.filter(user => this.s === user.name);
     },
     isActive(menuItem) {
-      return this.activeItem === menuItem;
+      console.log("/" + menuItem);
+      return this.$route.path === "/" + menuItem && "blue";
     },
     setActive(menuItem) {
       this.activeItem = menuItem;
 
       //Open Sidebar when clicked on tab
       // removeClass,
-     // this.removeClass(document.body, "sidebar-collapse");
+      // this.removeClass(document.body, "sidebar-collapse");
     },
     toggleSkin() {
       this.toggleClass(document.body, "theme-dark");

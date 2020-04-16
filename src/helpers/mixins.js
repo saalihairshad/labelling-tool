@@ -1,267 +1,288 @@
+import ddd from "recursive-diff";
 export default {
-    methods: {
-        toggleClass(el, className) {
-            if (el.classList.contains(className)) {
-                el.classList.remove(className);
-            } else {
-                el.classList.add(className);
-            }
-        },
+  methods: {
+    toggleClass(el, className) {
+      if (el.classList.contains(className)) {
+        el.classList.remove(className);
+      } else {
+        el.classList.add(className);
+      }
+    },
 
-        removeClass(el, className) {
-            if (el.classList.contains(className)) {
-                el.classList.remove(className);
-            }
-        },
-        assetsPath(img) {
-            return require(`@/assets/${img}`);
-        },
+    removeClass(el, className) {
+      if (el.classList.contains(className)) {
+        el.classList.remove(className);
+      }
+    },
+    assetsPath(img) {
+      return require(`@/assets/${img}`);
+    },
 
+    disagrement(item) {
+      let total_difference = 0;
+      if (item.annotations) {
+        console.log(item.annotations);
+        let an = Object.values(item.annotations);
+        if (an.length == 2) {
+          const diff = ddd.getDiff(an[0].annotations, an[1].annotations);
 
-        formatName(name) {
+          console.log(diff);
+          if (diff.length > 0) {
+            total_difference =
+              (this.objectSize(diff) * 100) /
+              this.objectSize(an[1].annotations);
+          }
+        }
+      }
+      return total_difference.toFixed(2);
+    },
 
-            name = this.convert_accented_characters(name);
-            console.log(name);
-            name = this.normalizeFonts(name);
-            name = this.replaceSymbols(name);
-            name = this.removeEmojis(name);
+    objectSize(obj) {
+      return JSON.stringify(obj).match(/[^\\]":/g).length; //
+    },
 
-            if (name.match(/\./g) && name.match(/\./g).length > 1) {
-                name = name.replace(/\./g, "");
-            } else {
-                name = name.replace(/\./g, " ");
-            }
+    formatName(name) {
+      name = this.convert_accented_characters(name);
+      console.log(name);
+      name = this.normalizeFonts(name);
+      name = this.replaceSymbols(name);
+      name = this.removeEmojis(name);
 
-            if (name.match(/\'s/g)) {
-                name = name.replace(/\'s/g, " ");
-            }
+      if (name.match(/\./g) && name.match(/\./g).length > 1) {
+        name = name.replace(/\./g, "");
+      } else {
+        name = name.replace(/\./g, " ");
+      }
 
-            if (name.match(/\'S/g)) {
-                name = name.replace(/\'S/g, " ");
-            }
+      if (name.match(/\'s/g)) {
+        name = name.replace(/\'s/g, " ");
+      }
 
-            if (name.match(/0/g)) {
-                name = name.replace(/0/g, " O ");
-            }
+      if (name.match(/\'S/g)) {
+        name = name.replace(/\'S/g, " ");
+      }
 
-            name = name.replace(/\_/g, " ");
-            name = name.replace(/\-/g, " ");
-            name = name.replace(/\#/g, " ");
-            name = name.replace(/\@/g, " ");
-            name = name.replace(/\:/g, " ");
+      if (name.match(/0/g)) {
+        name = name.replace(/0/g, " O ");
+      }
 
-            name = this.removeSpecialCharacters(name);
+      name = name.replace(/\_/g, " ");
+      name = name.replace(/\-/g, " ");
+      name = name.replace(/\#/g, " ");
+      name = name.replace(/\@/g, " ");
+      name = name.replace(/\:/g, " ");
 
-            // check if there is a space between two words convert both to lower case
-            if (name.match(" ")) {
-                name = name.toLowerCase();
-            }
+      name = this.removeSpecialCharacters(name);
 
-            name = name.trimLeft();
-            name = name.trimRight();
-            name = name.replace(/ +/g, " ");
+      // check if there is a space between two words convert both to lower case
+      if (name.match(" ")) {
+        name = name.toLowerCase();
+      }
 
-            if (name === "YouTube" || name === "LinkedIn") {
-                name = name.toLowerCase();
-            }
+      name = name.trimLeft();
+      name = name.trimRight();
+      name = name.replace(/ +/g, " ");
 
-            name = this.splitCamelCase(name);
+      if (name === "YouTube" || name === "LinkedIn") {
+        name = name.toLowerCase();
+      }
 
-            let nameList;
-            let finalName;
+      name = this.splitCamelCase(name);
 
-            let another = name;
-            another = another.split(" ");
+      let nameList;
+      let finalName;
 
-            if (another.length > 1 && another[0].length === 1) {
-                finalName = another[1];
+      let another = name;
+      another = another.split(" ");
 
-                if (another[2] && (another[2] !== "") !== "")
-                    if (finalName.length === 1) {
-                        finalName = another[2];
-                    }
-            } else {
-                nameList = name.split(" ");
-                let first = nameList[0];
-                let second = nameList[1];
+      if (another.length > 1 && another[0].length === 1) {
+        finalName = another[1];
 
-                if (first !== "" || second !== "") {
-                    first = first.toLowerCase();
-                    if (
-                        first === "dr" ||
-                        first === "the" ||
-                        first === "or" ||
-                        first === "it" ||
-                        first === "im"
-                    ) {
-                        finalName = second;
-                    } else {
-                        finalName = first;
-                    }
-                }
-            }
+        if (another[2] && (another[2] !== "") !== "")
+          if (finalName.length === 1) {
+            finalName = another[2];
+          }
+      } else {
+        nameList = name.split(" ");
+        let first = nameList[0];
+        let second = nameList[1];
 
-            if (finalName === "" || finalName === "unavailable") {
-                finalName = "unidentified";
-            }
+        if (first !== "" || second !== "") {
+          first = first.toLowerCase();
+          if (
+            first === "dr" ||
+            first === "the" ||
+            first === "or" ||
+            first === "it" ||
+            first === "im"
+          ) {
+            finalName = second;
+          } else {
+            finalName = first;
+          }
+        }
+      }
 
-            return finalName;
-        },
+      if (finalName === "" || finalName === "unavailable") {
+        finalName = "unidentified";
+      }
 
-        removeEmojis(name) {
-            return name.replace(
-                /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
-                " "
-            );
-        },
-        removeSpecialCharacters(name) {
-            return name.replace(/[^a-zA-Z ]/g, "");
-        },
-        replaceSymbols(str) {
-            let accents = "$’";
-            let accentsOut = "s'";
+      return finalName;
+    },
 
-            str = str.split("");
-            str.forEach((letter, index) => {
-                let i = accents.indexOf(letter);
-                if (i !== -1) {
-                    str[index] = accentsOut[i];
-                }
-            });
-            return str.join("");
-        },
-        splitCamelCase(str) {
-            return str.replace(/([a-z])([A-Z])/g, "$1 $2");
-        },
-        removeWhiteSpaces(str) {
-            return str.replace(/\s/g, "");
-        },
-        normalizeFonts(str) {
-            return str.normalize("NFKD");
-        },
-        convert_accented_characters(str) {
-            var conversions = new Object();
-            conversions["ae"] = "ä|æ|ǽ|ǣ|ᴂ";
-            conversions["aa"] = "ꜳ";
-            conversions["ao"] = "ꜵ";
-            conversions["au"] = "ꜷ";
-            conversions["av"] = "ꜹ";
-            conversions["ay"] = "ꜽ";
-            conversions["dz"] = "ǳ|ǆ";
-            conversions["DZ"] = "Ǳ|Ǆ";
-            conversions["oe"] = "ö|œ|ᴔ";
-            conversions["ue"] = "ü|ᵫ";
-            conversions["Ae"] = "Ä";
-            conversions["Ue"] = "Ü";
-            conversions["Oe"] = "Ö";
+    removeEmojis(name) {
+      return name.replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+        " "
+      );
+    },
+    removeSpecialCharacters(name) {
+      return name.replace(/[^a-zA-Z ]/g, "");
+    },
+    replaceSymbols(str) {
+      let accents = "$’";
+      let accentsOut = "s'";
 
-            conversions["A"] =
-                "Á|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Ǎ|Â|Ấ|Ậ|Ầ|Ẩ|Ẫ|Ä|Ǟ|Ȧ|Ǡ|Ạ|Ȁ|À|Ả|Ȃ|Ā|Ą|Å|Ǻ|Ḁ|Ⱥ|Ã|ᴀ|Ɐ|🅰|ᗩ|A̶|ᴬ|Λ|ǟ|Ꮧ|ą|ค|₳|ᗅ";
-            conversions["B"] = "В|Ḃ|Ḅ|Ɓ|Ḇ|Ƀ|Ƃ|ʙ|ᴃ|🅱|β|ᗷ|B̶|ᴮ|в|ɮ|Ᏸ|฿";
-            conversions["C"] = "¢|Ć|Č|Ç|Ḉ|Ĉ|Ċ|Ƈ|Ȼ|Ꜿ|ᴄ|🅲|↻|ᑕ|ᑢ|C̶|ƈ|ፈ|ƈ|¢|₵";
-            conversions["D"] = "Ð|Ď|Ḑ|Ḓ|Ḋ|Ḍ|Ɗ|Ḏ|ǲ|ǅ|Đ|Ƌ|Ꝺ|ᴅ|🅳|ᗪ|ᕲ|D̶|ᴰ|∂|ɖ|Ꮄ|ɖ|໓|Đ";
-            conversions["E"] =
-                "E̶|É|Ĕ|Ě|Ȩ|Ḝ|Ê|Ế|Ệ|Ề|Ể|Ễ|Ḙ|Ë|Ė|Ẹ|Ȅ|È|Ẻ|Ȇ|Ē|Ḗ|Ḕ|Ę|Ɇ|Ẽ|Ḛ|Ɛ|Ǝ|ᴇ|ⱻ|🅴|E|ᘿ|ᴱ|Σ|є|ɛ|Ꮛ|ɛ|ē|Ɇ|ε";
-            conversions["F"] = "Ḟ|Ƒ|Ꝼ|ꜰ|🅵|ᖴ|ᖴ|F̶|ʄ|Ꭶ|ʄ|₣|£";
-            conversions["G"] = "₲|G̶|Ǵ|Ğ|Ǧ|Ģ|Ĝ|Ġ|Ɠ|Ḡ|Ǥ|ɢ|ʛ|Ᵹ|🅶|G|ᘜ|ᴳ|ɢ|Ꮆ|ɠ|ງ";
-            conversions["H"] = "Ḫ|Ȟ|Ḩ|Ĥ|Ⱨ|Ḧ|Ḣ|Ḥ|Ħ|ʜ|🅷|Ƕ|ᕼ|ᕼ|H̶|ᴴ|н|ɦ|Ꮒ|ɧ|Ⱨ|ђ";
-            conversions["I"] = "I̶|Í|Ĭ|Ǐ|Î|Ï|Ḯ|İ|Ị|Ȉ|Ì|Ỉ|Ȋ|Ī|Į|Ɨ|Ĩ|Ḭ|ɪ|🅸|ᓰ|ᴵ|Ꭵ|ı";
-            conversions["J"] = "J̶|Ĵ|Ɉ|ᴊ|🅹|ᒍ|ᒚ|ᴶ|ʝ|Ꮰ|ʝ|ว|נ";
-            conversions["K"] = "K̶|Ḱ|Ǩ|Ķ|Ⱪ|Ꝃ|Ḳ|Ƙ|Ḵ|Ꝁ|Ꝅ|ᴋ|🅺|K|ᖽᐸ|ᴷ|к|ӄ|Ꮶ|ƙ|₭";
-            conversions["L"] = "L̶|Ĺ|Ƚ|Ľ|Ļ|Ḽ|Ḷ|Ḹ|Ⱡ|Ꝉ|Ḻ|Ŀ|Ɫ|ǈ|Ł|Ꞁ|ʟ|ᴌ|🅻|ᒪ|ᴸ|ʟ|Ꮭ|Ɩ|Ⱡ";
-            conversions["M"] = "М|M̶|ᗰ|ᴍ|Ɯ|Ḿ|Ṁ|Ṃ|Ɱ|🅼|ᘻ|ᴹ|м|ʍ|Ꮇ|ɱ|๓|₥|ϻ";
-            conversions["N"] = "N̶|Ń|Ň|Ņ|Ṋ|Ṅ|Ṇ|Ǹ|Ɲ|Ṉ|Ƞ|ǋ|Ñ|ɴ|ᴎ|🅽|ហ|ᑎ|ᘉ|ᴺ|ռ|Ꮑ|ŋ|ຖ|₦|и";
-            conversions["O"] =
-                "O̶|Ó|Ŏ|Ǒ|Ô|Ố|Ộ|Ồ|Ổ|Ỗ|Ö|Ȫ|Ȯ|Ȱ|Ọ|Ő|Ȍ|Ò|Ỏ|Ơ|Ớ|Ợ|Ờ|Ở|Ỡ|Ȏ|Ꝋ|Ꝍ|Ō|Ṓ|Ṑ|Ɵ|Ǫ|Ǭ|Ø|Ǿ|Õ|Ṍ|Ṏ|Ȭ|Ɔ|ᴏ|ᴐ|🅾|ට|O|ᓍ|ᴼ|♢|օ|Ꭷ|ơ|໐|Ø|◍";
-            conversions["P"] = "P̶|Ṕ|Ṗ|Ꝓ|Ƥ|Ꝕ|Ᵽ|Ꝑ|ᴘ|🅿|φ|ᑭ|ᕵ|ᴾ|ρ|ք|Ꭾ|℘|₱|þ";
-            conversions["Q"] = "Q̶|Ꝙ|Ꝗ|🆀|Ҩ|ᑫ|ᕴ|զ|Ꭴ|զ|๑|Q";
-            conversions["R"] = "Ŕ|Ř|Ŗ|Ṙ|Ṛ|Ṝ|Ȑ|Ȓ|Ṟ|Ɍ|Ɽ|Ꞃ|ʁ|ʀ|ᴙ|ᴚ|🆁|འ|ᖇ|ᴿ|я|ʀ|Ꮢ|ཞ|Ɽ";
-            conversions["S"] = "S̶|Ś|Ṥ|Š|Ṧ|Ş|Ŝ|Ș|Ṡ|Ṣ|Ṩ|ꜱ|Ꞅ|🆂|Ϛ|ᔕ|ѕ|ß|ֆ|Ꮥ|ʂ|Ş|₴|§|Տ";
-            conversions["T"] = "T̶|Ť|Ţ|Ṱ|Ț|Ⱦ|Ṫ|Ṭ|Ƭ|Ṯ|Ʈ|Ŧ|ᴛ|Ꞇ|🆃|Ͳ|T|ᖶ|ᵀ|т|ȶ|Ꮦ|ɬ|₮|†";
-            conversions["U"] =
-                "U̶|Ú|Ŭ|Ǔ|Û|Ṷ|Ü|Ǘ|Ǚ|Ǜ|Ǖ|Ṳ|Ụ|Ű|Ȕ|Ù|Ủ|Ư|Ứ|Ự|Ừ|Ử|Ữ|Ȗ|Ū|Ṻ|Ų|Ů|Ũ|Ṹ|Ṵ|ᴜ|🆄|Ա|ᑌ|ᑘ|ᵁ|υ|ʊ|Ꮼ|ų|น|Ʉ";
-            conversions["V"] = "Ꝟ|Ṿ|Ʋ|Ṽ|Ʌ|ᴠ|🆅|Ỽ|ᐯ|ᐺ|V̶|ⱽ|ν|ʋ|Ꮙ|۷|ง|V";
-            conversions["W"] = "Ẃ|Ŵ|Ẅ|Ẇ|Ẉ|Ẁ|Ⱳ|ᴡ|🆆|చ|ᗯ|ᘺ|W̶|ᵂ|ω|ա|Ꮗ|ῳ|ຟ|₩";
-            conversions["X"] = "χ|Ẍ|Ẋ|🆇|ჯ|᙭|X̶|Ӽ|ጀ|ҳ|Ӿ|×";
-            conversions["Y"] = "Y̶|Ý|Ŷ|Ÿ|Ẏ|Ỵ|Ỳ|Ƴ|Ỷ|Ỿ|Ȳ|Ɏ|Ỹ|ʏ|🆈|Ӌ|Y|ᖻ|ʏ|Ꭹ|ყ|ฯ|Ɏ|¥";
-            conversions["Z"] = "Ź|Ž|Ẑ|Ⱬ|Ż|Ẓ|Ȥ|Ẕ|Ƶ|ᴢ|🆉|ᘔ|ᗱ|Z̶|ʐ|ፚ|ຊ|Ⱬ|Ζ";
+      str = str.split("");
+      str.forEach((letter, index) => {
+        let i = accents.indexOf(letter);
+        if (i !== -1) {
+          str[index] = accentsOut[i];
+        }
+      });
+      return str.join("");
+    },
+    splitCamelCase(str) {
+      return str.replace(/([a-z])([A-Z])/g, "$1 $2");
+    },
+    removeWhiteSpaces(str) {
+      return str.replace(/\s/g, "");
+    },
+    normalizeFonts(str) {
+      return str.normalize("NFKD");
+    },
+    convert_accented_characters(str) {
+      var conversions = new Object();
+      conversions["ae"] = "ä|æ|ǽ|ǣ|ᴂ";
+      conversions["aa"] = "ꜳ";
+      conversions["ao"] = "ꜵ";
+      conversions["au"] = "ꜷ";
+      conversions["av"] = "ꜹ";
+      conversions["ay"] = "ꜽ";
+      conversions["dz"] = "ǳ|ǆ";
+      conversions["DZ"] = "Ǳ|Ǆ";
+      conversions["oe"] = "ö|œ|ᴔ";
+      conversions["ue"] = "ü|ᵫ";
+      conversions["Ae"] = "Ä";
+      conversions["Ue"] = "Ü";
+      conversions["Oe"] = "Ö";
 
-            conversions["a"] =
-                "á|ă|ắ|ặ|ằ|ẳ|ẵ|ǎ|â|ấ|ậ|ầ|ẩ|ẫ|ä|ǟ|ȧ|ǡ|ạ|ȁ|à|ả|ȃ|ā|ą|ᶏ|ẚ|å|ǻ|ḁ|ⱥ|ã|ª|ɐ|ₐ|α|ɑ";
-            conversions["b"] = "ḃ|ḅ|ɓ|ḇ|ᵬ|ᶀ|ƀ|ƃ|Ϧ|ც";
-            conversions["c"] = "ç|ć|ĉ|ċ|č|ḉ|ɕ|ƈ|ȼ|ↄ|ꜿ|ᶜ";
-            conversions["d"] = "ð|ď|ḑ|ḓ|ȡ|ḋ|ḍ|ɗ|ᶑ|ḏ|ᵭ|ᶁ|đ|ɖ|ƌ|ꝺ";
-            conversions["e"] =
-                "é|ĕ|ě|ȩ|ḝ|ê|ế|ệ|ề|ể|ễ|ḙ|ë|ė|ẹ|ȅ|è|ẻ|ȇ|ē|ḗ|ḕ|ⱸ|ę|ᶒ|ɇ|ẽ|ḛ|ɛ|ᶓ|ɘ|ǝ|ₑ|ᥱ";
-            conversions["f"] = "ḟ|ƒ|ᵮ|ᶂ|ꝼ|ᶠ";
-            conversions["g"] = "ǵ|ğ|ǧ|ģ|ĝ|ġ|ɠ|ḡ|ᶃ|ǥ|ᵹ|ɡ|ᵷ";
-            conversions["h"] = "ɥ|ʮ|ʯ|ḫ|ȟ|ḩ|ĥ|ⱨ|ḧ|ḣ|ḥ|ɦ|ẖ|ħ|ₕ";
-            conversions["i"] = "ᴉ|ı|í|ĭ|ǐ|î|ï|ḯ|ị|ȉ|ì|ỉ|ȋ|ī|į|ᶖ|ɨ|ĩ|ḭ|ᵢ|!|¡|ι";
-            conversions["j"] = "ȷ|ɟ|ʄ|ǰ|ĵ|ʝ|ɉ|ⱼ";
-            conversions["k"] = "ḱ|ǩ|ķ|ⱪ|ꝃ|ḳ|ƙ|ḵ|ᶄ|ꝁ|ʞ|ₖ|ќ";
-            conversions["l"] = "ĺ|ƚ|ɬ|ľ|ļ|ḽ|ȴ|ḷ|ḹ|ⱡ|ꝉ|ḻ|ŀ|ɫ|ᶅ|ɭ|ł|ꞁ|ₗ|ℓ|ᥣ";
-            conversions["m"] = "ḿ|ṁ|ṃ|ɱ|ᵯ|ᶆ|ɯ|ɰ|ₘ";
-            conversions["n"] = "ń|ň|ņ|ṋ|ȵ|ṅ|ṇ|ǹ|ɲ|ṉ|ƞ|ᵰ|ᶇ|ɳ|ñ|ŉ|ₙ|ᥒ|η|ή";
-            conversions["o"] =
-                "о|ᴓ|ᴑ|ó|ŏ|ǒ|ô|ố|ộ|ồ|ổ|ỗ|ö|ȫ|ȯ|ȱ|ọ|ő|ȍ|ò|ỏ|ơ|ớ|ợ|ờ|ở|ỡ|ȏ|ꝋ|ꝍ|ⱺ|ō|ṓ|ṑ|ǫ|ǭ|ø|ǿ|õ|ṍ|ṏ|ȭ|ɔ|ᶗ|º|ₒ|ɵ|σ";
-            conversions["p"] = "ṕ|ṗ|ꝓ|ƥ|ᵱ|ᶈ|ꝕ|ᵽ|ꝑ|ₚ";
-            conversions["q"] = "ꝙ|ʠ|ɋ|ꝗ";
-            conversions["r"] = "ŕ|ř|ŗ|ṙ|ṛ|ṝ|ȑ|ɾ|ᵳ|ȓ|ṟ|ɼ|ᵲ|ᶉ|ɍ|ɽ|ɿ|ɹ|ɻ|ɺ|ⱹ|ᵣ|ꞃ|r";
-            conversions["s"] = "ſ|ẜ|ẛ|ẝ|ś|ṥ|š|ṧ|ş|ŝ|ș|ṡ|ṣ|ṩ|ʂ|ᵴ|ᶊ|ȿ|ꞅ|ₛ|ˢ|ς";
-            conversions["t"] = "ť|ţ|ṱ|ț|ȶ|ẗ|ⱦ|ṫ|ṭ|ƭ|ṯ|ᵵ|ƫ|ʈ|ŧ|ʇ|ꞇ|ₜ";
-            conversions["u"] =
-                "ú|ŭ|ǔ|û|ṷ|ü|ǘ|ǚ|ǜ|ǖ|ṳ|ụ|ű|ȕ|ù|ủ|ư|ứ|ự|ừ|ử|ữ|ȗ|ū|ṻ|ų|ᶙ|ů|ũ|ṹ|ṵ|ᴝ|ᵤ";
-            conversions["v"] = "ⱴ|ꝟ|ṿ|ʋ|ᶌ|ⱱ|ṽ|ʌ|ᵥ";
-            conversions["w"] = "ẃ|ŵ|ẅ|ẇ|ẉ|ẁ|ⱳ|ẘ|ʍ";
-            conversions["x"] = "ẍ|ẋ|ᶍ|ₓ|ˣ";
-            conversions["y"] = "у|ý|ŷ|ÿ|ẏ|ỵ|ỳ|ƴ|ỷ|ỿ|ȳ|ẙ|ɏ|ỹ|ʎ|ʸ";
-            conversions["z"] = "ź|ž|ẑ|ʑ|ⱬ|ż|ẓ|ȥ|ẕ|ᵶ|ᶎ|ʐ|ƶ|ɀ|ᶻ|z|ʑ";
-            conversions["AE"] = "Æ|Ǽ|Ǣ|ᴁ";
-            conversions["AA"] = "Ꜳ";
-            conversions["AO"] = "Ꜵ";
-            conversions["AU"] = "Ꜷ";
-            conversions["AV"] = "Ꜹ|Ꜻ";
-            conversions["AY"] = "Ꜽ";
+      conversions["A"] =
+        "Á|Ă|Ắ|Ặ|Ằ|Ẳ|Ẵ|Ǎ|Â|Ấ|Ậ|Ầ|Ẩ|Ẫ|Ä|Ǟ|Ȧ|Ǡ|Ạ|Ȁ|À|Ả|Ȃ|Ā|Ą|Å|Ǻ|Ḁ|Ⱥ|Ã|ᴀ|Ɐ|🅰|ᗩ|A̶|ᴬ|Λ|ǟ|Ꮧ|ą|ค|₳|ᗅ";
+      conversions["B"] = "В|Ḃ|Ḅ|Ɓ|Ḇ|Ƀ|Ƃ|ʙ|ᴃ|🅱|β|ᗷ|B̶|ᴮ|в|ɮ|Ᏸ|฿";
+      conversions["C"] = "¢|Ć|Č|Ç|Ḉ|Ĉ|Ċ|Ƈ|Ȼ|Ꜿ|ᴄ|🅲|↻|ᑕ|ᑢ|C̶|ƈ|ፈ|ƈ|¢|₵";
+      conversions["D"] = "Ð|Ď|Ḑ|Ḓ|Ḋ|Ḍ|Ɗ|Ḏ|ǲ|ǅ|Đ|Ƌ|Ꝺ|ᴅ|🅳|ᗪ|ᕲ|D̶|ᴰ|∂|ɖ|Ꮄ|ɖ|໓|Đ";
+      conversions["E"] =
+        "E̶|É|Ĕ|Ě|Ȩ|Ḝ|Ê|Ế|Ệ|Ề|Ể|Ễ|Ḙ|Ë|Ė|Ẹ|Ȅ|È|Ẻ|Ȇ|Ē|Ḗ|Ḕ|Ę|Ɇ|Ẽ|Ḛ|Ɛ|Ǝ|ᴇ|ⱻ|🅴|E|ᘿ|ᴱ|Σ|є|ɛ|Ꮛ|ɛ|ē|Ɇ|ε";
+      conversions["F"] = "Ḟ|Ƒ|Ꝼ|ꜰ|🅵|ᖴ|ᖴ|F̶|ʄ|Ꭶ|ʄ|₣|£";
+      conversions["G"] = "₲|G̶|Ǵ|Ğ|Ǧ|Ģ|Ĝ|Ġ|Ɠ|Ḡ|Ǥ|ɢ|ʛ|Ᵹ|🅶|G|ᘜ|ᴳ|ɢ|Ꮆ|ɠ|ງ";
+      conversions["H"] = "Ḫ|Ȟ|Ḩ|Ĥ|Ⱨ|Ḧ|Ḣ|Ḥ|Ħ|ʜ|🅷|Ƕ|ᕼ|ᕼ|H̶|ᴴ|н|ɦ|Ꮒ|ɧ|Ⱨ|ђ";
+      conversions["I"] = "I̶|Í|Ĭ|Ǐ|Î|Ï|Ḯ|İ|Ị|Ȉ|Ì|Ỉ|Ȋ|Ī|Į|Ɨ|Ĩ|Ḭ|ɪ|🅸|ᓰ|ᴵ|Ꭵ|ı";
+      conversions["J"] = "J̶|Ĵ|Ɉ|ᴊ|🅹|ᒍ|ᒚ|ᴶ|ʝ|Ꮰ|ʝ|ว|נ";
+      conversions["K"] = "K̶|Ḱ|Ǩ|Ķ|Ⱪ|Ꝃ|Ḳ|Ƙ|Ḵ|Ꝁ|Ꝅ|ᴋ|🅺|K|ᖽᐸ|ᴷ|к|ӄ|Ꮶ|ƙ|₭";
+      conversions["L"] = "L̶|Ĺ|Ƚ|Ľ|Ļ|Ḽ|Ḷ|Ḹ|Ⱡ|Ꝉ|Ḻ|Ŀ|Ɫ|ǈ|Ł|Ꞁ|ʟ|ᴌ|🅻|ᒪ|ᴸ|ʟ|Ꮭ|Ɩ|Ⱡ";
+      conversions["M"] = "М|M̶|ᗰ|ᴍ|Ɯ|Ḿ|Ṁ|Ṃ|Ɱ|🅼|ᘻ|ᴹ|м|ʍ|Ꮇ|ɱ|๓|₥|ϻ";
+      conversions["N"] = "N̶|Ń|Ň|Ņ|Ṋ|Ṅ|Ṇ|Ǹ|Ɲ|Ṉ|Ƞ|ǋ|Ñ|ɴ|ᴎ|🅽|ហ|ᑎ|ᘉ|ᴺ|ռ|Ꮑ|ŋ|ຖ|₦|и";
+      conversions["O"] =
+        "O̶|Ó|Ŏ|Ǒ|Ô|Ố|Ộ|Ồ|Ổ|Ỗ|Ö|Ȫ|Ȯ|Ȱ|Ọ|Ő|Ȍ|Ò|Ỏ|Ơ|Ớ|Ợ|Ờ|Ở|Ỡ|Ȏ|Ꝋ|Ꝍ|Ō|Ṓ|Ṑ|Ɵ|Ǫ|Ǭ|Ø|Ǿ|Õ|Ṍ|Ṏ|Ȭ|Ɔ|ᴏ|ᴐ|🅾|ට|O|ᓍ|ᴼ|♢|օ|Ꭷ|ơ|໐|Ø|◍";
+      conversions["P"] = "P̶|Ṕ|Ṗ|Ꝓ|Ƥ|Ꝕ|Ᵽ|Ꝑ|ᴘ|🅿|φ|ᑭ|ᕵ|ᴾ|ρ|ք|Ꭾ|℘|₱|þ";
+      conversions["Q"] = "Q̶|Ꝙ|Ꝗ|🆀|Ҩ|ᑫ|ᕴ|զ|Ꭴ|զ|๑|Q";
+      conversions["R"] = "Ŕ|Ř|Ŗ|Ṙ|Ṛ|Ṝ|Ȑ|Ȓ|Ṟ|Ɍ|Ɽ|Ꞃ|ʁ|ʀ|ᴙ|ᴚ|🆁|འ|ᖇ|ᴿ|я|ʀ|Ꮢ|ཞ|Ɽ";
+      conversions["S"] = "S̶|Ś|Ṥ|Š|Ṧ|Ş|Ŝ|Ș|Ṡ|Ṣ|Ṩ|ꜱ|Ꞅ|🆂|Ϛ|ᔕ|ѕ|ß|ֆ|Ꮥ|ʂ|Ş|₴|§|Տ";
+      conversions["T"] = "T̶|Ť|Ţ|Ṱ|Ț|Ⱦ|Ṫ|Ṭ|Ƭ|Ṯ|Ʈ|Ŧ|ᴛ|Ꞇ|🆃|Ͳ|T|ᖶ|ᵀ|т|ȶ|Ꮦ|ɬ|₮|†";
+      conversions["U"] =
+        "U̶|Ú|Ŭ|Ǔ|Û|Ṷ|Ü|Ǘ|Ǚ|Ǜ|Ǖ|Ṳ|Ụ|Ű|Ȕ|Ù|Ủ|Ư|Ứ|Ự|Ừ|Ử|Ữ|Ȗ|Ū|Ṻ|Ų|Ů|Ũ|Ṹ|Ṵ|ᴜ|🆄|Ա|ᑌ|ᑘ|ᵁ|υ|ʊ|Ꮼ|ų|น|Ʉ";
+      conversions["V"] = "Ꝟ|Ṿ|Ʋ|Ṽ|Ʌ|ᴠ|🆅|Ỽ|ᐯ|ᐺ|V̶|ⱽ|ν|ʋ|Ꮙ|۷|ง|V";
+      conversions["W"] = "Ẃ|Ŵ|Ẅ|Ẇ|Ẉ|Ẁ|Ⱳ|ᴡ|🆆|చ|ᗯ|ᘺ|W̶|ᵂ|ω|ա|Ꮗ|ῳ|ຟ|₩";
+      conversions["X"] = "χ|Ẍ|Ẋ|🆇|ჯ|᙭|X̶|Ӽ|ጀ|ҳ|Ӿ|×";
+      conversions["Y"] = "Y̶|Ý|Ŷ|Ÿ|Ẏ|Ỵ|Ỳ|Ƴ|Ỷ|Ỿ|Ȳ|Ɏ|Ỹ|ʏ|🆈|Ӌ|Y|ᖻ|ʏ|Ꭹ|ყ|ฯ|Ɏ|¥";
+      conversions["Z"] = "Ź|Ž|Ẑ|Ⱬ|Ż|Ẓ|Ȥ|Ẕ|Ƶ|ᴢ|🆉|ᘔ|ᗱ|Z̶|ʐ|ፚ|ຊ|Ⱬ|Ζ";
 
-            conversions["IJ"] = "Ĳ";
-            conversions["ij"] = "ĳ";
-            conversions["OE"] = "Œ|ɶ";
+      conversions["a"] =
+        "á|ă|ắ|ặ|ằ|ẳ|ẵ|ǎ|â|ấ|ậ|ầ|ẩ|ẫ|ä|ǟ|ȧ|ǡ|ạ|ȁ|à|ả|ȃ|ā|ą|ᶏ|ẚ|å|ǻ|ḁ|ⱥ|ã|ª|ɐ|ₐ|α|ɑ";
+      conversions["b"] = "ḃ|ḅ|ɓ|ḇ|ᵬ|ᶀ|ƀ|ƃ|Ϧ|ც";
+      conversions["c"] = "ç|ć|ĉ|ċ|č|ḉ|ɕ|ƈ|ȼ|ↄ|ꜿ|ᶜ";
+      conversions["d"] = "ð|ď|ḑ|ḓ|ȡ|ḋ|ḍ|ɗ|ᶑ|ḏ|ᵭ|ᶁ|đ|ɖ|ƌ|ꝺ";
+      conversions["e"] =
+        "é|ĕ|ě|ȩ|ḝ|ê|ế|ệ|ề|ể|ễ|ḙ|ë|ė|ẹ|ȅ|è|ẻ|ȇ|ē|ḗ|ḕ|ⱸ|ę|ᶒ|ɇ|ẽ|ḛ|ɛ|ᶓ|ɘ|ǝ|ₑ|ᥱ";
+      conversions["f"] = "ḟ|ƒ|ᵮ|ᶂ|ꝼ|ᶠ";
+      conversions["g"] = "ǵ|ğ|ǧ|ģ|ĝ|ġ|ɠ|ḡ|ᶃ|ǥ|ᵹ|ɡ|ᵷ";
+      conversions["h"] = "ɥ|ʮ|ʯ|ḫ|ȟ|ḩ|ĥ|ⱨ|ḧ|ḣ|ḥ|ɦ|ẖ|ħ|ₕ";
+      conversions["i"] = "ᴉ|ı|í|ĭ|ǐ|î|ï|ḯ|ị|ȉ|ì|ỉ|ȋ|ī|į|ᶖ|ɨ|ĩ|ḭ|ᵢ|!|¡|ι";
+      conversions["j"] = "ȷ|ɟ|ʄ|ǰ|ĵ|ʝ|ɉ|ⱼ";
+      conversions["k"] = "ḱ|ǩ|ķ|ⱪ|ꝃ|ḳ|ƙ|ḵ|ᶄ|ꝁ|ʞ|ₖ|ќ";
+      conversions["l"] = "ĺ|ƚ|ɬ|ľ|ļ|ḽ|ȴ|ḷ|ḹ|ⱡ|ꝉ|ḻ|ŀ|ɫ|ᶅ|ɭ|ł|ꞁ|ₗ|ℓ|ᥣ";
+      conversions["m"] = "ḿ|ṁ|ṃ|ɱ|ᵯ|ᶆ|ɯ|ɰ|ₘ";
+      conversions["n"] = "ń|ň|ņ|ṋ|ȵ|ṅ|ṇ|ǹ|ɲ|ṉ|ƞ|ᵰ|ᶇ|ɳ|ñ|ŉ|ₙ|ᥒ|η|ή";
+      conversions["o"] =
+        "о|ᴓ|ᴑ|ó|ŏ|ǒ|ô|ố|ộ|ồ|ổ|ỗ|ö|ȫ|ȯ|ȱ|ọ|ő|ȍ|ò|ỏ|ơ|ớ|ợ|ờ|ở|ỡ|ȏ|ꝋ|ꝍ|ⱺ|ō|ṓ|ṑ|ǫ|ǭ|ø|ǿ|õ|ṍ|ṏ|ȭ|ɔ|ᶗ|º|ₒ|ɵ|σ";
+      conversions["p"] = "ṕ|ṗ|ꝓ|ƥ|ᵱ|ᶈ|ꝕ|ᵽ|ꝑ|ₚ";
+      conversions["q"] = "ꝙ|ʠ|ɋ|ꝗ";
+      conversions["r"] = "ŕ|ř|ŗ|ṙ|ṛ|ṝ|ȑ|ɾ|ᵳ|ȓ|ṟ|ɼ|ᵲ|ᶉ|ɍ|ɽ|ɿ|ɹ|ɻ|ɺ|ⱹ|ᵣ|ꞃ|r";
+      conversions["s"] = "ſ|ẜ|ẛ|ẝ|ś|ṥ|š|ṧ|ş|ŝ|ș|ṡ|ṣ|ṩ|ʂ|ᵴ|ᶊ|ȿ|ꞅ|ₛ|ˢ|ς";
+      conversions["t"] = "ť|ţ|ṱ|ț|ȶ|ẗ|ⱦ|ṫ|ṭ|ƭ|ṯ|ᵵ|ƫ|ʈ|ŧ|ʇ|ꞇ|ₜ";
+      conversions["u"] =
+        "ú|ŭ|ǔ|û|ṷ|ü|ǘ|ǚ|ǜ|ǖ|ṳ|ụ|ű|ȕ|ù|ủ|ư|ứ|ự|ừ|ử|ữ|ȗ|ū|ṻ|ų|ᶙ|ů|ũ|ṹ|ṵ|ᴝ|ᵤ";
+      conversions["v"] = "ⱴ|ꝟ|ṿ|ʋ|ᶌ|ⱱ|ṽ|ʌ|ᵥ";
+      conversions["w"] = "ẃ|ŵ|ẅ|ẇ|ẉ|ẁ|ⱳ|ẘ|ʍ";
+      conversions["x"] = "ẍ|ẋ|ᶍ|ₓ|ˣ";
+      conversions["y"] = "у|ý|ŷ|ÿ|ẏ|ỵ|ỳ|ƴ|ỷ|ỿ|ȳ|ẙ|ɏ|ỹ|ʎ|ʸ";
+      conversions["z"] = "ź|ž|ẑ|ʑ|ⱬ|ż|ẓ|ȥ|ẕ|ᵶ|ᶎ|ʐ|ƶ|ɀ|ᶻ|z|ʑ";
+      conversions["AE"] = "Æ|Ǽ|Ǣ|ᴁ";
+      conversions["AA"] = "Ꜳ";
+      conversions["AO"] = "Ꜵ";
+      conversions["AU"] = "Ꜷ";
+      conversions["AV"] = "Ꜹ|Ꜻ";
+      conversions["AY"] = "Ꜽ";
 
-            conversions["ff"] = "ﬀ";
-            conversions["ffi"] = "ﬃ";
-            conversions["ffl"] = "ﬄ";
-            conversions["fi"] = "ﬁ";
-            conversions["fl"] = "ﬂ";
-            conversions["tz"] = "ꜩ";
-            conversions["um"] = "ꝸ";
-            conversions["vy"] = "ꝡ";
-            conversions["st"] = "ﬆ";
-            conversions["nj"] = "ǌ";
-            conversions["oi"] = "ƣ";
-            conversions["oo"] = "ꝏ";
-            conversions["ET"] = "Ꝫ";
-            conversions["IS"] = "Ꝭ";
-            conversions["LJ"] = "Ǉ";
-            conversions["NJ"] = "Ǌ";
-            conversions["OI"] = "Ƣ";
-            conversions["OO"] = "Ꝏ";
-            conversions["OU"] = "Ȣ";
-            conversions["TZ"] = "Ꜩ";
-            conversions["VY"] = "Ꝡ";
-            conversions["OU"] = "ᴕ";
-            conversions["et"] = "ꝫ";
-            conversions["hv"] = "ƕ";
-            conversions["is"] = "ꝭ";
-            conversions["lj"] = "ǉ";
-            conversions["ou"] = "ȣ";
-            conversions["th"] = "ᵺ";
+      conversions["IJ"] = "Ĳ";
+      conversions["ij"] = "ĳ";
+      conversions["OE"] = "Œ|ɶ";
 
-            for (var i in conversions) {
-                var re = new RegExp(conversions[i], "g");
-                str = str.replace(re, i);
-            }
-            return str;
-        },
+      conversions["ff"] = "ﬀ";
+      conversions["ffi"] = "ﬃ";
+      conversions["ffl"] = "ﬄ";
+      conversions["fi"] = "ﬁ";
+      conversions["fl"] = "ﬂ";
+      conversions["tz"] = "ꜩ";
+      conversions["um"] = "ꝸ";
+      conversions["vy"] = "ꝡ";
+      conversions["st"] = "ﬆ";
+      conversions["nj"] = "ǌ";
+      conversions["oi"] = "ƣ";
+      conversions["oo"] = "ꝏ";
+      conversions["ET"] = "Ꝫ";
+      conversions["IS"] = "Ꝭ";
+      conversions["LJ"] = "Ǉ";
+      conversions["NJ"] = "Ǌ";
+      conversions["OI"] = "Ƣ";
+      conversions["OO"] = "Ꝏ";
+      conversions["OU"] = "Ȣ";
+      conversions["TZ"] = "Ꜩ";
+      conversions["VY"] = "Ꝡ";
+      conversions["OU"] = "ᴕ";
+      conversions["et"] = "ꝫ";
+      conversions["hv"] = "ƕ";
+      conversions["is"] = "ꝭ";
+      conversions["lj"] = "ǉ";
+      conversions["ou"] = "ȣ";
+      conversions["th"] = "ᵺ";
 
+      for (var i in conversions) {
+        var re = new RegExp(conversions[i], "g");
+        str = str.replace(re, i);
+      }
+      return str;
     }
-}
+  }
+};

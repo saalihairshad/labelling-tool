@@ -14,15 +14,12 @@
                   {{ tweet.full_text }}
                 </div>
               </div>
-
-              <div class="b-t">
-                <small><strong>Author</strong>: {{ tweet.user.name }}</small>
+              <div class="pt-3 pb-3 b-t">
+                <strong>Author</strong>: {{ tweet.user.name }}
                 |
-                <small
-                  ><strong>App: {{ tweet.app_name }}</strong></small
-                >
+                <strong>App: {{ tweet.app_name }}</strong>
                 |
-                <small><strong>Country:</strong> {{ tweet.user.name }}</small>
+                <strong>Country:</strong> {{ tweet.user.name }}
               </div>
             </div>
           </div>
@@ -51,9 +48,9 @@
             <div class="col-md-5">
               <el-progress
                 type="circle"
-                :percentage="parseInt(similarity)"
+                :percentage="parseInt(disagree)"
               ></el-progress>
-              <div class="mt-3">Similarity</div>
+              <div class="mt-3">Disagrement</div>
             </div>
           </div>
         </el-tab-pane>
@@ -99,94 +96,24 @@
 import AnnotationForm from "./AnnotationForm";
 import ddd from "recursive-diff";
 import auth from "../services/authService";
+import mixins from "../helpers/mixins";
 export default {
+  mixins: [mixins],
   props: ["tweet"],
-  data() {
-    return {
-      similarity: 0,
-      an: []
-    };
-  },
+
   components: {
     AnnotationForm
   },
-
-  mounted() {
-    if (this.tweet.annotations) {
-      this.an = Object.values(this.tweet.annotations);
-
-      let total_difference = 0;
-      if (this.an.length == 2) {
-        console.log(this.an);
-        const diff = ddd.getDiff(
-          this.an[0].annotations,
-          this.an[1].annotations
-        );
-
-        if (diff.length > 0) {
-          total_difference =
-            (this.objectSize(diff) * 100) /
-            this.objectSize(this.an[1].annotations);
-        }
-      }
-      console.log(total_difference);
-
-      this.similarity = (100 - total_difference).toFixed(2);
+  computed: {
+    disagree() {
+      return this.disagrement(this.tweet);
     }
   },
+
   methods: {
     handleNext() {
       this.$emit("next");
-    },
-
-    objectSize(obj) {
-      // var size = 0, key;
-      // for (key in obj) {
-      //     if (obj.hasOwnProperty(key)) size++;
-
-      //     // if(typeof obj[key] == 'object') {
-
-      //     //   console.log(key);
-      //     //   this.objectSize(obj[key]);
-      //     // }
-      // }
-      // return size;
-      //var obj={a:0,b:1,c:{a:1,otherkeyb:'2:"":2\\',otherkey:{d:1,e:2}}}
-      return JSON.stringify(obj).match(/[^\\]":/g).length; //
     }
-
-    //  arr_diff (a1, a2) {
-
-    //     var a = [], diff = [];
-
-    //     for (var i = 0; i < a1.length; i++) {
-    //         a[a1[i]] = true;
-    //     }
-
-    //     for (var i = 0; i < a2.length; i++) {
-    //         if (a[a2[i]]) {
-    //             delete a[a2[i]];
-    //         } else {
-    //             a[a2[i]] = true;
-    //         }
-    //     }
-
-    //     for (var k in a) {
-    //         diff.push(k);
-    //     }
-
-    //     return diff;
-    // }
   }
 };
 </script>
-<style scoped>
-code {
-  white-space: pre-wrap; /* css-3 */
-  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-  white-space: -pre-wrap; /* Opera 4-6 */
-  white-space: -o-pre-wrap; /* Opera 7 */
-  word-wrap: break-word;
-  color: palevioletred; /* Internet Explorer 5.5+ */
-}
-</style>

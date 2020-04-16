@@ -17,17 +17,16 @@ Version:    1.0.8
 [1. All common core files]
 */
 
-
-@import 'basic/variables';
+@import "basic/variables";
 // @import "../scss/common";
 @import "bootstrap/scss/bootstrap";
-@import '../scss/libs/paperIcons';
-@import '../scss/libs/roboto';
-@import '../scss/libs/animations';
+@import "../scss/libs/paperIcons";
+@import "../scss/libs/roboto";
+@import "../scss/libs/animations";
 // @import "../scss/libs/lightslider";
 @import "basic/responsive-helper"; // Should be at top of all other
 @import "basic/navDefault";
-@import 'basic/mixins';
+@import "basic/mixins";
 
 // @import "basic/icon";
 @import "basic/base";
@@ -65,7 +64,7 @@ Version:    1.0.8
 // // Toast
 // @import "../../../../node_modules/toastr/toastr";
 // // Avatar Placeholder
- @import "libs/letters";
+@import "libs/letters";
 // //Date Tables
 // @import "../../../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4";
 // //LobiList TaskTodo
@@ -74,8 +73,7 @@ Version:    1.0.8
 // [3. Panel Components]
 // */
 
-
- @import "components/_forms";
+@import "components/_forms";
 // @import "components/_forms-material";
 @import "components/sidebarMenu";
 // @import "components/shortcodes";
@@ -100,3 +98,11 @@ Version:    1.0.8
 @import "basic/theme-dark";
 // @import "basic/rtl";
 
+code {
+  white-space: pre-wrap; /* css-3 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word;
+  color: palevioletred; /* Internet Explorer 5.5+ */
+}

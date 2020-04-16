@@ -56,6 +56,7 @@
       </div>
     </div>
     <div class="col-md-9 b-l vh-100">
+      <div id="top"></div>
       <div class="p-3 scrollable-container" v-if="show">
         <Tweet :tweet="selectedTweet" @next="handeNext()" />
       </div>
@@ -112,6 +113,11 @@ export default {
       if (this.tweets[this.index + 1]) {
         this.selectedTweet = this.tweets[this.index + 1];
         this.index = this.tweets.indexOf(this.selectedTweet);
+
+        window.scrollTo(0);
+        var elmnt = document.getElementById("top");
+        console.log(elmnt);
+        elmnt.scrollTop = 0;
       } else {
         this.$message({
           showClose: true,
