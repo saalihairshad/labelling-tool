@@ -6,14 +6,10 @@
           <div class="col-lg-4 mx-md-auto">
             <div class="text-center">
               <img src="assets/img/dummy/u5.png" alt="" />
-
-              <p class="p-t-b-20">
-           
-              </p>
+              <p class="p-t-b-20"></p>
             </div>
 
             <el-form
-
               :model="form"
               ref="form"
               label-width="120px"
@@ -49,6 +45,16 @@
                 <el-button type="primary" @click="submit()">Submit</el-button>
               </el-form-item>
             </el-form>
+
+            <div class="mt-3">
+              <el-button
+                type="primary"
+                plain=""
+                @click="handleRoute('register')"
+                class="btn btn-block "
+                >Create A New Account
+              </el-button>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +74,9 @@ export default {
     };
   },
   methods: {
+    handleRoute(route) {
+      vm.$router.push({ path: "/" + route });
+    },
     async submit() {
       console.log("here ");
       try {
@@ -76,13 +85,11 @@ export default {
         window.location = "/";
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
-
-           this.$message({
+          this.$message({
             showClose: true,
             message: ex.response.data,
             type: "error"
           });
-  
         }
       }
     }

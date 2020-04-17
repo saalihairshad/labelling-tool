@@ -71,7 +71,7 @@
 
 <script>
 import axios from "axios";
-import Tweet from "../components/Tweet";
+import Tweet from "../components/twitter/Tweet";
 import auth from "../services/authService";
 import { getTweets } from "../services/tweetsService";
 export default {

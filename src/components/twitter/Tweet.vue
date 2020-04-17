@@ -28,7 +28,7 @@
 
       <el-tabs class="my-3 p-2">
         <el-tab-pane label="Annotations">
-          <AnnotationForm
+          <Form
             :item="tweet"
             :key="tweet._id"
             class="p-3"
@@ -87,22 +87,26 @@
                 </pre>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="Coding Guidlines">
+          <Documentation />
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
-import AnnotationForm from "./AnnotationForm";
-import ddd from "recursive-diff";
-import auth from "../services/authService";
-import mixins from "../helpers/mixins";
+import Form from "./Form";
+import auth from "../../services/authService";
+import mixins from "../../helpers/mixins";
+import Documentation from "./Documentation";
 export default {
   mixins: [mixins],
   props: ["tweet"],
 
   components: {
-    AnnotationForm
+    Form,
+    Documentation
   },
   computed: {
     disagree() {

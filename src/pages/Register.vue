@@ -6,10 +6,9 @@
           <div class="col-lg-4 mx-md-auto">
             <div class="text-center">
               <img src="assets/img/dummy/u5.png" alt="" />
-              <h3 class="mt-2">Welcome Back</h3>
+              <h3 class="mt-2">Create A New Account</h3>
               <p class="p-t-b-20">
-                Hey Soldier welcome back signin now there is lot of new stuff
-                waiting for you
+                Please enter your details to create new account.
               </p>
             </div>
 
@@ -61,7 +60,7 @@
 </template>
 <script>
 import { register } from "../services/userService";
-
+import auth from "../services/authService";
 export default {
   data() {
     return {
@@ -77,13 +76,22 @@ export default {
       console.log("see");
       try {
         const response = await register(this.form);
-        auth.loginWithJwt("token", response.headers["x-auth-token"]);
+        // auth.loginWithJwt("token", response.headers["x-auth-token"]);
+        this.$message({
+          showClose: true,
+          message: "Your account has been created.",
+          type: "success"
+        });
+        setTimeout(() => {}, 6000);
+
         window.location = "/";
       } catch (ex) {
         if (ex.response && ex.response.status === 400) {
-          const errors = { ...this.state.errors };
-          errors.email = ex.response.data;
-          this.setState({ errors });
+          this.$message({
+            showClose: true,
+            message: ex.response.data,
+            type: "error"
+          });
         }
       }
     }

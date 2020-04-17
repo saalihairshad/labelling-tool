@@ -29,7 +29,7 @@
 
       <el-tabs class="my-3 p-2">
         <el-tab-pane label="Annotations">
-          <ReviewAnnotationForm
+          <Form
             :item="review"
             :key="review._id"
             class="p-3"
@@ -65,20 +65,25 @@
                 </pre>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="Coding Guidlines">
+          <Documentation />
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
 </template>
 
 <script>
-import ReviewAnnotationForm from "./ReviewAnnotationForm";
-import auth from "../services/authService";
-import mixins from "../helpers/mixins";
+import Form from "./Form";
+import auth from "../../services/authService";
+import mixins from "../../helpers/mixins";
+import Documentation from "./Documentation";
 export default {
   mixins: [mixins],
   props: ["review"],
   components: {
-    ReviewAnnotationForm
+    Form,
+    Documentation
   },
   computed: {
     disagree() {

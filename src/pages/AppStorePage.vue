@@ -58,7 +58,7 @@
 
 <script>
 import axios from "axios";
-import Review from "../components/Review";
+import Review from "../components/appstore/Review";
 import { getReviews } from "../services/itunesService.js";
 
 import auth from "../services/authService";

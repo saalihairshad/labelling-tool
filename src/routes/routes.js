@@ -22,8 +22,8 @@ import RegisterPage from "@/pages/Register.vue";
 const routes = [
   {
     path: "/",
-    component: Dashboard,
-    redirect: "/dashboard",
+    component: TweetsPage,
+    redirect: "/tweets",
     meta: {
       requiresAuth: true
     }

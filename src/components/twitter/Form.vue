@@ -86,7 +86,7 @@
             <el-form-item label="Gender" prop="gender">
               <el-radio label="female">Female</el-radio>
               <el-radio label="male">Male</el-radio>
-              <el-radio label="unKnown">Unknow</el-radio>
+              <el-radio label="unKnown">Unknown</el-radio>
             </el-form-item>
           </el-radio-group>
         </div>
@@ -100,10 +100,6 @@
       </div>
       <hr />
 
-      <el-form-item label="Status" prop="isPending">
-        <el-checkbox v-model="isPending" label="Pending" border></el-checkbox>
-      </el-form-item>
-
       <el-form-item class="pt-4">
         <el-button type="primary" @click="onSubmit()">Save</el-button>
       </el-form-item>
@@ -113,10 +109,10 @@
 
 <script>
 import axios from "axios";
-import auth from "../services/authService";
-import { update } from "../services/tweetsService";
-import mixins from "../helpers/mixins.js";
-import GenderDetect from "./GenderDetect";
+import auth from "../../services/authService";
+import { update } from "../../services/tweetsService";
+import mixins from "../../helpers/mixins.js";
+import GenderDetect from "../common/GenderDetect";
 export default {
   mixins: [mixins],
   props: ["item", "url"],

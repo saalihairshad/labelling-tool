@@ -120,10 +120,6 @@
 
       <hr />
 
-      <el-form-item label="Status" prop="isPending">
-        <el-checkbox v-model="isPending" label="Pending" border></el-checkbox>
-      </el-form-item>
-
       <el-form-item class="pt-4">
         <el-button type="primary" @click="onSubmit()">Save</el-button>
       </el-form-item>
@@ -133,10 +129,10 @@
 
 <script>
 import axios from "axios";
-import auth from "../services/authService";
-import mixins from "../helpers/mixins.js";
-import { update } from "../services/itunesService.js";
-import GenderDetect from "./GenderDetect";
+import auth from "../../services/authService";
+import mixins from "../../helpers/mixins.js";
+import { update } from "../../services/itunesService.js";
+import GenderDetect from "../common/GenderDetect";
 
 export default {
   mixins: [mixins],

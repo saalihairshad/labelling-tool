@@ -15,11 +15,7 @@ import "element-ui/lib/theme-chalk/index.css";
 
 import auth from "./services/authService";
 
-
-
-import mixins from './helpers/mixins.js'
-
-
+//import mixins from "./helpers/mixins.js";
 
 //Tags
 //https://github.com/voerro/vue-tagsinput
@@ -66,12 +62,12 @@ router.beforeEach((to, from, next) => {
 
 window.vm = new Vue({
   render: h => h(App),
-  mixins: [mixins],
+  // mixins: [mixins],
   router,
   component: {
     LineChart
   },
-  beforeCreate: function () {
+  beforeCreate: function() {
     // const el = document.body;
     // this.toggleClass(el, 'sidebar-mini');
     // this.toggleClass(el, 'sidebar-collapse');
