@@ -1,7 +1,7 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white">
-      <div>
+      <div v-loading="loading">
         <!-- <div class="b-t">
                <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
             </div> -->
@@ -77,7 +77,8 @@ export default {
       selectedItem: null,
       show: false,
       index: "",
-      user: {}
+      user: {},
+      loading: true
     };
   },
   async created() {
@@ -112,10 +113,12 @@ export default {
     },
     // Get tweet
     getitunes() {
+      this.loading = true;
       getReviews()
         .then(res => {
           this.reviews = res.data.data;
           this.meta = res.data.meta;
+          this.loading = false;
         })
         .catch(err => {});
     }

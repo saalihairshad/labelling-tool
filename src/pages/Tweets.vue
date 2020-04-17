@@ -1,7 +1,7 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white sticky">
-      <div class="slimScroll">
+      <div class="slimScroll" v-loading="loading">
         <div class="tab-content" id="v-pills-tabContent">
           <div
             class="tab-pane fade show active"
@@ -89,7 +89,8 @@ export default {
       selectedTweet: null,
       show: false,
       index: "",
-      user: {}
+      user: {},
+      loading: true
     };
   },
   async created() {
@@ -114,10 +115,11 @@ export default {
         this.selectedTweet = this.tweets[this.index + 1];
         this.index = this.tweets.indexOf(this.selectedTweet);
 
-        window.scrollTo(0);
-        var elmnt = document.getElementById("top");
-        console.log(elmnt);
-        elmnt.scrollTop = 0;
+        this.getTweets();
+        // window.scrollTo(0);
+        // var elmnt = document.getElementById("top");
+        // console.log(elmnt);
+        // elmnt.scrollTop = 0;
       } else {
         this.$message({
           showClose: true,
@@ -128,10 +130,12 @@ export default {
     },
     // Get tweet
     getTweets() {
+      this.loading = true;
       getTweets()
         .then(res => {
           this.tweets = res.data.data;
           this.meta = res.data.meta;
+          this.loading = false;
         })
         .catch(err => {});
     }
