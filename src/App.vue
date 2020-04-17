@@ -4,7 +4,7 @@
     <div class="has-sidebar-left has-sidebar-tabs">
       <NavBar />
       <!-- <div class="container-fluid relative animatedParent animateOnce my-3"> -->
-        <router-view></router-view>
+      <router-view></router-view>
       <!-- </div> -->
     </div>
     <SidebarRight />

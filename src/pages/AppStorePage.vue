@@ -1,12 +1,12 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white">
-      <div v-loading="loading">
+      <div class="scrollable" v-loading="loading">
         <!-- <div class="b-t">
                <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
             </div> -->
 
-        <ul class="list-unstyled b-t scrollable" v-if="reviews.length > 0">
+        <ul class="list-unstyled b-t " v-if="reviews.length > 0">
           <li
             class="media p-3 b-b "
             v-for="review in reviews"
@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="col-md-9 b-l vh-100">
-      <div class="p-3 scrollable-container" v-if="show">
+      <div id="scrollable" class="p-3 scrollable-container" v-if="show">
         <Review :review="selectedItem" @next="handeNext()" />
       </div>
 
@@ -103,6 +103,9 @@ export default {
       if (this.reviews[this.index + 1]) {
         this.selectedItem = this.reviews[this.index + 1];
         this.index = this.reviews.indexOf(this.selectedItem);
+
+        document.getElementById("scrollable").scrollTop = 0;
+        this.getitunes();
       } else {
         this.$message({
           showClose: true,
