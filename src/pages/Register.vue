@@ -82,7 +82,6 @@ export default {
           message: "Your account has been created.",
           type: "success"
         });
-        setTimeout(() => {}, 6000);
 
         window.location = "/";
       } catch (ex) {

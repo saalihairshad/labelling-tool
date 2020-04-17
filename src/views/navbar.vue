@@ -49,7 +49,7 @@ export default {
     };
   },
   computed: {
-    user() {
+    isAuthenticated() {
       return auth.authenticated();
     }
   },

@@ -39,7 +39,7 @@
         <el-tab-pane label="Annotators">
           <div class="row">
             <div class="col-md-7">
-              <ul v-if="tweet.annotations">
+              <ul v-if="tweet.hasOwnProperty('annotations')">
                 <li v-for="user in tweet.annotations" :key="user._id">
                   {{ user.name }}
                 </li>
