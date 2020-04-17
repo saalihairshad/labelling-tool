@@ -1,58 +1,44 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white sticky">
-      <div class="slimScroll" v-loading="loading">
-        <div class="tab-content" id="v-pills-tabContent">
-          <div
-            class="tab-pane fade show active"
-            id="w2-tab1"
-            role="tabpanel"
-            aria-labelledby="w2-tab1"
+      <div class="scrollable" v-loading="loading">
+        <ul class="list-unstyled b-t scrollable" v-if="tweets.length > 0">
+          <li
+            class="media p-3 b-b "
+            v-for="(tweet, index) in tweets"
+            :key="tweet._id"
+            @click="handleTweetClick(tweet)"
+            :class="
+              selectedTweet && tweet._id == selectedTweet._id ? 'light b-l' : ''
+            "
           >
-            <!-- <div class="b-t">
-               <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
-            </div> -->
-            <ul class="list-unstyled b-t scrollable" v-if="tweets.length > 0">
-              <li
-                class="media p-3 b-b "
-                v-for="(tweet, index) in tweets"
-                :key="tweet._id"
-                @click="handleTweetClick(tweet)"
-                :class="
-                  selectedTweet && tweet._id == selectedTweet._id
-                    ? 'light b-l'
-                    : ''
-                "
+            <div class="avatar avatar-md blue mr-3">
+              <i class="icon-twitter"></i>
+            </div>
+
+            <div class="media-body text-truncate">
+              <h6 class="mt-0 mb-1 font-weight-normal">
+                {{ tweet.user.name }}
+              </h6>
+              <span>{{ tweet.full_text }}</span>
+              <br />
+              <small>
+                <el-tag
+                  size="mini"
+                  type="primary"
+                  class="mr-2"
+                  v-if="isAnnotated(tweet)"
+                  >Anotated
+                </el-tag>
+
+                <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
+
+                <i class="icon-comment-o ml-3 mr-2"></i
+                >{{ tweet.replies.length }}</small
               >
-                <div class="avatar avatar-md blue mr-3">
-                  <i class="icon-twitter"></i>
-                </div>
-
-                <div class="media-body text-truncate">
-                  <h6 class="mt-0 mb-1 font-weight-normal">
-                    {{ tweet.user.name }}
-                  </h6>
-                  <span>{{ tweet.full_text }}</span>
-                  <br />
-                  <small>
-                    <el-tag
-                      size="mini"
-                      type="primary"
-                      class="mr-2"
-                      v-if="isAnnotated(tweet)"
-                      >Anotated
-                    </el-tag>
-
-                    <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
-
-                    <i class="icon-comment-o ml-3 mr-2"></i
-                    >{{ tweet.replies.length }}</small
-                  >
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="col-md-9 b-l vh-100">
