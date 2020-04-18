@@ -14,12 +14,14 @@
                   {{ tweet.full_text }}
                 </div>
               </div>
-              <div class="pt-3 pb-3 b-t">
-                <strong>Author</strong>: {{ tweet.user.name }}
-                |
-                <strong>App: {{ tweet.app_name }}</strong>
-                |
-                <strong>Country:</strong> {{ tweet.user.name }}
+
+              <div class="pt-3 pb-3 b-t" style="font-size:14.5px;">
+                <strong>Author: </strong
+                ><span class="px-1"> {{ tweet.user.name }} </span> |
+                <strong class="pl-1">App: </strong
+                ><span class="px-1"> {{ tweet.app_name }} </span> |
+                <strong class="pl-1">Country: </strong>
+                <span class="px-1">{{ tweet.country }} </span>
               </div>
             </div>
           </div>

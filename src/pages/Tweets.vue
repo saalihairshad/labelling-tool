@@ -102,11 +102,13 @@ export default {
         document.getElementById("scrollable").scrollTop = 0;
         this.getTweets();
       } else {
-        this.$message({
-          showClose: true,
-          message: "No more tweets",
-          type: "warning"
-        });
+        setTimeout(() => {
+          this.$message({
+            showClose: true,
+            message: "No more tweets",
+            type: "warning"
+          });
+        }, 2000);
       }
     },
     // Get tweet

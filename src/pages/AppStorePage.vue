@@ -103,15 +103,16 @@ export default {
       if (this.reviews[this.index + 1]) {
         this.selectedItem = this.reviews[this.index + 1];
         this.index = this.reviews.indexOf(this.selectedItem);
-
         document.getElementById("scrollable").scrollTop = 0;
         this.getitunes();
       } else {
-        this.$message({
-          showClose: true,
-          message: "No more reviews",
-          type: "warning"
-        });
+        setTimeout(() => {
+          this.$message({
+            showClose: true,
+            message: "No more reviews",
+            type: "warning"
+          });
+        }, 2000);
       }
     },
     // Get tweet

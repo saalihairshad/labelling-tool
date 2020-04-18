@@ -187,6 +187,9 @@ export default {
 
     //Format Name
     this.formatedName = this.formatName(this.item.user.name);
+    if (this.formatedName === "unidentified") {
+      this.form.gender = "unknown";
+    }
   },
   methods: {
     handleGender(gender) {

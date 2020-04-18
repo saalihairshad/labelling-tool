@@ -17,9 +17,13 @@
                   {{ review.Review }}
                 </div>
 
-                <div class="pt-3 pb-3 b-t">
-                  Author: {{ review.Author }} | App: {{ review.AppName }} |
-                  Country: {{ review.Country }}
+                <div class="pt-3 pb-3 b-t" style="font-size:14.5px;">
+                  <strong>Author: </strong
+                  ><span class="px-1"> {{ review.Author }} </span> |
+                  <strong class="pl-1">App: </strong
+                  ><span class="px-1"> {{ review.AppName }} </span> |
+                  <strong class="pl-1">Country: </strong>
+                  <span class="px-1">{{ review.Country }} </span>
                 </div>
               </div>
             </div>

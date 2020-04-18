@@ -44,23 +44,22 @@ export default {
   },
   methods: {
     handleGender() {
-      try {
-        var GenderApi = require("gender-api.com-client");
-        var genderApiClient = new GenderApi.Client("XhcpKpNHWAPwSrFUlH");
+      if (this.formatedName === "unidentified") {
+        this.$emit("gender", "unknown");
+      } else {
+        try {
+          var GenderApi = require("gender-api.com-client");
+          var genderApiClient = new GenderApi.Client("XhcpKpNHWAPwSrFUlH");
 
-        if (this.name === "unidentified") {
-          this.form.gender = "unKnown";
-          return;
+          genderApiClient.getByFirstName(this.formatedName, response => {
+            console.log(response.gender); //female
+            console.log(response.accuracy); //98
+
+            this.$emit("gender", this.format(response.gender));
+          });
+        } catch (e) {
+          console.log("Error:", e);
         }
-
-        genderApiClient.getByFirstName(this.formatedName, response => {
-          console.log(response.gender); //female
-          console.log(response.accuracy); //98
-
-          this.$emit("gender", this.format(response.gender));
-        });
-      } catch (e) {
-        console.log("Error:", e);
       }
     },
 
