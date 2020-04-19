@@ -176,13 +176,13 @@ export default {
     this.validType = true;
 
     if (this.item.annotations) {
-      this.form = this.item.annotations[user._id].annotations;
+      if (this.item.annotations[user._id]) {
+        this.form = this.item.annotations[user._id].annotations;
+      }
       //other type enable
       if (this.form.otherType) {
         this.otherTypeCheck = true;
       }
-      //pending status update
-      this.isPending = this.item.annotations[user._id].isPending;
     }
 
     //Format Name
