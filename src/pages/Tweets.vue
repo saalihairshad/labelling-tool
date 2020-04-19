@@ -28,7 +28,7 @@
                   type="primary"
                   class="mr-2"
                   v-if="isAnnotated(tweet)"
-                  >Anotated
+                  >Annotated
                 </el-tag>
 
                 <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->

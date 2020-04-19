@@ -365,11 +365,14 @@
           </li>
           <li>
             <i class="icon-navigate_next mx-2"></i>
-            <strong>Moral police</strong> Tired of censoring non politically correct content
+            <strong>Moral police</strong> Tired of censoring non politically
+            correct content
           </li>
           <li>
             <i class="icon-navigate_next mx-2"></i>
-            <strong>Vital</strong>... ...but MUST do a better job ferreting out harassment, racism, and bots. Twitter is what you make of it; whom you follow.
+            <strong>Vital</strong>... ...but MUST do a better job ferreting out
+            harassment, racism, and bots. Twitter is what you make of it; whom
+            you follow.
           </li>
           <li>
             <i class="icon-navigate_next mx-2"></i>
@@ -381,6 +384,43 @@
           </li>
         </ul>
       </div>
+
+      <div class="pt-3">
+        <h4>Support Request</h4>
+        <p>
+          While using an app or a certain feature if the user faces a problem
+          and asks for a suggestion on how to solve it or use an app then it
+          will be considered as a support request. It might also contain
+          technical questions on how to do something.
+        </p>
+
+        <h5>Examples</h5>
+        <ul class="list-group list-group-flush list-unstyled mylist">
+          <li>
+            <i class="icon-navigate_next mx-2"></i>
+            @Adobe Please help me with a complicated support issue. I've wasted
+            hours on the phone and chat with no resolution. Surely there is
+            someone who can understand my issue and help.
+          </li>
+          <li>
+            <i class="icon-navigate_next mx-2"></i>
+            hey @SlackHQ, how do I change my browser in the slack desktop app? I
+            don't see the settings option.
+          </li>
+          <li>
+            <i class="icon-navigate_next mx-2"></i>
+            Dalton Lane How can I get my verification check on Twitter?
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+    <div class="pt-3">
+      <h3>Gender Classification</h3>
+      <p></p>
+
+      <h4>Male</h4>
     </div>
   </div>
 </template>

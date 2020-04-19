@@ -10,7 +10,7 @@
             aria-labelledby="w2-tab1"
           >
             <div class="b-t">
-               <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
+              <span>Annotated: {{ meta.annotated }} of {{ meta.total }}</span>
             </div>
             <ul class="list-unstyled b-t" v-if="tweets.length > 0">
               <li
@@ -29,22 +29,20 @@
                 </div>
 
                 <div class="media-body text-truncate">
-                  
-                  
-                  
                   <h6 class="mt-0 mb-1 font-weight-normal">
                     {{ tweet.user.name }}
                   </h6>
                   <span>{{ tweet.full_text }}</span>
                   <br />
-                  <small
-                    >
+                  <small>
+                    <el-tag
+                      size="mini"
+                      type="primary"
+                      class="mr-2"
+                      v-if="isAnnotated(tweet)"
+                      >Annotated
+                    </el-tag>
 
-      <el-tag size="mini" type="primary" class="mr-2"  v-if="isAnnotated(tweet)"
-                      >Anotated
-                      
-                      </el-tag > 
-                  
                     <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
 
                     <i class="icon-comment-o ml-3 mr-2"></i
@@ -72,27 +70,25 @@ import Tweet from "../components/Tweet";
 import auth from "../services/authService";
 export default {
   name: "TweetComponent",
-  props: [
-   'url'
-  ],
+  props: ["url"],
   components: {
     Tweet
     //  TweetForm
   },
   data() {
     return {
-      meta:[],
+      meta: [],
       tweets: [],
       error: "",
       text: "",
       selectedTweet: null,
       show: false,
       index: "",
-      user: {},
+      user: {}
     };
   },
   async created() {
-       this.user = auth.getCurrentUser();
+    this.user = auth.getCurrentUser();
     try {
       this.tweets = await this.getTweets();
     } catch (error) {
@@ -100,10 +96,8 @@ export default {
     }
   },
   methods: {
-    isAnnotated(tweet){
-
-        return tweet.annotations  && tweet.annotations[this.user._id];
-
+    isAnnotated(tweet) {
+      return tweet.annotations && tweet.annotations[this.user._id];
     },
     handleTweetClick(tweet) {
       this.selectedTweet = tweet;

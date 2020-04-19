@@ -44,7 +44,7 @@
         <el-tab-pane label="Annotators">
           <div class="row">
             <div class="col-md-7">
-              <ul v-if="review.annotations">
+              <ul v-if="review.hasOwnProperty('annotations')">
                 <li v-for="user in review.annotations" :key="user._id">
                   {{ user.name }}
                 </li>
