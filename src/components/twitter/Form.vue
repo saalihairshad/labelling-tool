@@ -53,7 +53,7 @@
             </div>
             <div>
               <el-checkbox
-                label="other"
+                label="Other"
                 v-model="form.type.other"
               ></el-checkbox>
               <el-input
@@ -96,6 +96,15 @@
             :formatedName="formatedName"
             @gender="handleGender"
           />
+        </div>
+
+        <div class="pt-3">
+          <i class="el-icon-info mr-3 text-yellow" />
+          <small
+            >Click the pencil icon to manually enter the name of a person and
+            detect their gender. For more information please refer to the coding
+            guidelines.</small
+          >
         </div>
       </div>
       <hr />

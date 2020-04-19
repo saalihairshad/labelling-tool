@@ -53,7 +53,7 @@
             </div>
             <div>
               <el-checkbox
-                label="other"
+                label="Other"
                 v-model="form.type.other"
               ></el-checkbox>
               <el-input
@@ -89,12 +89,6 @@
               <el-radio label="unknown">Unknown</el-radio>
             </el-form-item>
           </el-radio-group>
-          <div>
-            <i class="el-icon-info mr-3 text-yellow" />
-            <small
-              >Please refer to the coding guide line for more information</small
-            >
-          </div>
         </div>
 
         <div class="col-md-6 ">
@@ -107,6 +101,14 @@
           />
         </div>
       </div>
+      <div class="pt-3">
+        <i class="el-icon-info mr-3 text-yellow" />
+        <small
+          >Click the pencil icon to manually enter the name of a person and
+          detect their gender. For more information please refer to the coding
+          guidelines.</small
+        >
+      </div>
       <hr />
 
       <el-radio-group v-model="form.language">
@@ -114,7 +116,10 @@
           <el-radio label="English"></el-radio>
           <el-radio label="German"></el-radio>
           <el-radio label="French"></el-radio>
+          <el-radio label="Chinese"></el-radio>
           <el-radio label="Mandarin"></el-radio>
+          <el-radio label="Spanish"></el-radio>
+          <el-radio label="Other"></el-radio>
         </el-form-item>
       </el-radio-group>
 
@@ -167,6 +172,13 @@ export default {
           {
             required: true,
             message: "Please select a gender",
+            trigger: "change"
+          }
+        ],
+        language: [
+          {
+            required: true,
+            message: "Please select a language",
             trigger: "change"
           }
         ]

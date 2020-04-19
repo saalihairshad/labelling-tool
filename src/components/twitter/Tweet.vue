@@ -89,7 +89,7 @@
                 </pre>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="Coding Guidlines">
+        <el-tab-pane label="Coding Guidelines">
           <Documentation />
         </el-tab-pane>
       </el-tabs>
