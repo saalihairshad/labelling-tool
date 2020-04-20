@@ -98,7 +98,7 @@ export default {
   },
   computed: {
     disagree() {
-      return this.disagrement(this.review);
+      return this.disagrement(this.review, "reviews");
     }
   },
 

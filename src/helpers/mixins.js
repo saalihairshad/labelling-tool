@@ -18,7 +18,7 @@ export default {
       return require(`@/assets/${img}`);
     },
 
-    disagrement(item) {
+    disagrement(item, type = "tweets") {
       let total_difference = 100;
       let kappa = 0;
       if (item.annotations) {
@@ -31,14 +31,14 @@ export default {
           total_difference =
             (diff.length * 100) / this.objectSize(an[1].annotations);
 
-          kappa = this.kappa(an[0].annotations, an[1].annotations);
+          kappa = this.kappa(type, an[0].annotations, an[1].annotations);
         }
       }
 
       return [total_difference.toFixed(2), kappa];
     },
 
-    kappa(p1, p2) {
+    kappa(type, p1, p2) {
       var Cohen = require("cohens-kappa");
       var categories = [
         "Very Negative",
@@ -69,8 +69,7 @@ export default {
         generalComplaint: p1.type.generalComplaint,
         generalPraise: p1.type.generalPraise,
         noise: p1.type.noise,
-        other: p1.type.other,
-       // language: p1.language
+        other: p1.type.other
       };
 
       var reviewer2 = {
@@ -82,9 +81,13 @@ export default {
         generalComplaint: p2.type.generalComplaint,
         generalPraise: p2.type.generalPraise,
         noise: p2.type.noise,
-        other: p2.type.other,
-      //  language: p2.language
+        other: p2.type.other
       };
+
+      if (type === "reviews") {
+        reviewer1 = { ...reviewer1, language: p1.language };
+        reviewer2 = { ...reviewer2, language: p2.language };
+      }
 
       console.log(reviewer1);
       console.log(reviewer2);
