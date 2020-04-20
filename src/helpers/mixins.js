@@ -26,10 +26,7 @@ export default {
         let an = Object.values(item.annotations);
         if (an.length == 2) {
           const diff = ddd.getDiff(an[0].annotations, an[1].annotations);
-
           console.log(diff);
-
-          console.log("xxxxxxxxx");
           console.log(this.objectSize(an[1].annotations));
           total_difference =
             (diff.length * 100) / this.objectSize(an[1].annotations);
@@ -43,9 +40,6 @@ export default {
 
     kappa(p1, p2) {
       var Cohen = require("cohens-kappa");
-      console.log(p1);
-      console.log(p2);
-
       var categories = [
         "Very Negative",
         "Negative",
@@ -76,7 +70,7 @@ export default {
         generalPraise: p1.type.generalPraise,
         noise: p1.type.noise,
         other: p1.type.other,
-        language: p1.language
+       // language: p1.language
       };
 
       var reviewer2 = {
@@ -89,40 +83,12 @@ export default {
         generalPraise: p2.type.generalPraise,
         noise: p2.type.noise,
         other: p2.type.other,
-        language: p2.language
+      //  language: p2.language
       };
 
-      // var kappaL = Cohen.kappa(p1, p2, 15, "linear");
-      // console.log("Linear weights: " + kappaL);
+      console.log(reviewer1);
+      console.log(reviewer2);
 
-      // var reviewer1 ={
-      //     bugReport: false,
-      //     supportRequest: false,
-      //     featureRequest: false,
-      //     generalComplaint: false,
-      //     generalPraise: false,
-      //     noise: false,
-      //     other: false
-      // }
-
-      // var reviewer2 ={
-      //     bugReport: false,
-      //     supportRequest: false,
-      //     featureRequest: false,
-      //     generalComplaint: false,
-      //     generalPraise: false,
-      //     noise: false,
-      //     other: false
-      // }
-      //   var categories = [
-      //     bugReport: false,
-      //     supportRequest: false,
-      //     featureRequest: false,
-      //     generalComplaint: false,
-      //     generalPraise: false,
-      //     noise: false,
-      //     other: false
-      //   ];
       var rev3numeric = Cohen.nominalConversion(categories, reviewer1);
       var rev4numeric = Cohen.nominalConversion(categories, reviewer2);
 
