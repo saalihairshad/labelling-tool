@@ -32,7 +32,7 @@
                   type="primary"
                   class="mr-2"
                   v-if="isAnnotated(review)"
-                  >Anotated
+                  >Annotated
                 </el-tag>
 
                 <!-- <el-tag  size="mini" type="warning" v-if="itune.annotations && itune.annotations.isPending">Pending</el-tag> -->

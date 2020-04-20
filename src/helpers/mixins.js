@@ -32,9 +32,91 @@ export default {
               (this.objectSize(diff) * 100) /
               this.objectSize(an[1].annotations);
           }
+
+          this.kappa(an[0].annotations, an[1].annotations);
         }
       }
       return total_difference.toFixed(2);
+    },
+
+    kappa(p1, p2) {
+      var Cohen = require("cohens-kappa");
+      console.log(p1);
+      console.log(p2);
+
+      var categories = [
+        "Very Negative",
+        "Negative",
+        "Neutral",
+        "Positive",
+        "Very Positive",
+        "male",
+        "female",
+        "unKnown",
+        true,
+        false
+      ];
+
+      var reviewer1 = {
+        sentiment: p1.sentiment,
+        gender: p1.gender,
+        bugReport: p1.type.bugReport,
+        supportRequest: p1.type.supportRequest,
+        featureRequest: p1.type.featureRequest,
+        generalComplaint: p1.type.generalComplaint,
+        generalPraise: p1.type.generalPraise,
+        noise: p1.type.noise,
+        other: p1.type.other
+      };
+
+      var reviewer2 = {
+        sentiment: p2.sentiment,
+        gender: p2.gender,
+        bugReport: p2.type.bugReport,
+        supportRequest: p2.type.supportRequest,
+        featureRequest: p2.type.featureRequest,
+        generalComplaint: p2.type.generalComplaint,
+        generalPraise: p2.type.generalPraise,
+        noise: p2.type.noise,
+        other: p2.type.other
+      };
+
+      // var kappaL = Cohen.kappa(p1, p2, 15, "linear");
+      // console.log("Linear weights: " + kappaL);
+
+      // var reviewer1 ={
+      //     bugReport: false,
+      //     supportRequest: false,
+      //     featureRequest: false,
+      //     generalComplaint: false,
+      //     generalPraise: false,
+      //     noise: false,
+      //     other: false
+      // }
+
+      // var reviewer2 ={
+      //     bugReport: false,
+      //     supportRequest: false,
+      //     featureRequest: false,
+      //     generalComplaint: false,
+      //     generalPraise: false,
+      //     noise: false,
+      //     other: false
+      // }
+      //   var categories = [
+      //     bugReport: false,
+      //     supportRequest: false,
+      //     featureRequest: false,
+      //     generalComplaint: false,
+      //     generalPraise: false,
+      //     noise: false,
+      //     other: false
+      //   ];
+      var rev3numeric = Cohen.nominalConversion(categories, reviewer1);
+      var rev4numeric = Cohen.nominalConversion(categories, reviewer2);
+
+      var kappaUnweighted = Cohen.kappa(rev3numeric, rev4numeric, 15, "none");
+      console.log("Unweighted kappa: " + kappaUnweighted);
     },
 
     objectSize(obj) {

@@ -115,6 +115,9 @@ export default {
       return this.disagrement(this.tweet);
     }
   },
+  mounted() {
+    // this.kappa();
+  },
 
   methods: {
     handleNext() {
