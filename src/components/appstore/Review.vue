@@ -42,20 +42,27 @@
           />
         </el-tab-pane>
         <el-tab-pane label="Annotators">
-          <div class="row">
-            <div class="col-md-7">
+          <div class="row p-5">
+            <div class="col-md-12">
               <ul v-if="review.hasOwnProperty('annotations')">
                 <li v-for="user in review.annotations" :key="user._id">
                   {{ user.name }}
                 </li>
               </ul>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6 text-center">
               <el-progress
                 type="circle"
-                :percentage="parseInt(disagree)"
+                :percentage="parseFloat(disagree[0])"
               ></el-progress>
               <div class="mt-3">Disagrement</div>
+            </div>
+            <div class="col-md-6 text-center">
+              <el-progress
+                type="circle"
+                :percentage="disagree[1]"
+              ></el-progress>
+              <div class="mt-3">Unweighted kappa</div>
             </div>
           </div>
         </el-tab-pane>

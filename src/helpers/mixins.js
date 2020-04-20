@@ -19,7 +19,8 @@ export default {
     },
 
     disagrement(item) {
-      let total_difference = 0;
+      let total_difference = 100;
+      let kappa = 0;
       if (item.annotations) {
         console.log(item.annotations);
         let an = Object.values(item.annotations);
@@ -27,16 +28,17 @@ export default {
           const diff = ddd.getDiff(an[0].annotations, an[1].annotations);
 
           console.log(diff);
-          if (diff.length > 0) {
-            total_difference =
-              (this.objectSize(diff) * 100) /
-              this.objectSize(an[1].annotations);
-          }
 
-          this.kappa(an[0].annotations, an[1].annotations);
+          console.log("xxxxxxxxx");
+          console.log(this.objectSize(an[1].annotations));
+          total_difference =
+            (diff.length * 100) / this.objectSize(an[1].annotations);
+
+          kappa = this.kappa(an[0].annotations, an[1].annotations);
         }
       }
-      return total_difference.toFixed(2);
+
+      return [total_difference.toFixed(2), kappa];
     },
 
     kappa(p1, p2) {
@@ -52,9 +54,16 @@ export default {
         "Very Positive",
         "male",
         "female",
-        "unKnown",
+        "unknown",
         true,
-        false
+        false,
+        "English",
+        "German",
+        "French",
+        "Chinese",
+        "Mandarin",
+        "Spanish",
+        "Other"
       ];
 
       var reviewer1 = {
@@ -66,7 +75,8 @@ export default {
         generalComplaint: p1.type.generalComplaint,
         generalPraise: p1.type.generalPraise,
         noise: p1.type.noise,
-        other: p1.type.other
+        other: p1.type.other,
+        language: p1.language
       };
 
       var reviewer2 = {
@@ -78,7 +88,8 @@ export default {
         generalComplaint: p2.type.generalComplaint,
         generalPraise: p2.type.generalPraise,
         noise: p2.type.noise,
-        other: p2.type.other
+        other: p2.type.other,
+        language: p2.language
       };
 
       // var kappaL = Cohen.kappa(p1, p2, 15, "linear");
@@ -115,8 +126,9 @@ export default {
       var rev3numeric = Cohen.nominalConversion(categories, reviewer1);
       var rev4numeric = Cohen.nominalConversion(categories, reviewer2);
 
-      var kappaUnweighted = Cohen.kappa(rev3numeric, rev4numeric, 15, "none");
-      console.log("Unweighted kappa: " + kappaUnweighted);
+      var kappaUnweighted = Cohen.kappa(rev3numeric, rev4numeric, 25, "linear");
+
+      return kappaUnweighted;
     },
 
     objectSize(obj) {
