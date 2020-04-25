@@ -24,14 +24,18 @@ export default {
       if (item.annotations) {
         console.log(item.annotations);
         let an = Object.values(item.annotations);
-        if (an.length == 2) {
-          const diff = ddd.getDiff(an[0].annotations, an[1].annotations);
-          console.log(diff);
-          console.log(this.objectSize(an[1].annotations));
-          total_difference =
-            (diff.length * 100) / this.objectSize(an[1].annotations);
+        let an1 = an[0].annotations;
+        let an2 = an[1].annotations;
+        delete an1.type.otherName;
+        delete an2.type.otherName;
 
-          kappa = this.kappa(type, an[0].annotations, an[1].annotations);
+        if (an.length == 2) {
+          const diff = ddd.getDiff(an1, an2);
+          console.log(diff);
+          console.log(this.objectSize(an2));
+          total_difference = (diff.length * 100) / this.objectSize(an2);
+
+          kappa = this.kappa(type, an1, an2);
         }
       }
 
@@ -89,13 +93,15 @@ export default {
         reviewer2 = { ...reviewer2, language: p2.language };
       }
 
-      console.log(reviewer1);
-      console.log(reviewer2);
+      console.log("reviewer1: ", reviewer1);
+      console.log("reviewer2: ", reviewer2);
 
       var rev3numeric = Cohen.nominalConversion(categories, reviewer1);
       var rev4numeric = Cohen.nominalConversion(categories, reviewer2);
 
-      var kappaUnweighted = Cohen.kappa(rev3numeric, rev4numeric, 25, "linear");
+      var kappaUnweighted = Cohen.kappa(rev3numeric, rev4numeric, 25, "none");
+
+      console.log("kappaUnweighted: ", kappaUnweighted);
 
       return kappaUnweighted;
     },

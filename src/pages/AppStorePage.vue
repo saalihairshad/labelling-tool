@@ -1,11 +1,29 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white">
+      <div class="d-flex b-t p-3 align-items-center">
+        <div>
+          <span>Anotated: {{ annoted.length }}/{{ meta.total }}</span>
+        </div>
+        <div class="ml-auto">
+          <el-select
+            v-model="country"
+            placeholder="Select"
+            filterable
+            @change="handleCountry"
+            size="mini"
+          >
+            <el-option value="" label="All Countries" />
+            <el-option
+              v-for="country in countries"
+              :key="country.code"
+              :label="`${country.name} (${country.code.toLowerCase()})`"
+              :value="country.code"
+            />
+          </el-select>
+        </div>
+      </div>
       <div class="scrollable" v-loading="loading">
-        <!-- <div class="b-t">
-               <span>Anotated: {{meta.annotated}} of {{meta.total}}</span>
-            </div> -->
-
         <ul class="list-unstyled b-t " v-if="reviews.length > 0">
           <li
             class="media p-3 b-b "
@@ -41,6 +59,7 @@
             </div>
           </li>
         </ul>
+        <div v-else class="text-center my-5">No reviews found</div>
       </div>
     </div>
     <div class="col-md-9 b-l vh-100">
@@ -61,6 +80,8 @@ import axios from "axios";
 import Review from "../components/appstore/Review";
 import { getReviews } from "../services/itunesService.js";
 
+import countryList from "country-list";
+
 import auth from "../services/authService";
 export default {
   name: "ituneComponent",
@@ -78,10 +99,14 @@ export default {
       show: false,
       index: "",
       user: {},
-      loading: true
+      loading: true,
+      countries: [],
+      country: "",
+      annoted: []
     };
   },
   async created() {
+    this.countries = countryList.getData();
     this.user = auth.getCurrentUser();
     try {
       this.itunes = await this.getitunes();
@@ -94,7 +119,6 @@ export default {
       return itune.annotations && itune.annotations[this.user._id];
     },
     handleClick(item) {
-      console.log(item);
       this.selectedItem = item;
       this.index = this.reviews.indexOf(item);
       this.show = true;
@@ -118,13 +142,28 @@ export default {
     // Get tweet
     getitunes() {
       this.loading = true;
-      getReviews()
+      let params;
+      if (this.country) params = { Country: this.country.toLowerCase() };
+      getReviews(params)
         .then(res => {
           this.reviews = res.data.data;
           this.meta = res.data.meta;
           this.loading = false;
+          this.countAnnotations();
         })
         .catch(err => {});
+    },
+
+    handleCountry() {
+      this.getitunes();
+    },
+
+    countAnnotations() {
+      this.annoted = this.reviews.filter(review =>
+        review.annotations && review.annotations.hasOwnProperty(this.user._id)
+          ? review
+          : ""
+      );
     }
   }
 };

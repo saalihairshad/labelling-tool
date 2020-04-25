@@ -1,6 +1,11 @@
 <template>
   <div class="row no-gutters">
     <div class="col-md-3 white sticky">
+      <div class="d-flex b-t p-3 align-items-center">
+        <div>
+          <span>Anotated: {{ annoted.length }}/{{ meta.total }}</span>
+        </div>
+      </div>
       <div class="scrollable" v-loading="loading">
         <ul class="list-unstyled b-t scrollable" v-if="tweets.length > 0">
           <li
@@ -75,7 +80,8 @@ export default {
       show: false,
       index: "",
       user: {},
-      loading: true
+      loading: true,
+      annoted: []
     };
   },
   async created() {
@@ -119,8 +125,16 @@ export default {
           this.tweets = res.data.data;
           this.meta = res.data.meta;
           this.loading = false;
+          this.countAnnotations();
         })
         .catch(err => {});
+    },
+    countAnnotations() {
+      this.annoted = this.tweets.filter(review =>
+        review.annotations && review.annotations.hasOwnProperty(this.user._id)
+          ? review
+          : ""
+      );
     }
   }
 };

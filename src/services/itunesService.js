@@ -1,7 +1,10 @@
 import httpService from "./httpService";
 
 export function getReviews($params = "") {
-  return httpService.get("/itunes/?" + $params);
+  let params = Object.entries($params)
+    .map(([key, val]) => `${key}=${val}`)
+    .join("&");
+  return httpService.get("/itunes/?" + params);
 }
 
 export function getReview(id) {
