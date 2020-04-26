@@ -117,7 +117,7 @@
           <el-radio label="German"></el-radio>
           <el-radio label="French"></el-radio>
           <el-radio label="Chinese"></el-radio>
-          <el-radio label="Mandarin"></el-radio>
+          <!-- <el-radio label="Mandarin"></el-radio> -->
           <el-radio label="Spanish"></el-radio>
           <el-radio label="Other"></el-radio>
         </el-form-item>
