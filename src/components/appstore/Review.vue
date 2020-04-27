@@ -9,9 +9,9 @@
               <i class="icon-apple s-64"></i>
             </div>
             <div class="media-body">
-              <h6 class="mt-0 mb-1 font-weight-normal b-b" v-if="review.Title">
+              <h3 class="mt-0 mb-1 font-weight-normal b-b" v-if="review.Title">
                 {{ review.Title }}
-              </h6>
+              </h3>
               <div class="collapse my-3 show" id="message1">
                 <div class="lead my-3">
                   {{ review.Review }}
