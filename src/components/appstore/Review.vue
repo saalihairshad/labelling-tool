@@ -42,7 +42,11 @@
           />
         </el-tab-pane>
         <el-tab-pane label="Annotators">
-          Please select at least two annotators.
+          <p class="ml-2">
+            <i class="el-icon-info ml-2"></i>
+            Please select at least two annotators to check the disagreement or
+            Cohen's kappa of the document !!!
+          </p>
           <div class="row p-3">
             <div class="col-md-12 mb-3">
               <el-select
@@ -69,7 +73,7 @@
                     type="circle"
                     :percentage="parseFloat(disagree[0])"
                   ></el-progress>
-                  <div class="mt-3">Disagrement</div>
+                  <div class="mt-3">Disagreement</div>
                 </div>
                 <div class="col-md-6 text-center">
                   <el-progress
