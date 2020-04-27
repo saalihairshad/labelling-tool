@@ -46,7 +46,7 @@
     </div>
 
     <div class="alert alert-primary" role="alert" style="border-radius:0px">
-      <i class="icon-info_outline mx-2 "></i>If the of a Review/Tweet is "Noise"
+      <i class="icon-info_outline mx-2 "></i>If the conyent of a Review/Tweet is "Noise"
       then please mark the sentiment as "Neutral".
     </div>
 
