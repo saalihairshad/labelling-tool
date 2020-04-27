@@ -15,18 +15,42 @@
                 label="Bug Report"
                 v-model="form.type.bugReport"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user reports a problem"
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
             <div>
               <el-checkbox
                 label="Support Request"
                 v-model="form.type.supportRequest"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content=" The user asks for support but it is not about a specific feature request or bug."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
             <div>
               <el-checkbox
                 label="Feature Request"
                 v-model="form.type.featureRequest"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
           </div>
           <div class="col-md-4">
@@ -35,12 +59,28 @@
                 label="General Complaint"
                 v-model="form.type.generalComplaint"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
             <div>
               <el-checkbox
                 label="General Praise"
                 v-model="form.type.generalPraise"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user praises the app or functionalities of the app."
+                placement="right-end"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
           </div>
 
@@ -50,12 +90,28 @@
                 label="Noise"
                 v-model="form.type.noise"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="Symbols, characters or unrecognized text."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
             </div>
             <div>
               <el-checkbox
                 label="Other"
                 v-model="form.type.other"
               ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The review is not about a bug, a feature request or support request. This category also includes statements about the content of an app"
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
               <el-input
                 placeholder="Add Name"
                 v-if="form.type.other"
@@ -97,6 +153,7 @@
           <GenderDetect
             :name="item.Author"
             :formatedName="formatedName"
+            :country="item.Country"
             @gender="handleGender"
           />
         </div>

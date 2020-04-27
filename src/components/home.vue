@@ -1,7 +1,6 @@
-
 <template>
   <div>
-    <div>Total Items {{counts}}</div>
+    <div>Total Items {{ counts }}</div>
     <counter
       v-for="c in counters"
       :key="c"

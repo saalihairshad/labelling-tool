@@ -42,27 +42,43 @@
           />
         </el-tab-pane>
         <el-tab-pane label="Annotators">
-          <div class="row p-5">
+          Please select at least two annotators.
+          <div class="row p-3">
+            <div class="col-md-12 mb-3">
+              <el-select
+                v-model="selectedAnnotators"
+                @change="handleAnnotation"
+                multiple=""
+                :multiple-limit="2"
+                filterable=""
+                placeholder="Select Annotators"
+              >
+                <el-option
+                  v-for="user in annotationsList"
+                  :key="user._id"
+                  :value="user._id"
+                  :label="user.name"
+                  >{{ user.name }}</el-option
+                >
+              </el-select>
+            </div>
             <div class="col-md-12">
-              <ul v-if="review.hasOwnProperty('annotations')">
-                <li v-for="user in review.annotations" :key="user._id">
-                  {{ user.name }}
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6 text-center">
-              <el-progress
-                type="circle"
-                :percentage="parseFloat(disagree[0])"
-              ></el-progress>
-              <div class="mt-3">Disagrement</div>
-            </div>
-            <div class="col-md-6 text-center">
-              <el-progress
-                type="circle"
-                :percentage="disagree[1]"
-              ></el-progress>
-              <div class="mt-3">Unweighted kappa</div>
+              <div class="row" v-if="disagree">
+                <div class="col-md-6 text-center">
+                  <el-progress
+                    type="circle"
+                    :percentage="parseFloat(disagree[0])"
+                  ></el-progress>
+                  <div class="mt-3">Disagrement</div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <el-progress
+                    type="circle"
+                    :percentage="disagree[1]"
+                  ></el-progress>
+                  <div class="mt-3">Unweighted kappa</div>
+                </div>
+              </div>
             </div>
           </div>
         </el-tab-pane>
@@ -88,23 +104,46 @@
 import Form from "./Form";
 import auth from "../../services/authService";
 import mixins from "../../helpers/mixins";
-import Documentation from "./Documentation";
+import Documentation from "../common/Documentation";
 export default {
   mixins: [mixins],
   props: ["review"],
+
   components: {
     Form,
     Documentation
   },
+
+  data() {
+    return {
+      selectedAnnotators: []
+    };
+  },
+
+  mounted() {
+    this.handleAnnotation();
+  },
   computed: {
     disagree() {
-      return this.disagrement(this.review, "reviews");
+      return this.handleAnnotation();
+    },
+    annotationsList() {
+      this.selectedAnnotators = [];
+      return this.review.annotations;
     }
   },
 
   methods: {
+    handleAnnotation() {
+      if (this.selectedAnnotators.length == 2) {
+        let r1 = this.review.annotations[this.selectedAnnotators[0]];
+        let r2 = this.review.annotations[this.selectedAnnotators[1]];
+        return this.disagrement(this.review, "reviews", r1, r2);
+      }
+    },
     handleNext() {
       this.$emit("next");
+      this.selectedAnnotators = [];
     }
   }
 };

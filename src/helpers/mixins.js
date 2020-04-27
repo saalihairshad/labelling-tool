@@ -18,7 +18,7 @@ export default {
       return require(`@/assets/${img}`);
     },
 
-    disagrement(item, type = "tweets") {
+    disagrement(item, type = "tweets", r1 = null, r2 = null) {
       let total_difference = 100;
       let kappa = 0;
       if (item.annotations) {
@@ -26,10 +26,16 @@ export default {
         let an = Object.values(item.annotations);
         let an1 = an[0].annotations;
         let an2 = an[1].annotations;
+
+        if (r1 && r2) {
+          an1 = r1.annotations;
+          an2 = r2.annotations;
+        }
+
         delete an1.type.otherName;
         delete an2.type.otherName;
 
-        if (an.length == 2) {
+        if (an.length >= 2) {
           const diff = ddd.getDiff(an1, an2);
           console.log(diff);
           console.log(this.objectSize(an2));
@@ -59,7 +65,6 @@ export default {
         "German",
         "French",
         "Chinese",
-        "Mandarin",
         "Spanish",
         "Other"
       ];

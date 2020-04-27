@@ -68,9 +68,20 @@
       </div>
 
       <div class="text-center pt-5 mt-5" v-if="!selectedItem">
+        <div class="pt-3">
+          <i class="icon-apple fz-48"></i>
+          <div class="mt-3">
+            <h4>Please select a Review from the sidebar to annotate!</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="card" v-if="!selectedItem">
+        <h2 class="pl-3 pt-5">Coding Guidelines</h2>
         <i class="el-icon-thumb fz-48"></i>
         <div class="mt-3"><h4>Select An Item</h4></div>
-      </div>
+        <Documentation />
+      </div> -->
     </div>
   </div>
 </template>
@@ -83,10 +94,13 @@ import { getReviews } from "../services/itunesService.js";
 import countryList from "country-list";
 
 import auth from "../services/authService";
+import Documentation from "../components/common/Documentation";
+
 export default {
   name: "ituneComponent",
   components: {
-    Review
+    Review,
+    Documentation
     //  ituneForm
   },
   data() {

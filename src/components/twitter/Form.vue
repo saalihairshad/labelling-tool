@@ -94,6 +94,7 @@
           <GenderDetect
             :name="item.user.name"
             :formatedName="formatedName"
+            :country="item.country_code"
             @gender="handleGender"
           />
         </div>

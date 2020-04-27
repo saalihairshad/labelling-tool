@@ -35,7 +35,8 @@ export default {
       type: String,
       default: "",
       required: true
-    }
+    },
+    country: ""
   },
   data() {
     return {
@@ -51,12 +52,17 @@ export default {
           var GenderApi = require("gender-api.com-client");
           var genderApiClient = new GenderApi.Client("XhcpKpNHWAPwSrFUlH");
 
-          genderApiClient.getByFirstName(this.formatedName, response => {
-            console.log(response.gender); //female
-            console.log(response.accuracy); //98
+          genderApiClient.getByFirstNameAndCountry(
+            this.formatedName,
+            this.country,
+            response => {
+              console.log(response.gender); //female
+              console.log(response.accuracy); //98
+              console.log(response.country); //
 
-            this.$emit("gender", this.format(response.gender));
-          });
+              this.$emit("gender", this.format(response.gender));
+            }
+          );
         } catch (e) {
           console.log("Error:", e);
         }

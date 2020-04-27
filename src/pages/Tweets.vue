@@ -1,6 +1,6 @@
 <template>
   <div class="row no-gutters">
-    <div class="col-md-3 white sticky">
+    <div class="col-md-3 white">
       <div class="d-flex b-t p-3 align-items-center">
         <div>
           <span>Anotated: {{ annoted.length }}/{{ meta.total }}</span>
@@ -52,10 +52,20 @@
       </div>
 
       <div class="text-center pt-5 mt-5" v-if="!selectedTweet">
-        <i class="el-icon-thumb fz-48"></i>
-        <div class="mt-3"><h4>Select An Item</h4></div>
+        <div class="pt-3">
+          <i class="icon-twitter fz-48"></i>
+          <div class="mt-3">
+            <h4>Please select a Tweet from the sidebar to annotate!</h4>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- 
+      <div class="card" v-if="!selectedTweet">
+        <h2 class="pl-3 pt-5">Coding Guidelines</h2>
+        <Documentation />
+    </div> -->
   </div>
 </template>
 
@@ -64,10 +74,13 @@ import axios from "axios";
 import Tweet from "../components/twitter/Tweet";
 import auth from "../services/authService";
 import { getTweets } from "../services/tweetsService";
+import Documentation from "../components/common/Documentation";
+
 export default {
   name: "TweetComponent",
   components: {
-    Tweet
+    Tweet,
+    Documentation
     //  TweetForm
   },
   data() {

@@ -101,7 +101,7 @@
 import Form from "./Form";
 import auth from "../../services/authService";
 import mixins from "../../helpers/mixins";
-import Documentation from "./Documentation";
+import Documentation from "../common/Documentation";
 export default {
   mixins: [mixins],
   props: ["tweet"],
