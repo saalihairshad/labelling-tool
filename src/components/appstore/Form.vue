@@ -333,7 +333,7 @@ export default {
           if (response.statusText == "OK") {
             this.$message({
               showClose: true,
-              message: "Itune Review annotated!",
+              message: "Itunes Review annotated!",
               type: "success"
             });
             this.onNext();
