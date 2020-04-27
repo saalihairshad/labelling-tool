@@ -62,7 +62,7 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented."
+                content="The user complains about the app, but does not mention specific functionalities or problems."
                 placement="top"
               >
                 <i class="el-icon-info ml-2"></i>
@@ -93,7 +93,7 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content="Symbols, characters or unrecognized text."
+                content="The user enters random symbols, characters or unrecognized text."
                 placement="top"
               >
                 <i class="el-icon-info ml-2"></i>
