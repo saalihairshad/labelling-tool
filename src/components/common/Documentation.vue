@@ -46,8 +46,8 @@
     </div>
 
     <div class="alert alert-primary" role="alert" style="border-radius:0px">
-      <i class="icon-info_outline mx-2 "></i>If the conyent of a Review/Tweet is "Noise"
-      then please mark the sentiment as "Neutral".
+      <i class="icon-info_outline mx-2 "></i>If the content of a Review/Tweet is
+      "Noise" then please mark the sentiment as "Neutral".
     </div>
 
     <div class="pt-3" id="sentiment">
@@ -1066,33 +1066,57 @@
     <div class="py-3" id="gender">
       <h3>Gender Classification</h3>
       <p>
-        The gender will be encoded accorging to a user's first name and the
-        country of origin. In the gender section the tool represent the real
-        name of the user as "Original Name" and the first name as "Formatted
-        Name". All you need to do is to click the "Detect Gender" button and
-        tool will automatically select the gender as female, male or unknown.
-        The API used to detect the gender is provided here:
+        The gender will be encoded according to a user's first name and the
+        country of origin. In the gender section the tool represents the real
+        name of the user as <strong>Original Name</strong> and the first name as
+        <strong>Formatted Name</strong>. All you need to do is to click the
+        <strong>Detect Gender</strong> button and the tool will automatically
+        select the gender as either Female, Male or Unknown. The API used to
+        detect the gender is provided here:
         <a href="https://gender-api.com/en/">https://gender-api.com/en/</a>.
       </p>
 
-      <div
+      <!-- <div
         class="alert"
         role="alert"
         style="border-radius:0 10px 0 0 ; background-color:#eee"
-      >
-        <!-- <i class="icon-lightbulb_outline mx-2 float-right"></i> -->
-        <p>
-          The algorithm in the tool selects the first word as the
-          <strong>Formatted Name</strong> except for titles (Dr, The etc) where
-          the second word is selected as the <strong>Formatted Name</strong>.
-          Some user names are four or more words, such sentences might contain
-          actual name of the user for instance <em>"This is Jimmy"</em>, in this
-          case you can enter the name (Jimmy) in the input that appears if you
-          click the pencil icon right beside the Formatted Name. After entering
-          the name click the <strong>Detect Gender</strong> button and the tool
-          will select among the give options.
-        </p>
-      </div>
+      > -->
+
+      <p>
+        The algorithm in the tool selects the first word as the
+        <strong>Formatted Name</strong> except for the titles (Dr, The etc.)
+        where the second word is selected as the
+        <strong>Formatted Name</strong>. Some user names are four or more words,
+        such sentences might contain actual name of the user.
+      </p>
+
+      <h6>Examples</h6>
+      <i class="icon-navigate_next mx-2"></i>
+      This is Jimmy
+      <p class="pl-4">
+        <i class="icon-hand-o-right mx-2"></i>
+        <em
+          ><strong>Explanation</strong>: In this case you can enter the name
+          Jimmy in the input field that appears if you click the pencil icon
+          right beside the Formatted Name. After entering the name click the
+          <strong>Detect Gender</strong> button and the tool will select among
+          the given options.
+        </em>
+      </p>
+
+      <i class="icon-navigate_next mx-2"></i>
+      nickisdaname
+      <p class="pl-4">
+        <i class="icon-hand-o-right mx-2"></i>
+        <em
+          ><strong>Explanation</strong>: nickisdaname will be selected as
+          Formatted Name and marked as Unkown by the tool. But this word
+          contains nicki, if you enter this in the input field it will return
+          the gender as Female.
+        </em>
+      </p>
+
+      <!-- </div> -->
     </div>
   </div>
 </template>
