@@ -9,6 +9,9 @@
         <div class="d-flex hv-100 align-items-stretch">
           <div class="indigo text-white">
             <div class="nav mt-5 pt-5 flex-column nav-pills">
+              <a @click="handleRoute('')" :class="isActive('')">
+                <i class="icon-dashboard"></i>
+              </a>
               <a @click="handleRoute('tweets')" :class="isActive('tweets')">
                 <i class="icon-twitter"></i>
               </a>

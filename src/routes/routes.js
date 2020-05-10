@@ -20,16 +20,16 @@ import RegisterPage from "@/pages/Register.vue";
 // import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 
 const routes = [
+  //   {
+  //     path: "/",
+  //     component: TweetsPage,
+  //     redirect: "/tweets",
+  //     meta: {
+  //       requiresAuth: true
+  //     }
+  //   },
   {
     path: "/",
-    component: TweetsPage,
-    redirect: "/tweets",
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
-    path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
     meta: {
