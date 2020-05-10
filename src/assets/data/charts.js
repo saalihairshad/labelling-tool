@@ -1,187 +1,99 @@
-// var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-// if (document.getElementById('gradientChart')) {
-//     var ctx = document.getElementById('gradientChart').getContext("2d");
-
-
-//     // gradientStroke.addColorStop(0, '#03a9f4');
-//     // gradientStroke.addColorStop(1, '#3f51b5');
-
-//     // var gradientFill = ctx.createLinearGradient(500, 0, 100, 0);
-//     // gradientFill.addColorStop(0, "rgba(3, 169, 244, 0.6)");
-//     // gradientFill.addColorStop(1, "rgba(63, 81, 181, 0.6)");
-
-// }
-
-
-
 const charts = {
-    dashboard_doughnut: {
-        data: {
-            datasets: [
-
-                {
-                    label: 'Disk',
-                    backgroundColor: [
-                        "#e2e8f0",
-                        "#88e2ff",
-                        "#7986cb",
-                    ],
-                    data: [10, 20, 30]
-
-                },
-
-            ],
-
-            // These labels appear in the legend and in the tooltips when hovering different arcs
-            labels: [
-                'Red',
-                'Yellow',
-                'Blue'
-            ]
+  dashboard_bar: {
+    data: {
+      labels: [
+        "Power Distance",
+        "Individualism",
+        "Masculinity",
+        "Uncertanity Avoidance",
+        "Long Term Orientation",
+        "Indulgence"
+      ],
+      datasets: [
+        {
+          label: "United States",
+          borderColor: "rgba(255,99,132,1)",
+          backgroundColor: "rgba(54, 162, 235, 0.7)",
+          data: [40, 91, 62, 46, 26, 68]
+        },
+        {
+          label: "United Kingdom",
+          backgroundColor: "rgba(255, 99, 132, 0.7)",
+          data: [35, 89, 66, 35, 51, 69]
         },
 
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                display: !0, position: 'bottom', labels:
-                {
-                    fontColor: '#7F8FA4', usePointStyle: !0
-                }
-            }
+        {
+          label: "India",
+          backgroundColor: "rgba(255,206,86,0.7)",
+          data: [77, 48, 56, 40, 51, 26]
         },
-    },
 
-
-    dashboard_bar: {
-        data: {
-            labels: [
-                "Blue",
-                "Yellow",
-                "Green",
-                "Purple",
-                "Orange",
-                "Red",
-                "Indigo",
-                "Blue",
-                "Yellow",
-                "Green",
-                "Purple",
-                "Orange",
-                "Red",
-                "Indigo",
-                "Blue",
-                "Yellow"
-            ],
-            datasets: [
-                {
-                    label: "HTML",
-                    backgroundColor: "#7986cb",
-                    borderWidth: 0,
-                    data: [21, 90, 55, 0, 59, 77, 12, 21, 90, 55, 0, 59, 77, 12, 21, 90]
-                },
-                {
-                    label: "Wordpress",
-                    backgroundColor: "#88e2ff",
-                    borderWidth: 0,
-                    data: [12, 40, 16, 17, 89, 0, 12, 12, 0, 55, 60, 79, 99, 12, 12, 0]
-                },
-                {
-                    label: "Laravel",
-                    backgroundColor: "#e2e8f0",
-                    borderWidth: 0,
-                    data: [12, 40, 16, 17, 89, 0, 12, 40, 16, 17, 89, 0, 12, 12, 40, 16]
-                }
-            ]
+        {
+          label: "Canada",
+          backgroundColor: "rgb( 0,204,102, 0.7)",
+          data: [39, 80, 52, 48, 36, 68]
         },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: { display: true },
-            scales: {
-                xAxes: [
-                    {
-                        stacked: true,
-                        barThickness: 5,
-                        gridLines: {
-                            zeroLineColor: "rgba(255,255,255,0.1)",
-                            color: "rgba(255,255,255,0.1)",
-                            display: false
-                        }
-                    }
-                ],
-                yAxes: [
-                    {
-                        stacked: true,
-                        gridLines: {
-                            zeroLineColor: "rgba(255,255,255,0.1)",
-                            color: "rgba(255,255,255,0.1)"
-                        }
-                    }
-                ]
-            }
+        {
+          label: "Australia",
+          backgroundColor: "rgba(0,204,204,0.7)",
+          data: [38, 90, 61, 51, 21, 71]
+        },
+        {
+          label: "Netherlands",
+          backgroundColor: "rgb(255,178,102,0.7)",
+          data: [38, 80, 14, 53, 67, 68]
+        },
+        {
+          label: "Germany",
+          backgroundColor: "rgb(160,160,160,0.7)",
+          data: [35, 67, 66, 65, 83, 40]
+        },
+        {
+          label: "France",
+          backgroundColor: "rgba(204,153,255,0.7)",
+          data: [68, 71, 43, 86, 63, 48]
         }
+      ]
     },
-
-
-
-    dashboard_line: {
-        data: {
-            labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL"],
-            datasets: [{
-                label: "Data",
-                // borderColor: gradientStroke,
-                // pointBorderColor: gradientStroke,
-                // pointBackgroundColor: gradientStroke,
-                // pointHoverBackgroundColor: gradientStroke,
-                // pointHoverBorderColor: gradientStroke,
-                // backgroundColor: gradientFill,
-                pointBorderWidth: 5,
-                pointHoverRadius: 5,
-                pointHoverBorderWidth: 1,
-                pointRadius: 5,
-                fill: true,
-                borderWidth: 4,
-                data: [0, 170, 80, 60, 80, 170, 20]
-            }]
-        },
-        options: {
-            animation: {
-                easing: "easeInOutBack"
-            },
-            legend: {
-                display: false,
-                position: "bottom"
-            },
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        fontColor: "rgba(0,0,0,0.5)",
-                        fontStyle: "bold",
-                        beginAtZero: true,
-                        maxTicksLimit: 5,
-                        padding: 20
-                    },
-                    gridLines: {
-                        drawTicks: false,
-                        display: false
-                    }
-
-                }],
-                xAxes: [{
-                    gridLines: {
-                        zeroLineColor: "transparent"
-                    },
-                    ticks: {
-                        padding: 20,
-                        fontColor: "rgba(0,0,0,0.5)",
-                        fontStyle: "bold"
-                    }
-                }]
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: { display: true },
+      scales: {
+        xAxes: [
+          {
+            //barThickness: 5,
+            gridLines: {
+              zeroLineColor: "rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.1)",
+              display: false
             }
-        }
-    },
+          }
+        ],
+        yAxes: [
+          {
+            gridLines: {
+              zeroLineColor: "rgba(255,255,255,0.1)",
+              color: "rgba(255,255,255,0.1)"
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
 
+      plugins: {
+        datalabels: {
+          borderColor: "blue",
+          anchor: "end",
+          textAlign: "center",
+          clamp: true,
+          offset: 2
+        }
+      }
+    }
+  }
 };
 
 export default charts;

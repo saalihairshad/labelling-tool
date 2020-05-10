@@ -44,8 +44,8 @@
         <el-tab-pane label="Annotators">
           <p class="ml-2">
             <i class="el-icon-info ml-2"></i>
-            Please select at two annotators to check the disagreement or
-            Cohen's kappa of the document!
+            Please select two annotators to check the disagreement or Cohen's
+            kappa of the document!
           </p>
           <div class="row p-3">
             <div class="col-md-12 mb-3">

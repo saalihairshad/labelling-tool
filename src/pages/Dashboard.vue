@@ -1,170 +1,77 @@
-
 <template>
   <div>
-    <b-row class="row-eq-height my-3 mt-3">
-      <b-col class="col-md-6">
-        <b-row>
-          <b-col cols="col-md-6 col-sm-6">
-            <b-card class="no-b mb-3 bg-danger text-white">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <i class="icon-package s-18"></i>
-                </div>
-                <div>
-                  <span class="text-success">40+35</span>
-                </div>
-              </div>
-              <div class="text-center">
-                <div class="s-48 my-3 font-weight-lighter">
-                  <i class="icon-chrome"></i>
-                </div>Chrome
-              </div>
-            </b-card>
-          </b-col>
-          <b-col cols="col-md-6 col-sm-6">
-            <div class="card no-b mb-3">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <i class="icon-timer s-18"></i>
-                  </div>
-                  <div>
-                    <span class="badge badge-pill badge-primary">4:30</span>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <div class="s-48 my-3 font-weight-lighter">68</div>New Orders
-                </div>
-              </div>
-            </div>
-          </b-col>
-        </b-row>
-        <div class="row">
-          <div class="col-md-6 col-sm-6">
-            <div class="card no-b mb-3">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <i class="icon-user-circle-o s-18"></i>
-                  </div>
-                  <div>
-                    <span class="badge badge-pill badge-danger">4:30</span>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <div class="s-48 my-3 font-weight-lighter">170</div>New Users
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-6">
-            <div class="card no-b mb-3">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center">
-                  <div>
-                    <i class="icon-user-times s-18"></i>
-                  </div>
-                  <div>
-                    <span class="text-danger">50</span>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <div class="s-48 my-3 font-weight-lighter">95</div>Returning Users
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </b-col>
-      <b-col class="col-md-6">
-        <b-card class="no-b p-2">
-          <doughnut-chart
-            cssClasses="height-300"
-            :chartData="chartsData.dashboard_doughnut.data"
-            :options="chartsData.dashboard_doughnut.options"
-          />
-        </b-card>
-      </b-col>
-    </b-row>
     <b-card class="no-b my-3">
       <bar-chart
-        cssClasses="my-2 height-300"
+        cssClasses="my-2 vh-x"
         :chartData="chartsData.dashboard_bar.data"
         :options="chartsData.dashboard_bar.options"
       />
-
-      <div class="p-4">
-        <b-row class="my-3 no-gutters">
-          <b-col class="col-md-3">
-            <h1>Tasks</h1>Currently assigned tasks to team.
-          </b-col>
-          <b-col class="col-md-9">
-            <b-row>
-              <b-col class="col-md-3" v-for="task in json.tasks" :key="task.id">
-                <list
-                  :title="task.title"
-                  :subtitle="task.subtitle"
-                  :image="assetsPath(task.team.u1)"
-                />
-            
-                <b-progress :value="task.progress" :variant="task.variant" class="mb-3"  height=".25rem"></b-progress>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </div>
     </b-card>
 
-    <b-row class="row my-3">
-      <b-col class="col-md-6">
-        <b-card class="b-0">
-          <div class="p-5">
-            <line-chart
-              cssClasses="my-2 height-300"
-              :chartData="chartsData.dashboard_line.data"
-              :options="chartsData.dashboard_line.options"
-            />
+    <b-card class="no-b my-3">
+      <div class="container">
+        <h2 class="">Dimensions of Hofstede's Cultural Model</h2>
+        <hr />
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Power Distance</h4>
+            <p>
+              Refers to the degree to which members of the country accept and
+              expect that power is distributed unequally.
+            </p>
+            <h4>Individualism vs. Collectivism:</h4>
+            <p>
+              Indicates the extent to which members of a society are integrated
+              into groups.
+            </p>
+            <h4>Masculinity vs. Femininity</h4>
+            <p>
+              Evaluates the differentiation between genders in a society. A
+              society with a high Masculinity will have a stronger
+              differentiation than a society with a low Masculinity.
+            </p>
           </div>
-        </b-card>
-      </b-col>
-      <b-col class="col-md-6">
-        <div class="card no-b">
-          <div class="card-body">
-            <table class="table table-hover earning-box">
-              <tbody>
-                <tr class="no-b" v-for="employe in json.employees" :key="employe.id">
-                  <td class="w-10">
-                    <a href="panel-page-profile.html" class="avatar avatar-lg">
-                      <img :src="assetsPath(employe.image)" alt="" />
-                    </a>
-                  </td>
-                  <td>
-                    <h6>{{employe.name}}</h6>
-                    <small class="text-muted">{{employe.designation}}</small>
-                  </td>
-                  <td>{{employe.age}}</td>
-                  <td>${{employe.salery}}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="col-md-6">
+            <i class="icon-keyboard_arrow_right"></i>
+            <h4>Uncertainty Avoidance</h4>
+            <p>
+              Indicates the extent to which people in a society are resistant to
+              unpredictable and ambiguous situations.
+            </p>
+            <h4>Long-term vs. Short-term Time Orientation</h4>
+            <p>
+              Refers to people’s tendencies to focus on future or present goals.
+              People in societies with a higher long-term index will consider
+              the future more important than those with a short-term
+              orientation.
+            </p>
+            <h4>Indulgence vs. Restraint</h4>
+            <p>
+              Indicates the extent to which a society expresses their wants and
+              impulses. More indulgent societies—those with a higher Indulgence
+              index, tend more to gratification than those with a lower
+              Indulgence index.
+            </p>
           </div>
         </div>
-      </b-col>
-    </b-row>
+      </div>
+    </b-card>
   </div>
 </template>
 <script>
+import Chart from "chart.js";
 import {
   LineChart,
   BarChart,
   DoughnutChart
 } from "../components/charts/charts.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
 import chartsData from "../assets/data/charts.js";
 import jsonData from "../assets/json/dashboard.json";
 import list from "../components/x-list";
-import mixins from '../helpers/mixins.js'
+import mixins from "../helpers/mixins.js";
 export default {
-     mixins: [mixins],
+  mixins: [mixins],
   components: {
     LineChart,
     BarChart,
@@ -174,17 +81,15 @@ export default {
   data() {
     return {
       chartsData,
-      json:jsonData
+      json: jsonData
     };
   },
-  methods: {
-       
-  },
-  computed:{
- 
-  },
-
+  methods: {},
+  computed: {}
 };
 </script>
 <style>
+.vh-x {
+  height: 70vh;
+}
 </style>
