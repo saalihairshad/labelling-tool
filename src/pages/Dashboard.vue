@@ -32,7 +32,6 @@
             </p>
           </div>
           <div class="col-md-6">
-            <i class="icon-keyboard_arrow_right"></i>
             <h4>Uncertainty Avoidance</h4>
             <p>
               Indicates the extent to which people in a society are resistant to

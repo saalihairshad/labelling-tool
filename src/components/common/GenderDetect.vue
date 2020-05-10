@@ -18,9 +18,9 @@
     <el-button @click="handleGender" primary size="mini" plain>
       Detect Gender</el-button
     >
-    <el-button @click="handleGender2" primary size="mini" plain>
+    <!-- <el-button @click="handleGender2" primary size="mini" plain>
       Detect Genderioz.io</el-button
-    >
+    > -->
   </div>
 </template>
 <script>
