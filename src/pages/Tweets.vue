@@ -3,11 +3,16 @@
     <div class="col-md-3 white">
       <div class="d-flex b-t p-3 align-items-center">
         <div>
-          <span>Anotated: {{ annoted.length }}/{{ meta.total }}</span>
+          <span v-if="annoted"
+            >Anotated: {{ annoted.length }}/{{ meta.total }}</span
+          >
         </div>
       </div>
       <div class="scrollable" v-loading="loading">
-        <ul class="list-unstyled b-t scrollable" v-if="tweets.length > 0">
+        <ul
+          class="list-unstyled b-t scrollable"
+          v-if="tweets && tweets.length > 0"
+        >
           <li
             class="media p-3 b-b "
             v-for="(tweet, index) in tweets"
@@ -27,7 +32,7 @@
               </h6>
               <span>{{ tweet.full_text }}</span>
               <br />
-              <small>
+              <small v-if="tweet.replies">
                 <el-tag
                   size="mini"
                   type="primary"
@@ -39,8 +44,8 @@
                 <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
 
                 <i class="icon-comment-o ml-3 mr-2"></i
-                >{{ tweet.replies.length }}</small
-              >
+                >{{ tweet.replies.length }}
+              </small>
             </div>
           </li>
         </ul>

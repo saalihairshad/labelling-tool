@@ -56,7 +56,10 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane :label="`Replies (` + tweet.replies.length + ')'">
+        <el-tab-pane
+          v-if="tweet.replies"
+          :label="`Replies (` + tweet.replies.length + ')'"
+        >
           <div class="cardx" v-for="reply in tweet.replies" :key="reply.id">
             <ul class="list-unstyled">
               <li class="media p-3 b-b">

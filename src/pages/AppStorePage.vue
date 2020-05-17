@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="scrollable" v-loading="loading">
-        <ul class="list-unstyled b-t " v-if="reviews.length > 0">
+        <ul class="list-unstyled b-t " v-if="reviews && reviews.length > 0">
           <li
             class="media p-3 b-b "
             v-for="review in reviews"
