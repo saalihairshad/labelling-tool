@@ -45,6 +45,7 @@ export default {
   },
   methods: {
     handleGender() {
+      console.log("---------- ", this.formatedName);
       if (this.formatedName === "unidentified") {
         this.$emit("gender", "unknown");
       } else {

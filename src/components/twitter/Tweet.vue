@@ -47,12 +47,29 @@
                 </li>
               </ul>
             </div>
-            <div class="col-md-5">
-              <el-progress
-                type="circle"
-                :percentage="parseInt(disagree)"
-              ></el-progress>
-              <div class="mt-3">Disagrement</div>
+
+            <div
+              class="row"
+              v-if="
+                tweet.hasOwnProperty('annotations') &&
+                  Object.values(tweet.annotations).length > 1
+              "
+            >
+              <div class="col-md-6 text-center">
+                <el-progress
+                  type="circle"
+                  :percentage="parseFloat(disagree[0])"
+                ></el-progress>
+                <div class="mt-3">Disagrement</div>
+              </div>
+
+              <div class="col-md-6 text-center">
+                <el-progress
+                  type="circle"
+                  :percentage="disagree[1]"
+                ></el-progress>
+                <div class="mt-3">Unweighted kappa</div>
+              </div>
             </div>
           </div>
         </el-tab-pane>

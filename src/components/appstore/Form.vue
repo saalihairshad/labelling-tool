@@ -7,7 +7,228 @@
       label-position="top"
       :rules="rules"
     >
+      <!-- Content Analysis -->
       <el-form-item label="Content Analysis">
+        <div class="row d-flex">
+          <div class="col-md-4">
+            <el-checkbox
+              label="Bug Report"
+              v-model="form.type.bugReport"
+            ></el-checkbox>
+
+            <el-popover
+              placement="top-start"
+              title="Bug Report"
+              width="220"
+              trigger="hover"
+              content="The user reports a problem."
+            >
+              <span slot="reference" type="link"
+                ><i class="el-icon-info ml-2"></i
+              ></span>
+            </el-popover>
+          </div>
+
+          <div class="col-md-4">
+            <el-checkbox
+              label="Support Request"
+              v-model="form.type.supportRequest"
+            ></el-checkbox>
+
+            <el-popover
+              placement="top-start"
+              title="Support Request"
+              width="320"
+              trigger="hover"
+              content=" The user asks for support but it is not about a specific feature request or bug."
+            >
+              <span slot="reference" type="link"
+                ><i class="el-icon-info ml-2"></i
+              ></span>
+            </el-popover>
+          </div>
+
+          <div class="col-md-4">
+            <el-checkbox
+              label="Feature Request"
+              v-model="form.type.featureRequest"
+            ></el-checkbox>
+            <el-popover
+              placement="top-start"
+              title="Feature Request"
+              width="455"
+              trigger="hover"
+              content="The user asks for a missing feature, 
+              missing functionality, a miss-ing content or a feature that should be implemented. 
+              Or the user wants an exisiting feature to be removed."
+            >
+              <span slot="reference" type="link"
+                ><i class="el-icon-info ml-2"></i
+              ></span>
+            </el-popover>
+          </div>
+        </div>
+
+        <div class="row d-flex">
+          <div class="col-md-4">
+            <el-checkbox label="Noise" v-model="form.type.noise"></el-checkbox>
+
+            <el-popover
+              placement="top-start"
+              title="Noise"
+              width="350"
+              trigger="hover"
+              content="The user enters random symbols, characters, or unrecognized text"
+            >
+              <span slot="reference" type="link"
+                ><i class="el-icon-info ml-2"></i
+              ></span>
+            </el-popover>
+          </div>
+
+          <div class="col-md-4">
+            <el-checkbox label="Other" v-model="form.type.other"></el-checkbox>
+
+            <el-popover
+              placement="top-start"
+              title="Other"
+              width="410"
+              trigger="hover"
+              content="The review is not about a bug, a feature request or support request. This category also includes statements about the content of an app"
+            >
+              <span slot="reference" type="link"
+                ><i class="el-icon-info ml-2"></i
+              ></span>
+            </el-popover>
+
+            <el-input
+              placeholder="Add Name"
+              v-if="form.type.other"
+              type="text"
+              size="small"
+              v-model="form.type.otherName"
+            />
+          </div>
+        </div>
+
+        <!-- <div class="row d-flex">
+          <div class="col-md-4">
+            <div>
+              <el-checkbox
+                label="Bug Report"
+                v-model="form.type.bugReport"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user reports a problem"
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+            <div>
+              <el-checkbox
+                label="Support Request"
+                v-model="form.type.supportRequest"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content=" The user asks for support but it is not about a specific feature request or bug."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+            <div>
+              <el-checkbox
+                label="Feature Request"
+                v-model="form.type.featureRequest"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented. Or an exisiting feature that should be removed."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div>
+              <el-checkbox
+                label="General Complaint"
+                v-model="form.type.generalComplaint"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user complains about the app, but does not mention specific functionalities or problems."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+            <div>
+              <el-checkbox
+                label="General Praise"
+                v-model="form.type.generalPraise"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user praises the app or functionalities of the app."
+                placement="right-end"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div>
+              <el-checkbox
+                label="Noise"
+                v-model="form.type.noise"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The user enters random symbols, characters or unrecognized text."
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+            </div>
+            <div>
+              <el-checkbox
+                label="Other"
+                v-model="form.type.other"
+              ></el-checkbox>
+              <el-tooltip
+                class="item"
+                effect="dark"
+                content="The review is not about a bug, a feature request or support request. This category also includes statements about the content of an app"
+                placement="top"
+              >
+                <i class="el-icon-info ml-2"></i>
+              </el-tooltip>
+              <el-input
+                placeholder="Add Name"
+                v-if="form.type.other"
+                type="text"
+                size="small"
+                v-model="form.type.otherName"
+              />
+            </div>
+          </div>
+        </div> -->
+        <div v-if="!validType" class="text-danger">Please select a type</div>
+      </el-form-item>
+
+      <!-- <el-form-item label="Content Analysis">
         <div class="row d-flex">
           <div class="col-md-4">
             <div>
@@ -46,7 +267,7 @@
               <el-tooltip
                 class="item"
                 effect="dark"
-                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented."
+                content=" The user asks for a missing feature, missing functionality, a missing content or a feature that should be implemented. Or an exisiting feature that should be removed."
                 placement="top"
               >
                 <i class="el-icon-info ml-2"></i>
@@ -123,7 +344,8 @@
           </div>
         </div>
         <div v-if="!validType" class="text-danger">Please select a type</div>
-      </el-form-item>
+      </el-form-item> -->
+
       <hr />
       <el-form-item label="Sentiment Analysis" prop="sentiment">
         <el-radio-group v-model="form.sentiment">
