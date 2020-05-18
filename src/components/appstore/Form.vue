@@ -463,7 +463,7 @@ export default {
         ]
       },
 
-      isPending: false,
+      //   isPending: false,
       validType: false,
       form: {
         type: {
@@ -537,7 +537,7 @@ export default {
       let data = {};
 
       user["annotations"] = this.form;
-      user["isPending"] = this.isPending;
+      //   user["isPending"] = this.isPending;
 
       if (this.item.annotations) {
         data = {
