@@ -47,6 +47,7 @@ export default {
     handleGender() {
       console.log("---------- ", this.formatedName);
       if (this.formatedName === "unidentified") {
+        console.log("nomissss");
         this.$emit("gender", "unknown");
       } else {
         try {
@@ -57,6 +58,7 @@ export default {
             this.formatedName,
             this.country,
             response => {
+              //   console.log("=====================================!!!!");
               console.log(response.gender); //female
               console.log(response.accuracy); //98
               console.log(response.country); //

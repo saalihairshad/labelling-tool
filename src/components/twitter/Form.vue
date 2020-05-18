@@ -248,7 +248,7 @@
             <el-form-item label="Gender" prop="gender">
               <el-radio label="female">Female</el-radio>
               <el-radio label="male">Male</el-radio>
-              <el-radio label="unKnown">Unknown</el-radio>
+              <el-radio label="unknown">Unknown</el-radio>
             </el-form-item>
           </el-radio-group>
         </div>
@@ -396,7 +396,7 @@ export default {
       let data = {};
 
       user["annotations"] = this.form;
-    //   user["isPending"] = this.isPending;
+      //   user["isPending"] = this.isPending;
 
       if (this.item.annotations) {
         data = {
