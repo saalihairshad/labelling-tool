@@ -6,7 +6,14 @@
         <div data-toggle="collapse" data-target="#message1">
           <div class="media">
             <div class="d-flex mr-3 height-50">
-              <i class="icon-twitter s-64"></i>
+              <div class="text-center">
+                <i class="icon-twitter s-64"></i>
+                <div>
+                  <el-tag size="mini" type="success" class="mt-3" v-if="isAgree"
+                    >Agreed
+                  </el-tag>
+                </div>
+              </div>
             </div>
             <div class="media-body">
               <div class="collapse my-3 show" id="message1">
@@ -35,6 +42,7 @@
             :key="tweet._id"
             class="p-3"
             :url="`http://localhost:4000/api/tweets/${this.tweet._id}`"
+            :agreed="isAgree"
             @next="handleNext()"
           />
         </el-tab-pane>
@@ -133,6 +141,17 @@ export default {
   computed: {
     disagree() {
       return this.disagrement(this.tweet);
+    },
+    isAgree() {
+      const users = Object.keys(this.tweet.annotations);
+
+      const isUsersAgreed =
+        this.tweet.annotations &&
+        this.tweet.annotations[users[0]].annotations.isAgreed &&
+        this.tweet.annotations[users[1]].annotations.isAgreed;
+      const resutl = this.disagree[1] == 1 || isUsersAgreed;
+
+      return resutl;
     }
   },
   mounted() {
@@ -140,6 +159,7 @@ export default {
   },
 
   methods: {
+    isAgreed() {},
     handleNext() {
       this.$emit("next");
     }

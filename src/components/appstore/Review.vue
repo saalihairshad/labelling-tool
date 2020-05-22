@@ -125,6 +125,8 @@ export default {
   },
 
   mounted() {
+    console.log(this.annotationsList.length);
+
     this.handleAnnotation();
   },
   computed: {
@@ -139,6 +141,11 @@ export default {
 
   methods: {
     handleAnnotation() {
+      const users = Object.keys(this.annotationsList);
+      if (users.length == 2) {
+        this.selectedAnnotators = users;
+      }
+
       if (this.selectedAnnotators.length == 2) {
         let r1 = this.review.annotations[this.selectedAnnotators[0]];
         let r2 = this.review.annotations[this.selectedAnnotators[1]];

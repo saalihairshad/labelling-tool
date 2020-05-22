@@ -101,13 +101,13 @@
               ></span>
             </el-popover>
 
-            <el-input
+            <!-- <el-input
               placeholder="Add Name"
               v-if="form.type.other"
               type="text"
               size="small"
               v-model="form.type.otherName"
-            />
+            /> -->
           </div>
         </div>
 
@@ -270,6 +270,8 @@
           >
         </div>
       </div>
+      <el-checkbox v-model="form.isPending">Pending</el-checkbox>
+      <el-checkbox v-model="form.isAgreed">Agreed by you</el-checkbox>
       <hr />
 
       <el-form-item class="pt-4">
@@ -287,7 +289,7 @@ import mixins from "../../helpers/mixins.js";
 import GenderDetect from "../common/GenderDetect";
 export default {
   mixins: [mixins],
-  props: ["item", "url"],
+  props: ["item", "url", "agreed"],
   components: {
     GenderDetect
   },
@@ -323,7 +325,8 @@ export default {
         ]
       },
 
-      //   isPending: false,
+      isPending: false,
+
       validType: false,
       form: {
         type: {
@@ -336,13 +339,16 @@ export default {
           other: false
         },
 
+        isAgreed: this.agreed,
         otherType: "",
         sentiment: "",
         gender: ""
       }
     };
   },
+  computed() {},
   mounted() {
+    // this.form.isAgreed = this.agreed;
     let user = auth.getCurrentUser();
 
     this.validType = true;

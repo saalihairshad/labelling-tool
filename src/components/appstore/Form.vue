@@ -101,13 +101,13 @@
               ></span>
             </el-popover>
 
-            <el-input
+            <!-- <el-input
               placeholder="Add Name"
               v-if="form.type.other"
               type="text"
               size="small"
               v-model="form.type.otherName"
-            />
+            /> -->
           </div>
         </div>
 

@@ -40,8 +40,13 @@
                   v-if="isAnnotated(tweet)"
                   >Annotated
                 </el-tag>
-
-                <!-- <el-tag  size="mini" type="warning" v-if="tweet.annotations && tweet.annotations.isPending">Pending</el-tag> -->
+                <el-tag
+                  size="mini"
+                  type="warning"
+                  class="mr-2"
+                  v-if="isPending(tweet)"
+                  >Pending
+                </el-tag>
 
                 <i class="icon-comment-o ml-3 mr-2"></i
                 >{{ tweet.replies.length }}
@@ -113,6 +118,12 @@ export default {
   methods: {
     isAnnotated(tweet) {
       return tweet.annotations && tweet.annotations[this.user._id];
+    },
+    isPending(tweet) {
+      return (
+        tweet.annotations &&
+        tweet.annotations[this.user._id].annotations.isPending
+      );
     },
     handleTweetClick(tweet) {
       this.selectedTweet = tweet;
