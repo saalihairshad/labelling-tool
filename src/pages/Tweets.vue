@@ -122,6 +122,8 @@ export default {
     isPending(tweet) {
       return (
         tweet.annotations &&
+        tweet.annotations[this.user._id] &&
+        tweet.annotations[this.user._id].annotations &&
         tweet.annotations[this.user._id].annotations.isPending
       );
     },
