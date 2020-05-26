@@ -143,15 +143,17 @@ export default {
       return this.disagrement(this.tweet);
     },
     isAgree() {
-      const users = Object.keys(this.tweet.annotations);
+      if (this.tweet.annotations) {
+        const users = Object.keys(this.tweet.annotations);
 
-      const isUsersAgreed =
-        this.tweet.annotations &&
-        this.tweet.annotations[users[0]].annotations.isAgreed &&
-        this.tweet.annotations[users[1]].annotations.isAgreed;
-      const resutl = this.disagree[1] == 1 || isUsersAgreed;
+        const isUsersAgreed =
+          this.tweet.annotations[users[0]].annotations.isAgreed &&
+          this.tweet.annotations[users[1]].annotations.isAgreed;
+        const resutl = this.disagree[1] == 1 || isUsersAgreed;
 
-      return resutl;
+        return resutl;
+      }
+      return false;
     }
   },
   mounted() {

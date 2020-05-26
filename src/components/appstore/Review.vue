@@ -55,6 +55,7 @@
                 multiple=""
                 :multiple-limit="2"
                 filterable=""
+                no-data-text="No Annotators"
                 placeholder="Select Annotators"
               >
                 <el-option
@@ -86,6 +87,8 @@
             </div>
           </div>
         </el-tab-pane>
+
+        
 
         <el-tab-pane label="Json">
           <div class="light p-3 border-darken-3">

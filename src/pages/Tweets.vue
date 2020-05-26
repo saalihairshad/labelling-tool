@@ -44,7 +44,7 @@
                   size="mini"
                   type="warning"
                   class="mr-2"
-                  v-if="isPending(tweet)"
+                  v-if="tweet.isPending"
                   >Pending
                 </el-tag>
 
@@ -119,14 +119,14 @@ export default {
     isAnnotated(tweet) {
       return tweet.annotations && tweet.annotations[this.user._id];
     },
-    isPending(tweet) {
-      return (
-        tweet.annotations &&
-        tweet.annotations[this.user._id] &&
-        tweet.annotations[this.user._id].annotations &&
-        tweet.annotations[this.user._id].annotations.isPending
-      );
-    },
+    // isPending(tweet) {
+    //   return (
+    //     tweet.annotations &&
+    //     tweet.annotations[this.user._id] &&
+    //     tweet.annotations[this.user._id].annotations &&
+    //     tweet.annotations[this.user._id].annotations.isPending
+    //   );
+    // },
     handleTweetClick(tweet) {
       this.selectedTweet = tweet;
       this.index = this.tweets.indexOf(tweet);

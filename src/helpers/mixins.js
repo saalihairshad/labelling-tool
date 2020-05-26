@@ -1,6 +1,13 @@
 import ddd from "recursive-diff";
+import auth from "../services/authService";
 export default {
+    computed:{
+        isAdmin(){
+            return  auth.getCurrentUser().name === 'saliha' || auth.getCurrentUser().name==='Anna Fischer';
+          }
+    },
   methods: {
+    
     toggleClass(el, className) {
       if (el.classList.contains(className)) {
         el.classList.remove(className);

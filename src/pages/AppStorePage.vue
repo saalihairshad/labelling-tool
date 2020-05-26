@@ -52,8 +52,15 @@
                   v-if="isAnnotated(review)"
                   >Annotated
                 </el-tag>
+                 <el-tag
+                  size="mini"
+                  type="warning"
+                  class="mr-2"
+                  v-if="review.isPending"
+                  >Pending
+                </el-tag
 
-                <!-- <el-tag  size="mini" type="warning" v-if="itune.annotations && itune.annotations.isPending">Pending</el-tag> -->
+                <small>
                 {{ review.AppName }}
               </small>
             </div>
@@ -132,6 +139,7 @@ export default {
     isAnnotated(itune) {
       return itune.annotations && itune.annotations[this.user._id];
     },
+
     handleClick(item) {
       this.selectedItem = item;
       this.index = this.reviews.indexOf(item);
