@@ -42,7 +42,6 @@
             :key="tweet._id"
             class="p-3"
             :url="`http://localhost:4000/api/tweets/${this.tweet._id}`"
-            :agreed="isAgree"
             @next="handleNext()"
           />
         </el-tab-pane>
