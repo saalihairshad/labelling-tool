@@ -149,6 +149,9 @@ export default {
         }
       }
 
+
+    //   console.log(this.selectedAnnotators.length);
+
       if (this.selectedAnnotators.length == 2) {
         let r1 = this.review.annotations[this.selectedAnnotators[0]];
         let r2 = this.review.annotations[this.selectedAnnotators[1]];

@@ -9,7 +9,7 @@
               <div class="text-center">
                 <i class="icon-twitter s-64"></i>
                 <div>
-                  <el-tag size="mini" type="success" class="mt-3" v-if="isAgree"
+                  <el-tag size="mini" type="success" class="mt-3" v-if="this.tweet.finalAnnotation"
                     >Agreed
                   </el-tag>
                 </div>
@@ -142,26 +142,12 @@ export default {
     disagree() {
       return this.disagrement(this.tweet);
     },
-    isAgree() {
-      if (this.tweet.annotations) {
-        const users = Object.keys(this.tweet.annotations);
-
-        const isUsersAgreed =
-          this.tweet.annotations[users[0]].annotations.isAgreed &&
-          this.tweet.annotations[users[1]].annotations.isAgreed;
-        const resutl = this.disagree[1] == 1 || isUsersAgreed;
-
-        return resutl;
-      }
-      return false;
-    }
   },
   mounted() {
     // this.kappa();
   },
 
   methods: {
-    isAgreed() {},
     handleNext() {
       this.$emit("next");
     }

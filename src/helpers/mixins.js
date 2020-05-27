@@ -26,6 +26,8 @@ export default {
     },
 
     disagrement(item, type = "tweets", r1 = null, r2 = null) {
+
+        
       let total_difference = 100;
       let kappa = 0;
       if (item.annotations) {
