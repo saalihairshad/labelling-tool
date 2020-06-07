@@ -263,45 +263,49 @@
 
         <div class="pt-3">
           <i class="el-icon-info mr-3 ml-3 text-yellow" />
-          <small 
+          <small
             >Click the pencil icon to manually enter the name of a person and
             detect their gender. For more information please refer to the coding
             guidelines.</small
           >
         </div>
       </div>
-      <hr>
+      <hr />
 
-      <div class="pb-3"><h6 style="vertical-align: middle;font-size:14px; color: #606266;line-height: 40px;">Other Options</h6></div>
-       
-       <div>
-           <i class="el-icon-info mr-3 pb-3 text-yellow" />
-          <small>
-              Check Pending if you want to review this annotation later.
-          </small>
-       </div>
-       <div class="d-flex align-items-center">
-           
-         <el-checkbox v-model="isPending">Pending</el-checkbox>
+      <div class="pb-3">
+        <h6
+          style="vertical-align: middle;font-size:14px; color: #606266;line-height: 40px;"
+        >
+          Other Options
+        </h6>
+      </div>
+
+      <div>
+        <i class="el-icon-info mr-3 pb-3 text-yellow" />
+        <small>
+          Check Pending if you want to review this annotation later.
+        </small>
+      </div>
+      <div class="d-flex align-items-center">
+        <el-checkbox v-model="isPending">Pending</el-checkbox>
         <div class="ml-auto">
-        <div v-if="list && isAdmin" class="pb-2"> Select Final Annotator</div>
-        <el-select
-      
-        v-if="list && isAdmin"
-        v-model="finalAnnotation"
-        no-data-text="No Annotators"
-        placeholder="Select Final Annotation"
-        value-key="_id"
-        >
-        <el-option
-          v-for="user in list"
-          :key="user._id"
-          :value="user"
-          :label="user.name"
-          >{{ user.name }}</el-option
-        >
-        </el-select>
-    </div>
+          <div v-if="list && isAdmin" class="pb-2">Select Final Annotator</div>
+          <el-select
+            v-if="list && isAdmin"
+            v-model="finalAnnotation"
+            no-data-text="No Annotators"
+            placeholder="Select Final Annotation"
+            value-key="_id"
+          >
+            <el-option
+              v-for="user in list"
+              :key="user._id"
+              :value="user"
+              :label="user.name"
+              >{{ user.name }}</el-option
+            >
+          </el-select>
+        </div>
       </div>
 
       <hr />
@@ -331,8 +335,8 @@ export default {
       formatedName: "",
       detectGenderByName: "",
       showFormatedNameField: false,
-        finalAnnotation: {},
-        isPending: false,
+      finalAnnotation: {},
+      isPending: false,
 
       rules: {
         type: [
@@ -378,26 +382,27 @@ export default {
     };
   },
   computed: {
-        list() {
-    let list = {};
+    list() {
+      let list = {};
       list = { ...this.item.annotations };
       return list;
-    },
-  
+    }
 
     //   isPending(){
     //       console.log('---pending test--')
     //        this.item.isPending;
-    //       return this.item.isPending; 
+    //       return this.item.isPending;
     //   }
   },
   mounted() {
     // this.form.isAgreed = this.agreed;
- this.isPending =   this.item.isPending;
+    this.isPending = this.item.isPending;
 
-
-    if(this.item.finalAnnotation){
-         Object.assign(this.finalAnnotation , JSON.parse(JSON.stringify(this.item.finalAnnotation)))
+    if (this.item.finalAnnotation) {
+      Object.assign(
+        this.finalAnnotation,
+        JSON.parse(JSON.stringify(this.item.finalAnnotation))
+      );
     }
 
     let user = auth.getCurrentUser();
@@ -435,7 +440,7 @@ export default {
           }
         }
 
-        if (valid && this.validType) {
+        if ((valid && this.validType) || this.isPending) {
           this.save();
         } else {
           this.$message({
@@ -454,18 +459,18 @@ export default {
 
       user["annotations"] = this.form;
       //   user["isPending"] = this.isPending;
-      data['isPending'] = this.isPending; 
+      data["isPending"] = this.isPending;
 
       if (this.item.annotations) {
-        data['annotations'] = {
+        data["annotations"] = {
           ...this.item.annotations,
           [user._id]: user
         };
-        if( this.finalAnnotation){
-            data['finalAnnotation'] = this.finalAnnotation;
-        } 
+        if (this.finalAnnotation) {
+          data["finalAnnotation"] = this.finalAnnotation;
+        }
       } else {
-        data['annotations'] = {
+        data["annotations"] = {
           [user._id]: user
         };
       }

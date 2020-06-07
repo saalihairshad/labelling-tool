@@ -9,7 +9,11 @@
               <div class="text-center">
                 <i class="icon-twitter s-64"></i>
                 <div>
-                  <el-tag size="mini" type="success" class="mt-3" v-if="this.tweet.finalAnnotation"
+                  <el-tag
+                    size="mini"
+                    type="success"
+                    class="mt-3"
+                    v-if="this.tweet.finalAnnotation"
                     >Agreed
                   </el-tag>
                 </div>
@@ -46,7 +50,7 @@
           />
         </el-tab-pane>
         <el-tab-pane label="Annotators">
-          <div class="row">
+          <div class="row" v-if="tweet.annotations">
             <div class="col-md-7">
               <ul v-if="tweet.hasOwnProperty('annotations')">
                 <li v-for="user in tweet.annotations" :key="user._id">
@@ -140,7 +144,7 @@ export default {
   computed: {
     disagree() {
       return this.disagrement(this.tweet);
-    },
+    }
   },
   mounted() {
     // this.kappa();

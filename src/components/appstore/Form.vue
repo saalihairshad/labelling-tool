@@ -403,35 +403,41 @@
       </el-radio-group>
 
       <hr />
-            <div class="pb-3"><h6 style="vertical-align: middle;font-size:14px; color: #606266;line-height: 40px;">Other Options</h6></div>
-       
-       <div>
-           <i class="el-icon-info mr-3 pb-3 text-yellow" />
-          <small>
-              Check Pending if you want to review this annotation later.
-          </small>
-       </div>
-    <div class="d-flex align-items-center">
-         <el-checkbox v-model="isPending">Pending</el-checkbox>
-    <div  class="ml-auto">
-        <div v-if="list && isAdmin" class="pb-2"> Select Final Annotator</div>
-      <el-select
-        v-if="list && isAdmin"
-        v-model="finalAnnotation"
-        no-data-text="No Annotators"
-        placeholder="Select Final Annotation"
-        value-key="_id"
-      >
-        <el-option
-          v-for="user in list"
-          :key="user._id"
-          :value="user"
-          :label="user.name"
-          >{{ user.name }}</el-option
+      <div class="pb-3">
+        <h6
+          style="vertical-align: middle;font-size:14px; color: #606266;line-height: 40px;"
         >
-      </el-select>
-    </div>
-    </div>
+          Other Options
+        </h6>
+      </div>
+
+      <div>
+        <i class="el-icon-info mr-3 pb-3 text-yellow" />
+        <small>
+          Check Pending if you want to review this annotation later.
+        </small>
+      </div>
+      <div class="d-flex align-items-center">
+        <el-checkbox v-model="isPending">Pending</el-checkbox>
+        <div class="ml-auto">
+          <div v-if="list && isAdmin" class="pb-2">Select Final Annotator</div>
+          <el-select
+            v-if="list && isAdmin"
+            v-model="finalAnnotation"
+            no-data-text="No Annotators"
+            placeholder="Select Final Annotation"
+            value-key="_id"
+          >
+            <el-option
+              v-for="user in list"
+              :key="user._id"
+              :value="user"
+              :label="user.name"
+              >{{ user.name }}</el-option
+            >
+          </el-select>
+        </div>
+      </div>
 
       <el-form-item class="pt-4">
         <el-button type="primary" @click="onSubmit()">Save</el-button>
@@ -456,7 +462,7 @@ export default {
 
   computed: {
     list() {
-    let list = {};
+      let list = {};
       list = { ...this.item.annotations };
       return list;
     }
@@ -521,12 +527,14 @@ export default {
     };
   },
   mounted() {
-this.isPending =   this.item.isPending;
+    this.isPending = this.item.isPending;
 
-    if(this.item.finalAnnotation){
-         Object.assign(this.finalAnnotation , JSON.parse(JSON.stringify(this.item.finalAnnotation)))
+    if (this.item.finalAnnotation) {
+      Object.assign(
+        this.finalAnnotation,
+        JSON.parse(JSON.stringify(this.item.finalAnnotation))
+      );
     }
-   
 
     let user = auth.getCurrentUser();
 
@@ -553,7 +561,7 @@ this.isPending =   this.item.isPending;
     handleGender(gender) {
       this.form.gender = gender;
     },
-  
+
     onSubmit() {
       this.validType = false;
       this.$refs.form.validate(valid => {
@@ -565,7 +573,7 @@ this.isPending =   this.item.isPending;
           }
         }
 
-        if (valid && this.validType) {
+        if ((valid && this.validType) || this.isPending) {
           this.save();
         } else {
           this.$message({
@@ -583,20 +591,18 @@ this.isPending =   this.item.isPending;
       let data = {};
 
       user["annotations"] = this.form;
-      data['isPending'] = this.isPending; 
+      data["isPending"] = this.isPending;
 
       if (this.item.annotations) {
-        data['annotations'] = {
+        data["annotations"] = {
           ...this.item.annotations,
-          [user._id]: user,
+          [user._id]: user
         };
-        if( this.finalAnnotation){
-            data['finalAnnotation'] = this.finalAnnotation;
-         
+        if (this.finalAnnotation) {
+          data["finalAnnotation"] = this.finalAnnotation;
         }
-
       } else {
-         data['annotations']  = {
+        data["annotations"] = {
           [user._id]: user
         };
       }

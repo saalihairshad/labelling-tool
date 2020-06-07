@@ -128,6 +128,7 @@ export default {
     //   );
     // },
     handleTweetClick(tweet) {
+      console.log(tweet);
       this.selectedTweet = tweet;
       this.index = this.tweets.indexOf(tweet);
       this.show = true;

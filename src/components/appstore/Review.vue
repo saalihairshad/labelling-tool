@@ -42,53 +42,53 @@
           />
         </el-tab-pane>
         <el-tab-pane label="Annotators">
-          <p class="ml-2">
-            <i class="el-icon-info ml-2"></i>
-            Please select two annotators to check the disagreement or Cohen's
-            kappa of the document!
-          </p>
-          <div class="row p-3">
-            <div class="col-md-12 mb-3">
-              <el-select
-                v-model="selectedAnnotators"
-                @change="handleAnnotation"
-                multiple=""
-                :multiple-limit="2"
-                filterable=""
-                no-data-text="No Annotators"
-                placeholder="Select Annotators"
-              >
-                <el-option
-                  v-for="user in annotationsList"
-                  :key="user._id"
-                  :value="user._id"
-                  :label="user.name"
-                  >{{ user.name }}</el-option
+          <div v-if="review.annotations">
+            <p class="ml-2">
+              <i class="el-icon-info ml-2"></i>
+              Please select two annotators to check the disagreement or Cohen's
+              kappa of the document!
+            </p>
+            <div class="row p-3">
+              <div class="col-md-12 mb-3">
+                <el-select
+                  v-model="selectedAnnotators"
+                  @change="handleAnnotation"
+                  multiple=""
+                  :multiple-limit="2"
+                  filterable=""
+                  no-data-text="No Annotators"
+                  placeholder="Select Annotators"
                 >
-              </el-select>
-            </div>
-            <div class="col-md-12">
-              <div class="row" v-if="disagree">
-                <div class="col-md-6 text-center">
-                  <el-progress
-                    type="circle"
-                    :percentage="parseFloat(disagree[0])"
-                  ></el-progress>
-                  <div class="mt-3">Disagreement</div>
-                </div>
-                <div class="col-md-6 text-center">
-                  <el-progress
-                    type="circle"
-                    :percentage="disagree[1]"
-                  ></el-progress>
-                  <div class="mt-3">Unweighted kappa</div>
+                  <el-option
+                    v-for="user in annotationsList"
+                    :key="user._id"
+                    :value="user._id"
+                    :label="user.name"
+                    >{{ user.name }}</el-option
+                  >
+                </el-select>
+              </div>
+              <div class="col-md-12">
+                <div class="row" v-if="disagree">
+                  <div class="col-md-6 text-center">
+                    <el-progress
+                      type="circle"
+                      :percentage="parseFloat(disagree[0])"
+                    ></el-progress>
+                    <div class="mt-3">Disagreement</div>
+                  </div>
+                  <div class="col-md-6 text-center">
+                    <el-progress
+                      type="circle"
+                      :percentage="disagree[1]"
+                    ></el-progress>
+                    <div class="mt-3">Unweighted kappa</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </el-tab-pane>
-
-        
 
         <el-tab-pane label="Json">
           <div class="light p-3 border-darken-3">
@@ -149,8 +149,7 @@ export default {
         }
       }
 
-
-    //   console.log(this.selectedAnnotators.length);
+      //   console.log(this.selectedAnnotators.length);
 
       if (this.selectedAnnotators.length == 2) {
         let r1 = this.review.annotations[this.selectedAnnotators[0]];
