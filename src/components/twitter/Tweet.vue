@@ -31,6 +31,25 @@
                 ><span class="px-1"> {{ tweet.app_name }} </span> |
                 <strong class="pl-1">Country: </strong>
                 <span class="px-1">{{ tweet.country }} </span>
+
+                <span
+                  class="float-right"
+                  style="color:#2196F3"
+                  v-if="
+                    tweet.hasOwnProperty('annotations') &&
+                      Object.values(tweet.annotations).length > 1
+                  "
+                >
+                  <i class="icon-hand-o-right pr-2"></i>
+                  <strong>Kappa: {{ disagree[1] }} </strong>
+                  <el-tag
+                    class="ml-2"
+                    type="success"
+                    size="mini"
+                    v-if="disagree[1] == 1"
+                    >Agreed</el-tag
+                  >
+                </span>
               </div>
             </div>
           </div>
@@ -113,7 +132,7 @@
           <div class="light p-3 border-darken-3">
             <pre>
                     <code>
-                        {{tweet}}
+                        {{tweet.annotations}}
                     </code>
                 </pre>
           </div>
