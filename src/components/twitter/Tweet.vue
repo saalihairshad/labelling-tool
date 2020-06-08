@@ -21,9 +21,7 @@
             </div>
             <div class="media-body">
               <div class="collapse my-3 show" id="message1">
-                <div class="lead my-3">
-                  {{ tweet.full_text }}
-                </div>
+                <div class="lead my-3" v-html="fullText(tweet.full_text)"></div>
               </div>
 
               <div class="pt-3 pb-3 b-t" style="font-size:14.5px;">
@@ -133,6 +131,7 @@ import Form from "./Form";
 import auth from "../../services/authService";
 import mixins from "../../helpers/mixins";
 import Documentation from "../common/Documentation";
+import anchorme from "anchorme";
 export default {
   mixins: [mixins],
   props: ["tweet"],
@@ -153,6 +152,37 @@ export default {
   methods: {
     handleNext() {
       this.$emit("next");
+    },
+    fullText(text) {
+      const input = text;
+      const resultA = anchorme(input);
+      const resultB = anchorme({ input });
+      const resultC = anchorme({
+        input,
+        // use some options
+        options: {
+          attributes: {
+            target: "_blank",
+            class: "detected"
+          }
+        }
+        // and extensions
+        // extensions: [
+        //   // an extension for hashtag search
+        //   {
+        //     test: /#(\w|_)+/gi,
+        //     transform: string =>
+        //       ` <a href="https://a.b?s=${string.substr(1)}">${string}</a>`
+        //   },
+        //   // an extension for mentions
+        //   {
+        //     test: /@(\w|_)+/gi,
+        //     transform: string =>
+        //       ` <a href="https://a.b/${string.substr(1)}">${string}</a>`
+        //   }
+        // ]
+      });
+      return resultC;
     }
   }
 };

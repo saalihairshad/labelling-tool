@@ -14,6 +14,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^15.0.0",
     "@ckeditor/ckeditor5-vue": "^1.0.0",
+    "anchorme": "^2.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.4",
@@ -28,6 +29,7 @@
     "gender-api.com-client": "^1.0.14",
     "genderize": "^1.6.0",
     "jwt-decode": "^2.2.0",
+    "linkifyjs": "^2.1.9",
     "lodash": "^4.17.15",
     "recursive-diff": "^1.0.6",
     "sass-loader": "^7.3.1",
