@@ -34,14 +34,16 @@
 
                 <span
                   class="float-right"
-                  style="color:#2196F3"
                   v-if="
                     tweet.hasOwnProperty('annotations') &&
                       Object.values(tweet.annotations).length > 1
                   "
                 >
-                  <i class="icon-hand-o-right pr-2"></i>
-                  <strong>Kappa: {{ disagree[1] }} </strong>
+                  <!-- <i class="icon-hand-o-right pr-2"></i> -->
+                  <el-tag type="primary" size="mini" effect="plain"
+                    >Kappa: {{ disagree[1] }}
+                  </el-tag>
+                  <!-- <strong>Kappa: {{ disagree[1] }} </strong> -->
                   <el-tag
                     class="ml-2"
                     type="success"
