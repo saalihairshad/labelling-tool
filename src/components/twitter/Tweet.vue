@@ -40,7 +40,11 @@
                   "
                 >
                   <!-- <i class="icon-hand-o-right pr-2"></i> -->
-                  <el-tag type="primary" size="mini" effect="plain"
+                  <el-tag
+                    type="primary"
+                    size="mini"
+                    effect="plain"
+                    v-if="disagree[1]"
                     >Kappa: {{ disagree[1] }}
                   </el-tag>
                   <!-- <strong>Kappa: {{ disagree[1] }} </strong> -->
@@ -82,7 +86,8 @@
               class="row"
               v-if="
                 tweet.hasOwnProperty('annotations') &&
-                  Object.values(tweet.annotations).length > 1
+                  Object.values(tweet.annotations).length > 1 &&
+                  disagree.length > 0
               "
             >
               <div class="col-md-6 text-center">
@@ -134,6 +139,7 @@
           <div class="light p-3 border-darken-3">
             <pre>
                     <code>
+                        <!-- {{tweet}} -->
                         {{tweet.annotations}}
                     </code>
                 </pre>
@@ -163,7 +169,7 @@ export default {
   },
   computed: {
     disagree() {
-      return this.disagrement(this.tweet);
+      return !this.tweet.isPending ? this.disagrement(this.tweet) : [];
     }
   },
   mounted() {
