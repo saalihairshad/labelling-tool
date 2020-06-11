@@ -22,8 +22,9 @@
               selectedTweet && tweet._id == selectedTweet._id ? 'light b-l' : ''
             "
           >
-            <div class="avatar avatar-md blue mr-3">
-              <i class="icon-twitter"></i>
+            <div class="avatar avatar-md blue mr-3" style="font-size: 13px">
+              <!-- <i class="icon-twitter"></i> -->
+              {{ index }}
             </div>
 
             <div class="media-body text-truncate">

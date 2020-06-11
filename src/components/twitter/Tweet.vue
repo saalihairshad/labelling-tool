@@ -118,7 +118,7 @@
                 <div class="avatar avatar-md blue mr-3">
                   <img :src="reply.user.profile_image_url" alt="" />
                 </div>
-                <div class="media-body text-truncate">
+                <div class="media-body ">
                   <small class="float-right"> </small>
                   <h6 class="mt-0 mb-1 font-weight-normal">
                     {{ reply.user.name }}
