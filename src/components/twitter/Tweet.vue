@@ -1,6 +1,10 @@
 <template>
   <div class="m-md-3">
     <!--Message Start-->
+    <el-button type="primary" circle icon="el-icon-back" @click="$emit('back')">
+    </el-button>
+    <el-button type="primary" circle icon="el-icon-right" @click="handleNext">
+    </el-button>
     <div class="card b-0 m-2">
       <div class="card-body">
         <div data-toggle="collapse" data-target="#message1">

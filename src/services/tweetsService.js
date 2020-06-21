@@ -1,7 +1,10 @@
 import httpService from "./httpService";
 
 export function getTweets($params = "") {
-  return httpService.get("/tweets/?" + $params);
+  let params = Object.entries($params)
+    .map(([key, val]) => `${key}=${val}`)
+    .join("&");
+  return httpService.get("/tweets/?" + params);
 }
 
 export function getTweet(id) {

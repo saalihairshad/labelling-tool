@@ -7,6 +7,22 @@
             >Anotated: {{ annoted.length }}/{{ meta.total }}</span
           >
         </div>
+        <div class="ml-auto">
+          <el-checkbox v-model="checked" @change="handleAnnotatedFilter">
+            Annoted only
+          </el-checkbox>
+
+          <el-select
+            v-model="app"
+            placeholder="Select"
+            filterable
+            @change="handleFilter"
+            size="mini"
+          >
+            <el-option value="" label="All Apps" />
+            <el-option v-for="a in apps" :key="a" :label="`${a}`" :value="a" />
+          </el-select>
+        </div>
       </div>
       <div class="scrollable" v-loading="loading">
         <ul
@@ -59,7 +75,7 @@
     </div>
     <div class="col-md-9 b-l vh-100">
       <div id="scrollable" class="p-3 scrollable-container" v-if="show">
-        <Tweet :tweet="selectedTweet" @next="handeNext()" />
+        <Tweet :tweet="selectedTweet" @next="handeNext()" @back="handeBack()" />
       </div>
 
       <div class="text-center pt-5 mt-5" v-if="!selectedTweet">
@@ -96,6 +112,20 @@ export default {
   },
   data() {
     return {
+      app: "",
+      checked: false,
+      apps: [
+        "AdobeCare",
+        "DropboxSupport",
+        "evernotehelps",
+        "googlemaps",
+        "LinkedInHelp",
+        "Netflixhelps",
+        "SlackHQ",
+        "snapchatsupport",
+        "SpotifyCares",
+        "TeamYouTube"
+      ],
       meta: [],
       tweets: [],
       error: "",
@@ -117,9 +147,23 @@ export default {
     }
   },
   methods: {
+    handleFilter() {
+      this.getTweets();
+    },
     isAnnotated(tweet) {
       return tweet.annotations && tweet.annotations[this.user._id];
     },
+    handleAnnotatedFilter() {
+      if (this.checked) {
+        let fitlerdTweets = this.tweets.filter(tweet =>
+          this.isAnnotated(tweet)
+        );
+        this.tweets = fitlerdTweets;
+      } else {
+        this.getTweets();
+      }
+    },
+
     // isPending(tweet) {
     //   return (
     //     tweet.annotations &&
@@ -133,6 +177,22 @@ export default {
       this.selectedTweet = tweet;
       this.index = this.tweets.indexOf(tweet);
       this.show = true;
+    },
+    handeBack() {
+      if (this.tweets[this.index - 1]) {
+        this.selectedTweet = this.tweets[this.index - 1];
+        this.index = this.tweets.indexOf(this.selectedTweet);
+        document.getElementById("scrollable").scrollTop = 0;
+        this.getTweets();
+      } else {
+        setTimeout(() => {
+          this.$message({
+            showClose: true,
+            message: "No more tweets",
+            type: "warning"
+          });
+        }, 2000);
+      }
     },
     handeNext() {
       if (this.tweets[this.index + 1]) {
@@ -153,7 +213,10 @@ export default {
     // Get tweet
     getTweets() {
       this.loading = true;
-      getTweets()
+      let params = "";
+
+      if (this.app) params = { app_name: this.app };
+      getTweets(params)
         .then(res => {
           this.tweets = res.data.data;
           this.meta = res.data.meta;

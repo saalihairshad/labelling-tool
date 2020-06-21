@@ -8,14 +8,6 @@
           </li>
           <li class="list-group-item">
             <a href="#sentiment">Sentiment Analysis</a>
-            <!-- <ul class="list-group-flush p-3 sticky">
-              <li class="list-group-item">
-                <a href="#introduction">Introduction</a>
-              </li>
-              <li class="list-group-item">
-                <a href="#introduction">Introduction</a>
-              </li>
-            </ul> -->
           </li>
           <li class="list-group-item">
             <a href="#content">Content Classification</a>
