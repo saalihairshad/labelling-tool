@@ -4,7 +4,7 @@
       <div class="d-flex b-t p-3 align-items-center">
         <div>
           <span v-if="annoted"
-            >Anotated: {{ annoted.length }}/{{ meta.total }}</span
+            >Annotated: {{ annoted.length }}/{{ meta.total }}</span
           >
         </div>
         <div class="ml-auto">

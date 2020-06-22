@@ -3,7 +3,7 @@
     <div class="col-md-3 white">
       <div class="d-flex b-t p-3 align-items-center">
         <div>
-          <span>Anotated: {{ annoted.length }}/{{ meta.total }}</span>
+          <span>Annotated: {{ annoted.length }}/{{ meta.total }}</span>
         </div>
         <div class="ml-auto">
           <el-select
