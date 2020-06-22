@@ -9,7 +9,7 @@
         </div>
         <div class="ml-auto">
           <el-checkbox v-model="checked" @change="handleAnnotatedFilter">
-            Annoted only
+            Not Annotated
           </el-checkbox>
 
           <el-select
@@ -155,8 +155,8 @@ export default {
     },
     handleAnnotatedFilter() {
       if (this.checked) {
-        let fitlerdTweets = this.tweets.filter(tweet =>
-          this.isAnnotated(tweet)
+        let fitlerdTweets = this.tweets.filter(
+          tweet => !this.isAnnotated(tweet)
         );
         this.tweets = fitlerdTweets;
       } else {
